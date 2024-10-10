@@ -15,8 +15,9 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
@@ -52,47 +53,36 @@
 
         .button:hover {
             background-color: #d5a55d;
+        }
 
-            footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-}
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            clear: both;
+        }
 
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    bottom: 0;
-    clear: both;
-}
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
+        footer p {
+            margin: 0;
+        }
 
-footer p {
-    margin: 0;
-}
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
 
-footer a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -112,6 +102,12 @@ footer a:hover {
     <div class="footer-content">
         <p>&copy; 2024 Weekend Weebz. All rights reserved.</p>
         <p><a href="/privacy.html">Privacy Policy</a></p>
+    </div>
+</footer>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2024 Weekend Weebz. All rights reserved.</p>
+        <p><a href="/privacy.html">Privacy Policy</a> | <a href="/tos.html">Terms of Service</a></p>
     </div>
 </footer>
 
