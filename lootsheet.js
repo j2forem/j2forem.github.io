@@ -1,167 +1,133 @@
-const sheetId = '1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o';  // Replace with your Google Sheets ID
-const apiKey = 'AIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';    // Replace with your Google API key
+const sheetId = 'YOUR_SHEET_ID';  // Replace with your actual sheet ID
+const apiKey = 'YOUR_API_KEY';    // Replace with your actual Google API key
 
-// The sheet ranges for each tab
-const categoryTabs = {
-    weapons: 'Weapons!A:E',
-    armor: 'Armor!A:E',
-    potions: 'Potions!A:E',
-    scrolls: 'Scrolls!A:E',
-    gems: 'Gems!A:E',
-    miscmagicitems: 'MiscMagicItems!A:E',
-    unidmagicitems: 'UnidMagicItems!A:E',
-    money: 'Money!A:B'
+let currencyData = {
+    Gold: 0,
+    Silver: 0,
+    Copper: 0,
+    Platinum: 0,
+    Electrum: 0
 };
 
-// Initialize global variables to store data
-let itemsData = {};
-let currencyData = {};
-
-// Fetch data from the Google Sheet
-function fetchSheetData(category) {
-    console.log("Fetching data for category:", category);  // Log before fetching data
-
-    const sheetRange = categoryTabs[category] || categoryTabs['money'];
+// Function to fetch data from Google Sheets
+function fetchSheetData() {
+    const sheetRange = 'Money!A:B';  // Adjust this range to where your data is located
     const sheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
 
     fetch(sheetUrl)
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched data:", data);  // Log after data is fetched
-
-            if (category === 'money') {
-                parseCurrencyData(data);  // Call parseCurrencyData if it's the money tab
-            } else {
-                parseCategoryData(data, category);  // Call parseCategoryData for other tabs
-            }
+            parseCurrencyData(data);
         })
-        .catch(error => console.error('Error fetching sheet data:', error));
+        .catch(error => console.error('Error fetching data:', error));
 }
 
-
+// Function to parse the data and display it in the DOM
 function parseCurrencyData(sheetData) {
-    console.log("Parsing currency data:", sheetData);  // Log the data being parsed
-
     const rows = sheetData.values || [];
 
-    // Reset the currencyData object
-    currencyData = {
-        Gold: 0,
-        Silver: 0,
-        Copper: 0,
-        Platinum: 0,
-        Electrum: 0
-    };
-
-    // Loop through each row and map the currencies
     rows.forEach(row => {
-        if (row.length === 2) {  // Ensure each row has exactly 2 elements
-            const currencyType = row[0];
-            const amount = parseInt(row[1]);  // Ensure the amount is treated as a number
+        const currencyType = row[0];
+        const amount = parseInt(row[1]);
 
-            // Map the long names from the sheet to the short names
-            if (currencyType === "Gold Pieces") currencyData["Gold"] = amount;
-            else if (currencyType === "Silver Pieces") currencyData["Silver"] = amount;
-            else if (currencyType === "Copper Pieces") currencyData["Copper"] = amount;
-            else if (currencyType === "Platinum Pieces") currencyData["Platinum"] = amount;
-            else if (currencyType === "Electrum Pieces") currencyData["Electrum"] = amount;
-
-            console.log(`Currency: ${currencyType}, Amount: ${amount}`);  // Log each parsed row
-        } else {
-            console.error('Unexpected row structure:', row);  // Log unexpected row structures
-        }
+        if (currencyType === "Gold Pieces") currencyData["Gold"] = amount;
+        else if (currencyType === "Silver Pieces") currencyData["Silver"] = amount;
+        else if (currencyType === "Copper Pieces") currencyData["Copper"] = amount;
+        else if (currencyType === "Platinum Pieces") currencyData["Platinum"] = amount;
+        else if (currencyType === "Electrum Pieces") currencyData["Electrum"] = amount;
     });
 
-    displayCurrency();  // Update the DOM after parsing
+    displayCurrency();  // Update the DOM with the fetched values
 }
 
-
-
-// Display currency values in the DOM
+// Function to display the currency values in the DOM
 function displayCurrency() {
-    console.log("Updating currency in DOM:", currencyData);  // Log the currency data before updating the DOM
-
-    document.getElementById('gold-amount').innerText = currencyData['Gold'] || 0;
-    document.getElementById('silver-amount').innerText = currencyData['Silver'] || 0;
-    document.getElementById('copper-amount').innerText = currencyData['Copper'] || 0;
-    document.getElementById('platinum-amount').innerText = currencyData['Platinum'] || 0;
-    document.getElementById('electrum-amount').innerText = currencyData['Electrum'] || 0;
-
-    console.log("Gold updated to:", document.getElementById('gold-amount').innerText);  // Log after the DOM is updated
+    document.getElementById('gold-amount').innerText = currencyData['Gold'];
+    document.getElementById('silver-amount').innerText = currencyData['Silver'];
+    document.getElementById('copper-amount').innerText = currencyData['Copper'];
+    document.getElementById('platinum-amount').innerText = currencyData['Platinum'];
+    document.getElementById('electrum-amount').innerText = currencyData['Electrum'];
 }
 
-
-// Parse item data from the category and display it
-function parseCategoryData(sheetData, category) {
-    const rows = sheetData.values || [];
-    itemsData[category] = [];
-
-    rows.slice(1).forEach(row => {
-        const [name, description, location, date, quantity] = row;
-        const item = { name, description, location, date, quantity: parseInt(quantity) };
-        if (item.quantity > 0) {
-            itemsData[category].push(item);
-        }
-    });
-
-    displayItems(category);
-}
-
-// Display items in the DOM
-function displayItems(category) {
-    const list = document.getElementById(`${category}-list`);
-    list.innerHTML = '';
-
-    const items = itemsData[category] || [];
-    items.forEach((item, index) => {
-        const itemRow = document.createElement('div');
-        itemRow.className = 'item-row';
-        itemRow.innerHTML = `
-            <div>
-                <strong>${item.name}</strong> - Qty: ${item.quantity}, ${item.description}, Location: ${item.location}, Date: ${item.date}
-            </div>
-            <div>
-                <button onclick="modifyItemQuantity('${category}', ${index}, 1)">+</button>
-                <button onclick="modifyItemQuantity('${category}', ${index}, -1)">-</button>
-                <button onclick="deleteItem('${category}', ${index})">Delete</button>
-            </div>
-        `;
-        list.appendChild(itemRow);
-    });
-}
-
-// Function to update the currency values (called when "Update Currency" is clicked)
+// Function to handle the update when the "Update Currency" button is clicked
 function updateCurrency() {
+    // Get the selected currency type from the dropdown
     const currencyType = document.getElementById('currency-type').value;
+
+    // Get the amount to add or remove from the input field
     const amount = parseInt(document.getElementById('amount').value);
 
-    currencyData[currencyType] = (currencyData[currencyType] || 0) + amount;
-    displayCurrency();
+    // Validate if the amount is a valid number
+    if (isNaN(amount) || amount === 0) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    // Call modifyItemQuantity to update the currency in the DOM and Google Sheets
+    modifyItemQuantity(currencyType, amount);
 }
 
-// Helper function to modify item quantity
-function modifyItemQuantity(category, index, amount) {
-    itemsData[category][index].quantity += amount;
-    if (itemsData[category][index].quantity < 0) itemsData[category][index].quantity = 0;
-    displayItems(category);
+// Function to modify the item quantity and update both the DOM and Google Sheets
+function modifyItemQuantity(currencyType, amount) {
+    // Get the current amount of the selected currency
+    const currentAmount = currencyData[currencyType];
+    
+    // Calculate the new amount by adding or subtracting the entered amount
+    const newAmount = currentAmount + amount;
+
+    // Prevent negative values
+    if (newAmount < 0) {
+        alert("You cannot have a negative amount of currency.");
+        return;
+    }
+
+    // Update the displayed value in the DOM
+    document.getElementById(`${currencyType.toLowerCase()}-amount`).innerText = newAmount;
+
+    // Update the internal data structure with the new amount
+    currencyData[currencyType] = newAmount;
+
+    // Now, push the updated value back to Google Sheets
+    updateSheetData(currencyType, newAmount);
 }
 
-// Show specific tab content
-function showTab(tabName) {
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(content => content.classList.remove('active-content'));
+// Function to update a specific cell in Google Sheets
+function updateSheetData(currencyType, newValue) {
+    // Map currency types to row numbers
+    const rowMap = {
+        Gold: 1,
+        Silver: 2,
+        Copper: 3,
+        Platinum: 4,
+        Electrum: 5
+    };
 
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.classList.remove('active-tab'));
+    const rowNumber = rowMap[currencyType];  // Get the row number for this currency
+    const sheetRange = `Money!B${rowNumber}:B${rowNumber}`;  // Target the correct row and column
 
-    document.getElementById(tabName).classList.add('active-content');
-    event.target.classList.add('active-tab');
+    const body = {
+        values: [
+            [newValue]  // Send the new value to Google Sheets
+        ]
+    };
 
-    fetchSheetData(tabName);  // Fetch data for the selected tab
+    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?valueInputOption=USER_ENTERED&key=${apiKey}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(`Successfully updated ${currencyType} to ${newValue} in Google Sheets`, data);
+    })
+    .catch(error => {
+        console.error('Error updating Google Sheets:', error);
+    });
 }
 
+// Call fetchSheetData when the page loads to populate the DOM with data
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("DOM fully loaded and parsed.");
-    fetchSheetData('money');
+    fetchSheetData();
 });
-
