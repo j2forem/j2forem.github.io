@@ -14,7 +14,7 @@ const categoryTabs = {
 };
 
 // API key for accessing the Google Sheets
-const apiKey = 'YOUR_API_KEY';
+const apiKey = 'AIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Load currency data
