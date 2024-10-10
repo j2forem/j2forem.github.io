@@ -1,6 +1,5 @@
 const sheetId = '1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o';  // Replace with your actual sheet ID
 
-
 let currencyData = {
     Gold: 0,
     Silver: 0,
@@ -9,7 +8,7 @@ let currencyData = {
     Electrum: 0
 };
 
-// This is the new function using OAuth (REPLACE with this)
+// Function to fetch data from Google Sheets using OAuth token
 function fetchSheetData() {
     const sheetRange = 'Money!A:B';  // Adjust this range to your actual sheet range
     const authInstance = gapi.auth2.getAuthInstance();  // Get the Google Auth instance
@@ -24,14 +23,21 @@ function fetchSheetData() {
             'Authorization': `Bearer ${oauthToken}`  // Authenticate using the OAuth token
         }
     }).then(function(response) {
-        const data = response.result.values;  // Get the data from the response
-        console.log('Data from Google Sheets:', data);  // Log or use the data in your UI
-        // Handle the fetched data here (e.g., update your loot tracker UI)
-    }, function(error) {
+        if (response.status === 200) {
+            const data = response.result.values;  // Get the data from the response
+            if (!data || data.length === 0) {
+                console.error("No data found in the sheet.");
+                return;
+            }
+            console.log('Data from Google Sheets:', data);  // Log or use the data in your UI
+            parseCurrencyData(response.result);  // Parse and display the fetched data
+        } else {
+            console.error('Error fetching data:', response);
+        }
+    }).catch(function(error) {
         console.error('Error fetching data from Google Sheets:', error);  // Handle any errors
     });
 }
-
 
 // Function to parse the data and display it in the DOM
 function parseCurrencyData(sheetData) {
@@ -148,7 +154,7 @@ function updateSheetData(currencyType, newValue) {
     const authInstance = gapi.auth2.getAuthInstance();  // Get the Google Auth instance
     const user = authInstance.currentUser.get();  // Get the signed-in user
     const oauthToken = user.getAuthResponse().access_token;  // Get the OAuth token for this user
-    
+
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?valueInputOption=USER_ENTERED`, {
         method: 'PUT',
         headers: {
@@ -157,23 +163,17 @@ function updateSheetData(currencyType, newValue) {
         },
         body: JSON.stringify(body)
     }).then(response => {
-        return response.json();
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Failed to update data in Google Sheets.');
+        }
     }).then(data => {
         console.log('Data successfully updated in Google Sheets:', data);
     }).catch(error => {
         console.error('Error updating data in Google Sheets:', error);
     });
-    
-        body: JSON.stringify(body)
-    }
-    then(response => response.json())
-    .then(data => {
-        console.log(`Successfully updated ${currencyType} to ${newValue} in Google Sheets`, data);
-    })
-    .catch(error => {
-        console.error('Error updating Google Sheets:', error);
-    });
-
+}
 
 // Call fetchSheetData when the page loads to populate the DOM with data
 document.addEventListener('DOMContentLoaded', function () {
