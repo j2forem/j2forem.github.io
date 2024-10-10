@@ -36,16 +36,28 @@ function fetchSheetData(category) {
 
 // Parse currency data and display it in the DOM
 function parseCurrencyData(sheetData) {
-    const rows = sheetData.values || [];
+    const rows = sheetData.values || []; // Get the rows from the data
+
+    // Reset the currencyData object
+    currencyData = {
+        Gold: 0,
+        Silver: 0,
+        Copper: 0,
+        Platinum: 0,
+        Electrum: 0
+    };
+
     rows.forEach(row => {
-        const [currencyType, amount] = row;
-        currencyData[currencyType] = parseInt(amount);
+        const [currencyType, amount] = row;  // Deconstruct the row
+        currencyData[currencyType] = parseInt(amount);  // Store the amount in the corresponding currency key
     });
-    displayCurrency();
+
+    displayCurrency();  // Call the function to update the DOM
 }
 
 // Display currency values in the DOM
 function displayCurrency() {
+    // Ensure each DOM element gets updated with the correct value from currencyData
     document.getElementById('gold-amount').innerText = currencyData['Gold'] || 0;
     document.getElementById('silver-amount').innerText = currencyData['Silver'] || 0;
     document.getElementById('copper-amount').innerText = currencyData['Copper'] || 0;
