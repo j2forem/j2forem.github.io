@@ -53,21 +53,28 @@ function parseCurrencyData(sheetData) {
         Electrum: 0
     };
 
+    // Loop through each row and map the currencies
     rows.forEach(row => {
-        const [currencyType, amount] = row;
+        if (row.length === 2) {  // Ensure each row has exactly 2 elements
+            const currencyType = row[0];
+            const amount = parseInt(row[1]);  // Ensure the amount is treated as a number
 
-        // Map the long names from the sheet to the short names
-        if (currencyType === "Gold Pieces") currencyData["Gold"] = parseInt(amount);
-        else if (currencyType === "Silver Pieces") currencyData["Silver"] = parseInt(amount);
-        else if (currencyType === "Copper Pieces") currencyData["Copper"] = parseInt(amount);
-        else if (currencyType === "Platinum Pieces") currencyData["Platinum"] = parseInt(amount);
-        else if (currencyType === "Electrum Pieces") currencyData["Electrum"] = parseInt(amount);
+            // Map the long names from the sheet to the short names
+            if (currencyType === "Gold Pieces") currencyData["Gold"] = amount;
+            else if (currencyType === "Silver Pieces") currencyData["Silver"] = amount;
+            else if (currencyType === "Copper Pieces") currencyData["Copper"] = amount;
+            else if (currencyType === "Platinum Pieces") currencyData["Platinum"] = amount;
+            else if (currencyType === "Electrum Pieces") currencyData["Electrum"] = amount;
 
-        console.log(`Currency: ${currencyType}, Amount: ${amount}`);  // Log each parsed row
+            console.log(`Currency: ${currencyType}, Amount: ${amount}`);  // Log each parsed row
+        } else {
+            console.error('Unexpected row structure:', row);  // Log unexpected row structures
+        }
     });
 
     displayCurrency();  // Update the DOM after parsing
 }
+
 
 
 // Display currency values in the DOM
