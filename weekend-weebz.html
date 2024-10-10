@@ -11,48 +11,58 @@
     <style>
         /* Fantasy-themed body styles */
         body {
-            font-family: 'Cinzel', serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
-        }
+    font-family: 'Cinzel', serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+}
 
-        .container {
-            text-align: center;
-            background-color: #fdf8e4;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+/* Container should be centered and take up the remaining space */
+.container {
+    text-align: center;
+    background-color: #fdf8e4;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;  /* This makes the container grow to fill the space */
+}
 
-        h1 {
-            font-family: 'Uncial Antiqua', cursive;
-            font-size: 3em;
-            color: #2b1a0e;
-            margin-bottom: 30px;
-        }
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    clear: both;
+}
 
-        .button {
-            display: inline-block;
-            padding: 20px 40px;
-            margin: 15px;
-            background-color: #5d4037;
-            color: white;
-            font-size: 24px;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: background-color 0.3s ease;
-            font-family: 'Cinzel', serif;
-        }
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-        .button:hover {
-            background-color: #d5a55d;
-        }
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
     </style>
 </head>
 <body>
@@ -66,11 +76,18 @@
         <a href="loot-sheet.html" class="button">Loot Sheet</a>
 
         <!-- Link to go back to the main landing page -->
-        <a href="index.html" class="back-button">← Back to Main Page</a>
-    </div>
-    <!-- Sign-in and Sign-out buttons -->
-    <button onclick="handleSignInClick()">Sign in with Google</button>
-    <button onclick="handleSignOutClick()">Sign out</button>
+            </div>
+
+    <footer>
+        <div class="footer-content">
+            <p><a href="index.html" class="back-button">← Back to Main Page</a></p>
+            <p>&copy; 2024 Weekend Weebz. All rights reserved.</p>
+            <p><a href="/privacy.html">Privacy Policy</a> | <a href="/tos.html">Terms of Service</a></p>
+                <!-- Sign-in and Sign-out buttons -->
+    <p><button onclick="handleSignInClick()">Sign in with Google</button></p>
+    <p><button onclick="handleSignOutClick()">Sign out</button></p>
+        </div>
+    </footer>
 
     <!-- Load the Google API library and custom script just before the closing body tag -->
     <script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
