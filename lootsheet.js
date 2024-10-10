@@ -147,7 +147,8 @@ function showTab(tabName) {
     fetchSheetData(tabName);  // Fetch data for the selected tab
 }
 
-// Initial data fetch
 document.addEventListener('DOMContentLoaded', function () {
-    fetchSheetData('money');  // Load money tab by default
+    console.log("DOM fully loaded and parsed.");
+    fetchSheetData('money');
 });
+
