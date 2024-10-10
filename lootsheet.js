@@ -9,19 +9,29 @@ let currencyData = {
     Electrum: 0
 };
 
-// Function to fetch data from Google Sheets
+// This is the new function using OAuth (REPLACE with this)
 function fetchSheetData() {
     const sheetRange = 'Money!A:B';  // Adjust this range to your actual sheet range
-    const sheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
+    const authInstance = gapi.auth2.getAuthInstance();  // Get the Google Auth instance
+    const user = authInstance.currentUser.get();  // Get the signed-in user
+    const oauthToken = user.getAuthResponse().access_token;  // Get the OAuth token for this user
 
-    fetch(sheetUrl)
-        .then(response => response.json())
-        .then(data => {
-            console.log('Fetched sheet data:', data);  // Log the fetched data for verification
-            parseCurrencyData(data);
-        })
-        .catch(error => console.error('Error fetching data:', error));
+    // Now call the Google Sheets API, authenticated with the OAuth token
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: sheetId,  // Use your existing sheet ID variable
+        range: sheetRange,  // The range to fetch from your sheet
+        headers: {
+            'Authorization': `Bearer ${oauthToken}`  // Authenticate using the OAuth token
+        }
+    }).then(function(response) {
+        const data = response.result.values;  // Get the data from the response
+        console.log('Data from Google Sheets:', data);  // Log or use the data in your UI
+        // Handle the fetched data here (e.g., update your loot tracker UI)
+    }, function(error) {
+        console.error('Error fetching data from Google Sheets:', error);  // Handle any errors
+    });
 }
+
 
 // Function to parse the data and display it in the DOM
 function parseCurrencyData(sheetData) {
