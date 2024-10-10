@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
     <style>
+        /* General body styles */
         body {
             font-family: 'Cinzel', serif;
             background-color: #f4f4f4;
@@ -17,6 +18,7 @@
             background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
         }
 
+        /* Container for content */
         .container {
             background-color: #fdf8e4;
             padding: 20px;
@@ -151,30 +153,6 @@
         .currency-item span {
             font-weight: bold;
         }
-
-        .item-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #fdf8e4;
-            border: 2px solid #5d4037;
-            border-radius: 8px;
-        }
-
-        .item-row button {
-            margin-left: 10px;
-            padding: 5px 10px;
-            background-color: #5d4037;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .item-row button:hover {
-            background-color: #d5a55d;
-        }
     </style>
 </head>
 <body>
@@ -185,10 +163,13 @@
     <!-- Tab bar -->
     <div class="tabs">
         <span class="tab active-tab" onclick="showTab('money')">Money</span>
-        <span class="tab" onclick="fetchCategoryData('Weapons')">Weapons</span>
-        <span class="tab" onclick="fetchCategoryData('Armor')">Armor</span>
-        <span class="tab" onclick="fetchCategoryData('Potions')">Potions</span>
-        <span class="tab" onclick="fetchCategoryData('Scrolls')">Scrolls</span>
+        <span class="tab" onclick="showTab('weapons')">Weapons</span>
+        <span class="tab" onclick="showTab('armor')">Armor</span>
+        <span class="tab" onclick="showTab('potions')">Potions</span>
+        <span class="tab" onclick="showTab('scrolls')">Scrolls</span>
+        <span class="tab" onclick="showTab('gems')">Gems</span>
+        <span class="tab" onclick="showTab('miscmagicitems')">Misc Magic Items</span>
+        <span class="tab" onclick="showTab('unidmagicitems')">Not ID'd</span>
     </div>
 
     <!-- Money Tab -->
@@ -210,26 +191,47 @@
             <button type="button" onclick="updateCurrency()">Update Currency</button>
         </form>
 
-        <div class="currency-list" id="currency-list">
-            <p class="currency-item">Gold Pieces: <span id="gold-amount"></span></p>
-            <p class="currency-item">Silver Pieces: <span id="silver-amount"></span></p>
-            <p class="currency-item">Copper Pieces: <span id="copper-amount"></span></p>
-            <p class="currency-item">Platinum Pieces: <span id="platinum-amount"></span></p>
-            <p class="currency-item">Electrum Pieces: <span id="electrum-amount"></span></p>
+        <!-- Display updated currency amounts -->
+        <div class="currency-list">
+            <p class="currency-item">Gold Pieces: <span id="gold-amount">0</span></p>
+            <p class="currency-item">Silver Pieces: <span id="silver-amount">0</span></p>
+            <p class="currency-item">Copper Pieces: <span id="copper-amount">0</span></p>
+            <p class="currency-item">Platinum Pieces: <span id="platinum-amount">0</span></p>
+            <p class="currency-item">Electrum Pieces: <span id="electrum-amount">0</span></p>
         </div>
     </div>
 
-    <!-- Items Display Area -->
-    <div id="items" class="tab-content">
-        <h2>Items</h2>
-        <div id="item-list">
-            <!-- Dynamically populated items will appear here -->
+    <!-- Weapon Tab -->
+    <div id="weapons" class="tab-content">
+        <h2>Weapons</h2>
+        <button type="button" onclick="toggleForm('weapon-form')">Add New Weapon</button>
+
+        <form id="weapon-form" style="display:none; margin-top: 20px;">
+            <label for="weapon-name">Weapon Name:</label>
+            <input type="text" id="weapon-name" placeholder="Enter weapon name" required>
+
+            <label for="weapon-quantity">Quantity:</label>
+            <input type="number" id="weapon-quantity" placeholder="Enter quantity" required>
+
+            <label for="weapon-value">Assessed Value:</label>
+            <input type="number" id="weapon-value" placeholder="Enter assessed value" required>
+
+            <label for="weapon-location">Location Acquired:</label>
+            <input type="text" id="weapon-location" placeholder="Enter location acquired" required>
+
+            <label for="weapon-date">Date Acquired:</label>
+            <input type="date" id="weapon-date" required>
+
+            <button type="button" onclick="addItem('weapons')">Add Weapon</button>
+        </form>
+
+        <div id="weapon-list">
+            <!-- Dynamically added weapons will appear here -->
         </div>
     </div>
-
+    <!-- Add other categories similar to Weapons -->
 </div>
 
-<!-- Include the JS file -->
 <script src="lootsheet.js"></script>
 </body>
 </html>

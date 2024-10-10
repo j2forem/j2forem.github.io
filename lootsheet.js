@@ -1,88 +1,80 @@
+const sheetId = '1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o';  // Replace with your Google Sheets ID
+const apiKey = 'YAIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';    // Replace with your Google API key
+
+// The sheet ranges for each tab
+const categoryTabs = {
+    weapons: 'Weapons!A:E',
+    armor: 'Armor!A:E',
+    potions: 'Potions!A:E',
+    scrolls: 'Scrolls!A:E',
+    gems: 'Gems!A:E',
+    miscmagicitems: 'MiscMagicItems!A:E',
+    unidmagicitems: 'UnidMagicItems!A:E',
+    money: 'Money!A:B'
+};
+
+// Initialize global variables to store data
 let itemsData = {};
 let currencyData = {};
 
-// The base URL for Google Sheets API
-const baseSheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o/values/`;
-
-// Sheet tab names (to match your Google Sheet tabs for categories)
-const categoryTabs = {
-    Weapons: 'Weapons!A1:E100',
-    Armor: 'Armor!A1:E100',
-    Potions: 'Potions!A1:E100',
-    Scrolls: 'Scrolls!A1:E100',
-    Money: 'Money!A1:B6'  // Assuming "Money" tab contains currency info
-};
-
-// API key for accessing the Google Sheets
-const apiKey = 'AIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Load currency data
-    fetchCategoryData('Money');
-});
-
-// Show the selected tab
-function showTab(tabName) {
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(content => content.classList.remove('active-content'));
-
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.classList.remove('active-tab'));
-
-    document.getElementById(tabName).classList.add('active-content');
-    event.target.classList.add('active-tab');
-}
-
-// Fetch and display data for the selected category (e.g., Weapons, Armor, etc.)
-function fetchCategoryData(category) {
-    const sheetRange = categoryTabs[category];
-    const sheetUrl = `${baseSheetUrl}${sheetRange}?key=${apiKey}`;
+// Fetch data from the Google Sheet
+function fetchSheetData(category) {
+    const sheetRange = categoryTabs[category] || categoryTabs['money'];
+    const sheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
 
     fetch(sheetUrl)
         .then(response => response.json())
         .then(data => {
-            if (category === 'Money') {
+            if (category === 'money') {
                 parseCurrencyData(data);
             } else {
                 parseCategoryData(data, category);
-                displayItems(category);
             }
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => console.error('Error fetching sheet data:', error));
 }
 
-// Parse Google Sheets data for categories (Weapons, Armor, etc.)
+// Parse currency data and display it in the DOM
+function parseCurrencyData(sheetData) {
+    const rows = sheetData.values || [];
+    rows.forEach(row => {
+        const [currencyType, amount] = row;
+        currencyData[currencyType] = parseInt(amount);
+    });
+    displayCurrency();
+}
+
+// Display currency values in the DOM
+function displayCurrency() {
+    document.getElementById('gold-amount').innerText = currencyData['Gold'] || 0;
+    document.getElementById('silver-amount').innerText = currencyData['Silver'] || 0;
+    document.getElementById('copper-amount').innerText = currencyData['Copper'] || 0;
+    document.getElementById('platinum-amount').innerText = currencyData['Platinum'] || 0;
+    document.getElementById('electrum-amount').innerText = currencyData['Electrum'] || 0;
+}
+
+// Parse item data from the category and display it
 function parseCategoryData(sheetData, category) {
     const rows = sheetData.values || [];
-
-    // Clear current category data
     itemsData[category] = [];
 
-    // Assume the first row is the header
     rows.slice(1).forEach(row => {
         const [name, description, location, date, quantity] = row;
-        const item = {
-            name,
-            description,
-            location,
-            date,
-            quantity: parseInt(quantity)
-        };
-
-        // Add only items with quantity > 0
+        const item = { name, description, location, date, quantity: parseInt(quantity) };
         if (item.quantity > 0) {
             itemsData[category].push(item);
         }
     });
+
+    displayItems(category);
 }
 
-// Display items in the list for the selected category
+// Display items in the DOM
 function displayItems(category) {
-    const list = document.getElementById('item-list');
-    list.innerHTML = ''; // Clear existing items
+    const list = document.getElementById(`${category}-list`);
+    list.innerHTML = '';
 
     const items = itemsData[category] || [];
-
     items.forEach((item, index) => {
         const itemRow = document.createElement('div');
         itemRow.className = 'item-row';
@@ -100,40 +92,37 @@ function displayItems(category) {
     });
 }
 
-// Parse currency data from the "Money" sheet tab
-function parseCurrencyData(sheetData) {
-    const rows = sheetData.values || [];
-
-    // Clear current currency data
-    currencyData = {};
-
-    rows.forEach(row => {
-        const [currencyType, amount] = row;
-        currencyData[currencyType] = parseInt(amount);
-    });
-
-    displayCurrency();
-}
-
-// Display the currency data
-function displayCurrency() {
-    document.getElementById('gold-amount').textContent = currencyData.Gold || 0;
-    document.getElementById('silver-amount').textContent = currencyData.Silver || 0;
-    document.getElementById('copper-amount').textContent = currencyData.Copper || 0;
-    document.getElementById('platinum-amount').textContent = currencyData.Platinum || 0;
-    document.getElementById('electrum-amount').textContent = currencyData.Electrum || 0;
-}
-
-// Update currency when the user changes it
+// Function to update the currency values (called when "Update Currency" is clicked)
 function updateCurrency() {
     const currencyType = document.getElementById('currency-type').value;
     const amount = parseInt(document.getElementById('amount').value);
 
-    if (currencyData[currencyType] !== undefined) {
-        currencyData[currencyType] += amount;
-        if (currencyData[currencyType] < 0) currencyData[currencyType] = 0;
-    }
-
+    currencyData[currencyType] = (currencyData[currencyType] || 0) + amount;
     displayCurrency();
-    // You can implement Google Sheets update logic here to persist changes
 }
+
+// Helper function to modify item quantity
+function modifyItemQuantity(category, index, amount) {
+    itemsData[category][index].quantity += amount;
+    if (itemsData[category][index].quantity < 0) itemsData[category][index].quantity = 0;
+    displayItems(category);
+}
+
+// Show specific tab content
+function showTab(tabName) {
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => content.classList.remove('active-content'));
+
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.classList.remove('active-tab'));
+
+    document.getElementById(tabName).classList.add('active-content');
+    event.target.classList.add('active-tab');
+
+    fetchSheetData(tabName);  // Fetch data for the selected tab
+}
+
+// Initial data fetch
+document.addEventListener('DOMContentLoaded', function () {
+    fetchSheetData('money');  // Load money tab by default
+});
