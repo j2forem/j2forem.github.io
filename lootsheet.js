@@ -10,7 +10,7 @@ const categoryTabs = {
     Armor: 'Armor!A1:E100',
     Potions: 'Potions!A1:E100',
     Scrolls: 'Scrolls!A1:E100',
-    Money: 'Money!A1:B6'  // Assuming "Money" tab contains currency info
+    Money: 'Money!A1:B5'  // Assuming "Money" tab contains currency info
 };
 
 // API key for accessing the Google Sheets
