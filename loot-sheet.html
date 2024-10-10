@@ -239,3 +239,23 @@
             <p><a href="index.html" class="back-button">← Back to Main Page</a></p>
             <p>&copy; 2024 Weekend Weebz. All rights reserved.</p>
             <p><a href="/privacy.html">Privacy Policy</a> | <a href="/tos.html">
+                <p><a href="/privacy.html">Privacy Policy</a> | <a href="/tos.html">Terms of Service</a></p>
+                <!-- Sign-in and Sign-out buttons -->
+                <p><button onclick="handleSignInClick()">Sign in with Google</button></p>
+                <p><button onclick="handleSignOutClick()">Sign out</button></p>
+            </div>
+        </footer>
+    </div> <!-- Closing for .container -->
+    
+    <!-- Load the Google API client library -->
+    <script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
+    
+    <!-- Your custom script (lootsheet.js) -->
+    <script src="lootsheet.js"></script>
+    
+    <script>
+        console.log("Inline script is running!");
+    </script>
+    
+    </body>
+    </html>
