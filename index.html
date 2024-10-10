@@ -3,106 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&D Loot Tracker</title>
+    <title>My RPG Tools Hub</title>
+
+    <!-- Import fantasy-themed Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
     <style>
-        /* Basic styling */
+        /* Fantasy-themed body styles */
         body {
             font-family: 'Cinzel', serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
         }
 
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
+            text-align: center;
             background-color: #fdf8e4;
+            padding: 30px;
             border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .tabs {
-            display: flex;
-            justify-content: center;
+        h1 {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 3em;
+            color: #2b1a0e;
+            margin-bottom: 30px;
         }
 
-        .tab {
-            margin: 0 10px;
-            padding: 10px 20px;
+        .button {
+            display: inline-block;
+            padding: 20px 40px;
+            margin: 15px;
             background-color: #5d4037;
             color: white;
-            border-radius: 5px;
-            cursor: pointer;
+            font-size: 24px;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            font-family: 'Cinzel', serif;
         }
 
-        .tab-content {
-            margin-top: 20px;
-        }
-
-        /* Added missing curly braces and other fixes */
-        .currency-item {
-            margin-bottom: 10px;
-        }
-
-        .currency-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        button {
-            margin-top: 10px;
+        .button:hover {
+            background-color: #d5a55d;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>D&D Loot Tracker</h1>
+    <div class="container">
+        <h1>Welcome to My RPG Tools Hub</h1>
 
-    <!-- Tab bar -->
-    <div class="tabs">
-        <span class="tab" onclick="showTab('money')">Money</span>
-        <span class="tab" onclick="showTab('weapons')">Weapons</span>
-        <span class="tab" onclick="showTab('armor')">Armor</span>
-        <span class="tab" onclick="showTab('potions')">Potions</span>
+        <!-- Navigation buttons -->
+        <a href="weekend-weebz.html" class="button">Weekend Weebz</a>
+        <a href="puppy-killers.html" class="button">Puppy Killers</a>
+        <a href="loot-sheet.html" class="button">Loot Sheet</a>
     </div>
-
-    <!-- Dynamic tab content -->
-    <div id="tab-content">
-        <!-- Your existing money tab content here -->
-        <div id="money" class="tab-content active-content">
-            <h2>Money</h2>
-            <form class="currency-form" id="currency-form">
-                <label for="currency-type">Select Currency:</label>
-                <select id="currency-type">
-                    <option value="Gold">Gold Pieces</option>
-                    <option value="Silver">Silver Pieces</option>
-                    <option value="Copper">Copper Pieces</option>
-                    <option value="Platinum">Platinum Pieces</option>
-                    <option value="Electrum">Electrum Pieces</option>
-                </select>
-
-                <label for="amount">Amount to Add/Remove:</label>
-                <input type="number" id="amount" placeholder="Enter amount" required>
-
-                <button type="button" onclick="updateCurrency()">Update Currency</button>
-            </form>
-
-            <!-- Display updated currency amounts -->
-            <div class="currency-list" id="currency-list">
-                <p class="currency-item">Gold Pieces: <span id="gold-amount">2456</span></p>
-                <p class="currency-item">Silver Pieces: <span id="silver-amount">698</span></p>
-                <p class="currency-item">Copper Pieces: <span id="copper-amount">16</span></p>
-                <p class="currency-item">Platinum Pieces: <span id="platinum-amount">35</span></p>
-                <p class="currency-item">Electrum Pieces: <span id="electrum-amount">12</span></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Link to lootsheet.js -->
-<script src="lootsheet.js"></script>
 
 </body>
 </html>
