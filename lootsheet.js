@@ -3,10 +3,13 @@ const sheetId = '1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o';  // Replace with
 const apiKey = 'AAIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';  // Replace with your Google API key
 
 // Range of data in the Google Sheet (adjust as necessary)
-const sheetRange = 'Sheet1!A1:D100'; // Adjust the range based on your sheet's structure
+const sheetRange = 'Sheet1!A:D';  // This will dynamically include all rows with data
+
 
 // Construct the URL for the Google Sheets API request
-const sheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
+// Construct the URL for the Google Sheets API request without specifying row numbers
+const sheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A:D?key=${apiKey}`;
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
