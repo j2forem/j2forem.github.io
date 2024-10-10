@@ -31,6 +31,10 @@ function initClient() {
 function fetchSheetData() {
     const sheetRange = 'Money!A:B';  // Adjust this range to your actual sheet range
     const authInstance = gapi.auth2.getAuthInstance();  // Get the Google Auth instance
+    if (!authInstance) {
+        console.error("Auth instance is not initialized");
+        return;
+    }
     const user = authInstance.currentUser.get();  // Get the signed-in user
     const oauthToken = user.getAuthResponse().access_token;  // Get the OAuth token
 
@@ -52,19 +56,9 @@ function fetchSheetData() {
 
 // Function to parse the fetched data and update the DOM
 function parseCurrencyData(sheetData) {
-    console.log("Parsing currency data:", sheetData);
     const rows = sheetData.values || [];
+    currencyData = { Gold: 0, Silver: 0, Copper: 0, Platinum: 0, Electrum: 0 };  // Reset currency data
 
-    // Reset the currencyData object
-    currencyData = {
-        Gold: 0,
-        Silver: 0,
-        Copper: 0,
-        Platinum: 0,
-        Electrum: 0
-    };
-
-    // Loop through each row and map the currencies
     rows.forEach(row => {
         if (row.length === 2) {
             const currencyType = row[0];
@@ -75,10 +69,6 @@ function parseCurrencyData(sheetData) {
             else if (currencyType === "Copper") currencyData["Copper"] = amount;
             else if (currencyType === "Platinum") currencyData["Platinum"] = amount;
             else if (currencyType === "Electrum") currencyData["Electrum"] = amount;
-
-            console.log(`Currency: ${currencyType}, Amount: ${amount}`);
-        } else {
-            console.error('Unexpected row structure:', row);
         }
     });
 
@@ -93,8 +83,3 @@ function displayCurrency() {
     document.getElementById('platinum-amount').innerText = currencyData['Platinum'] || 0;
     document.getElementById('electrum-amount').innerText = currencyData['Electrum'] || 0;
 }
-
-// Event listener to call fetchSheetData when the page loads
-document.addEventListener('DOMContentLoaded', function () {
-    fetchSheetData();
-});
