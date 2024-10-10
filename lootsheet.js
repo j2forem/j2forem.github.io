@@ -10,7 +10,7 @@ const categoryTabs = {
     gems: 'Gems!A:E',
     miscmagicitems: 'MiscMagicItems!A:E',
     unidmagicitems: 'UnidMagicItems!A:E',
-    money: 'Money!A:B'
+    money: 'Money!A1:B6'
 };
 
 // Initialize global variables to store data
