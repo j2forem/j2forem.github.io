@@ -39,9 +39,8 @@ function fetchSheetData(category) {
 }
 
 
-// Parse currency data and display it in the DOM
 function parseCurrencyData(sheetData) {
-    console.log("Parsing currency data:", sheetData);  // Log the raw data being parsed
+    console.log("Parsing currency data:", sheetData);  // Log the data being parsed
 
     const rows = sheetData.values || [];
 
@@ -56,13 +55,20 @@ function parseCurrencyData(sheetData) {
 
     rows.forEach(row => {
         const [currencyType, amount] = row;
-        console.log(`Currency: ${currencyType}, Amount: ${amount}`);  // Log each row as it's parsed
 
-        currencyData[currencyType] = parseInt(amount);
+        // Map the long names from the sheet to the short names
+        if (currencyType === "Gold Pieces") currencyData["Gold"] = parseInt(amount);
+        else if (currencyType === "Silver Pieces") currencyData["Silver"] = parseInt(amount);
+        else if (currencyType === "Copper Pieces") currencyData["Copper"] = parseInt(amount);
+        else if (currencyType === "Platinum Pieces") currencyData["Platinum"] = parseInt(amount);
+        else if (currencyType === "Electrum Pieces") currencyData["Electrum"] = parseInt(amount);
+
+        console.log(`Currency: ${currencyType}, Amount: ${amount}`);  // Log each parsed row
     });
 
-    displayCurrency();  // Call to update the DOM after parsing
+    displayCurrency();  // Update the DOM after parsing
 }
+
 
 // Display currency values in the DOM
 function displayCurrency() {
