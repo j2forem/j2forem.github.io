@@ -68,6 +68,13 @@
         <!-- Link to go back to the main landing page -->
         <a href="index.html" class="back-button">← Back to Main Page</a>
     </div>
+    <!-- Sign-in and Sign-out buttons -->
+    <button onclick="handleSignInClick()">Sign in with Google</button>
+    <button onclick="handleSignOutClick()">Sign out</button>
 
+    <!-- Load the Google API library and custom script just before the closing body tag -->
+    <script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
+    <script src="auth.js"></script>
+    
 </body>
 </html>
