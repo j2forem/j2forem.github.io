@@ -1,5 +1,5 @@
-const sheetId = 'YOUR_SHEET_ID';  // Replace with your actual sheet ID
-const apiKey = 'YOUR_API_KEY';    // Replace with your actual Google API key
+const sheetId = 'Y1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o';  // Replace with your actual sheet ID
+const apiKey = 'AIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';    // Replace with your actual Google API key
 
 let currencyData = {
     Gold: 0,
