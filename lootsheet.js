@@ -19,24 +19,31 @@ let currencyData = {};
 
 // Fetch data from the Google Sheet
 function fetchSheetData(category) {
+    console.log("Fetching data for category:", category);  // Log before fetching data
+
     const sheetRange = categoryTabs[category] || categoryTabs['money'];
     const sheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
 
     fetch(sheetUrl)
         .then(response => response.json())
         .then(data => {
+            console.log("Fetched data:", data);  // Log after data is fetched
+
             if (category === 'money') {
-                parseCurrencyData(data);
+                parseCurrencyData(data);  // Call parseCurrencyData if it's the money tab
             } else {
-                parseCategoryData(data, category);
+                parseCategoryData(data, category);  // Call parseCategoryData for other tabs
             }
         })
         .catch(error => console.error('Error fetching sheet data:', error));
 }
 
+
 // Parse currency data and display it in the DOM
 function parseCurrencyData(sheetData) {
-    const rows = sheetData.values || []; // Get the rows from the data
+    console.log("Parsing currency data:", sheetData);  // Log the raw data being parsed
+
+    const rows = sheetData.values || [];
 
     // Reset the currencyData object
     currencyData = {
@@ -48,22 +55,28 @@ function parseCurrencyData(sheetData) {
     };
 
     rows.forEach(row => {
-        const [currencyType, amount] = row;  // Deconstruct the row
-        currencyData[currencyType] = parseInt(amount);  // Store the amount in the corresponding currency key
+        const [currencyType, amount] = row;
+        console.log(`Currency: ${currencyType}, Amount: ${amount}`);  // Log each row as it's parsed
+
+        currencyData[currencyType] = parseInt(amount);
     });
 
-    displayCurrency();  // Call the function to update the DOM
+    displayCurrency();  // Call to update the DOM after parsing
 }
 
 // Display currency values in the DOM
 function displayCurrency() {
-    // Ensure each DOM element gets updated with the correct value from currencyData
+    console.log("Updating currency in DOM:", currencyData);  // Log the currency data before updating the DOM
+
     document.getElementById('gold-amount').innerText = currencyData['Gold'] || 0;
     document.getElementById('silver-amount').innerText = currencyData['Silver'] || 0;
     document.getElementById('copper-amount').innerText = currencyData['Copper'] || 0;
     document.getElementById('platinum-amount').innerText = currencyData['Platinum'] || 0;
     document.getElementById('electrum-amount').innerText = currencyData['Electrum'] || 0;
+
+    console.log("Gold updated to:", document.getElementById('gold-amount').innerText);  // Log after the DOM is updated
 }
+
 
 // Parse item data from the category and display it
 function parseCategoryData(sheetData, category) {
