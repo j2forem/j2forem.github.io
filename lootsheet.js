@@ -1,5 +1,5 @@
-const sheetId = 'Y1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o';  // Replace with your actual sheet ID
-const apiKey = 'AIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';    // Replace with your actual Google API key
+const sheetId = 'YOUR_SHEET_ID';  // Replace with your actual sheet ID
+const apiKey = 'YOUR_API_KEY';    // Replace with your actual Google API key
 
 let currencyData = {
     Gold: 0,
@@ -11,12 +11,13 @@ let currencyData = {
 
 // Function to fetch data from Google Sheets
 function fetchSheetData() {
-    const sheetRange = 'Money!A:B';  // Adjust this range to where your data is located
+    const sheetRange = 'Money!A:B';  // Adjust this range to your actual sheet range
     const sheetUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${apiKey}`;
 
     fetch(sheetUrl)
         .then(response => response.json())
         .then(data => {
+            console.log('Fetched sheet data:', data);  // Log the fetched data for verification
             parseCurrencyData(data);
         })
         .catch(error => console.error('Error fetching data:', error));
@@ -24,29 +25,52 @@ function fetchSheetData() {
 
 // Function to parse the data and display it in the DOM
 function parseCurrencyData(sheetData) {
+    console.log("Parsing currency data:", sheetData);
+
     const rows = sheetData.values || [];
 
-    rows.forEach(row => {
-        const currencyType = row[0];
-        const amount = parseInt(row[1]);
+    // Reset the currencyData object
+    currencyData = {
+        Gold: 0,
+        Silver: 0,
+        Copper: 0,
+        Platinum: 0,
+        Electrum: 0
+    };
 
-        if (currencyType === "Gold Pieces") currencyData["Gold"] = amount;
-        else if (currencyType === "Silver Pieces") currencyData["Silver"] = amount;
-        else if (currencyType === "Copper Pieces") currencyData["Copper"] = amount;
-        else if (currencyType === "Platinum Pieces") currencyData["Platinum"] = amount;
-        else if (currencyType === "Electrum Pieces") currencyData["Electrum"] = amount;
+    // Loop through each row and map the currencies
+    rows.forEach(row => {
+        if (row.length === 2) {
+            const currencyType = row[0];  // Get the currency type from column A
+            const amount = parseInt(row[1]);  // Get the amount from column B
+
+            // Match the currencyType with the sheet structure ("Gold", "Silver", etc.)
+            if (currencyType === "Gold") currencyData["Gold"] = amount;
+            else if (currencyType === "Silver") currencyData["Silver"] = amount;
+            else if (currencyType === "Copper") currencyData["Copper"] = amount;
+            else if (currencyType === "Platinum") currencyData["Platinum"] = amount;
+            else if (currencyType === "Electrum") currencyData["Electrum"] = amount;
+
+            console.log(`Currency: ${currencyType}, Amount: ${amount}`);
+        } else {
+            console.error('Unexpected row structure:', row);
+        }
     });
 
-    displayCurrency();  // Update the DOM with the fetched values
+    displayCurrency();  // Update the DOM after parsing
 }
 
-// Function to display the currency values in the DOM
+// Function to display currency values in the DOM
 function displayCurrency() {
-    document.getElementById('gold-amount').innerText = currencyData['Gold'];
-    document.getElementById('silver-amount').innerText = currencyData['Silver'];
-    document.getElementById('copper-amount').innerText = currencyData['Copper'];
-    document.getElementById('platinum-amount').innerText = currencyData['Platinum'];
-    document.getElementById('electrum-amount').innerText = currencyData['Electrum'];
+    console.log("Updating currency in DOM:", currencyData);
+
+    document.getElementById('gold-amount').innerText = currencyData['Gold'] || 0;
+    document.getElementById('silver-amount').innerText = currencyData['Silver'] || 0;
+    document.getElementById('copper-amount').innerText = currencyData['Copper'] || 0;
+    document.getElementById('platinum-amount').innerText = currencyData['Platinum'] || 0;
+    document.getElementById('electrum-amount').innerText = currencyData['Electrum'] || 0;
+
+    console.log("Gold updated to:", document.getElementById('gold-amount').innerText);
 }
 
 // Function to handle the update when the "Update Currency" button is clicked
