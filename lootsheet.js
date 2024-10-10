@@ -145,21 +145,35 @@ function updateSheetData(currencyType, newValue) {
         ]
     };
 
-    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?valueInputOption=USER_ENTERED&key=${apiKey}`, {
+    const authInstance = gapi.auth2.getAuthInstance();  // Get the Google Auth instance
+    const user = authInstance.currentUser.get();  // Get the signed-in user
+    const oauthToken = user.getAuthResponse().access_token;  // Get the OAuth token for this user
+    
+    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?valueInputOption=USER_ENTERED`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${oauthToken}`  // Use OAuth token for authorization
         },
         body: JSON.stringify(body)
-    })
-    .then(response => response.json())
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        console.log('Data successfully updated in Google Sheets:', data);
+    }).catch(error => {
+        console.error('Error updating data in Google Sheets:', error);
+    });
+    
+        body: JSON.stringify(body)
+    }
+    then(response => response.json())
     .then(data => {
         console.log(`Successfully updated ${currencyType} to ${newValue} in Google Sheets`, data);
     })
     .catch(error => {
         console.error('Error updating Google Sheets:', error);
     });
-}
+
 
 // Call fetchSheetData when the page loads to populate the DOM with data
 document.addEventListener('DOMContentLoaded', function () {
