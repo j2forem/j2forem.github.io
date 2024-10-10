@@ -1,6 +1,6 @@
 // Google Sheets ID and API key
 const sheetId = '1KukjiJx6mXf-zHJ5oqb75e15fMx0n0WV3Ed2MdYKu2o';  // Replace with your Google Sheets ID
-const apiKey = 'AIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';  // Replace with your Google API key
+const apiKey = 'AAIzaSyDEVH3dZ2qjSwXviTNWw0CrpeV99vj8Ww0';  // Replace with your Google API key
 
 // Range of data in the Google Sheet (adjust as necessary)
 const sheetRange = 'Sheet1!A1:D100'; // Adjust the range based on your sheet's structure
