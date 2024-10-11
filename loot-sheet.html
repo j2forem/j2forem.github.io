@@ -234,20 +234,12 @@
     <!-- Add other categories similar to Weapons -->
 
     <!-- Footer should be inside the body tag -->
-    <footer>
-        <div class="footer-content">
-            <p><a href="index.html" class="back-button">← Back to Main Page</a></p>
-            <p>&copy; 2024 Weekend Weebz. All rights reserved.</p>
-            <p><a href="/privacy.html">Privacy Policy</a> | <a href="/tos.html">Terms of Service</a></p>
-            <!-- Sign-in and Sign-out buttons -->
-            <p><button onclick="handleSignInClick()">Sign in with Google</button></p>
-                            <p><button onclick="handleSignOutClick()">Sign out</button></p>
-            </div>
-        </footer>
+
     </div> <!-- Closing for .container -->
     
-    <!-- Load the Google API client library -->
-    <script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    
     
     <!-- Your custom script (lootsheet.js) -->
     <script src="lootsheet.js"></script>

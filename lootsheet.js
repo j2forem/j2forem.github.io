@@ -1,101 +1,96 @@
-// Function to update currency and push changes to Google Sheets
-function updateCurrency(currencyType, amount) {
-    currencyData[currencyType] += amount;
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Prevent negative values
-    if (currencyData[currencyType] < 0) {
-        currencyData[currencyType] = 0;
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
+  authDomain: "weekendweebz.firebaseapp.com",
+  projectId: "weekendweebz",
+  storageBucket: "weekendweebz.appspot.com",
+  messagingSenderId: "389932072090",
+  appId: "1:389932072090:web:c3775748a2b0b2a09b3323",
+  measurementId: "G-VW5PN0R4ZD"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// Initialize currency data
+let currencyData = {
+    Gold: 0,
+    Silver: 0,
+    Copper: 0,
+    Platinum: 0,
+    Electrum: 0
+};
+
+// Fetch loot data from Firebase and update the DOM
+function fetchLootData() {
+    database.ref('loot').once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+            currencyData = snapshot.val(); // Get data from Firebase
+            updateDOM();  // Update the DOM with the fetched data
+        } else {
+            console.error('No data found in Firebase');
+        }
+    }).catch(function(error) {
+        console.error('Error fetching data from Firebase:', error);
+    });
+}
+
+// Update the DOM with the current currency data
+function updateDOM() {
+    document.getElementById('gold-amount').innerText = currencyData.Gold;
+    document.getElementById('silver-amount').innerText = currencyData.Silver;
+    document.getElementById('copper-amount').innerText = currencyData.Copper;
+    document.getElementById('platinum-amount').innerText = currencyData.Platinum;
+    document.getElementById('electrum-amount').innerText = currencyData.Electrum;
+}
+
+// Handle currency updates (called when the "Update Currency" button is clicked)
+function updateCurrency() {
+    const currencyType = document.getElementById('currency-type').value;
+    const amount = parseInt(document.getElementById('amount').value);
+
+    if (isNaN(amount) || amount === 0) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    modifyItemQuantity(currencyType, amount);
+}
+
+// Modify the item quantity and update both Firebase and the DOM
+function modifyItemQuantity(currencyType, amount) {
+    const currentAmount = currencyData[currencyType];
+
+    const newAmount = currentAmount + amount;
+
+    if (newAmount < 0) {
+        alert("You cannot have a negative amount of currency.");
+        return;
     }
 
     // Update the DOM
-    document.getElementById(`${currencyType.toLowerCase()}-amount`).innerText = currencyData[currencyType];
+    document.getElementById(`${currencyType.toLowerCase()}-amount`).innerText = newAmount;
 
-    // Push the updated data to Google Sheets
-    updateSheetData(currencyType, currencyData[currencyType]);
-}
+    // Update the internal data structure
+    currencyData[currencyType] = newAmount;
 
-// Function to update a specific cell in Google Sheets
-function updateSheetData(currencyType, newValue) {
-    // Map currency types to row numbers in the sheet
-    const rowMap = {
-        Gold: 1,
-        Silver: 2,
-        Copper: 3,
-        Platinum: 4,
-        Electrum: 5
-    };
-
-    const rowNumber = rowMap[currencyType];
-    const sheetRange = `Money!B${rowNumber}:B${rowNumber}`; // Update the appropriate row
-
-    const body = {
-        values: [[newValue]] // Send the new value
-    };
-
-    // Get the OAuth token
-    const authInstance = gapi.auth2.getAuthInstance();
-    const user = authInstance.currentUser.get();
-    const oauthToken = user.getAuthResponse().access_token;
-
-    // Update the sheet with the new value
-    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?valueInputOption=USER_ENTERED`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${oauthToken}`
-        },
-        body: JSON.stringify(body)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(`Updated ${currencyType} in Google Sheets:`, data);
-    })
-    .catch(error => {
-        console.error(`Error updating ${currencyType} in Google Sheets:`, error);
+    // Push the updated value to Firebase
+    database.ref('loot').set(currencyData).then(() => {
+        console.log(`Successfully updated ${currencyType} to ${newAmount} in Firebase`);
+    }).catch((error) => {
+        console.error('Error updating data in Firebase:', error);
     });
 }
 
-// Fetch the current data from Google Sheets
-function fetchSheetData() {
-    const sheetRange = 'Money!A:B'; // Adjust to your sheet's range
-
-    const authInstance = gapi.auth2.getAuthInstance();
-    const user = authInstance.currentUser.get();
-    const oauthToken = user.getAuthResponse().access_token;
-
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: sheetId,
-        range: sheetRange
-    }).then(function(response) {
-        const data = response.result.values;
-        if (!data || data.length === 0) {
-            console.error("No data found in the sheet.");
-            return;
-        }
-        parseCurrencyData(data);
-    }).catch(function(error) {
-        console.error("Error fetching data from Google Sheets:", error);
-    });
-}
-
-// Parse the fetched data and display it in the UI
-function parseCurrencyData(sheetData) {
-    currencyData = { Gold: 0, Silver: 0, Copper: 0, Platinum: 0, Electrum: 0 }; // Reset
-
-    sheetData.forEach(row => {
-        const [currencyType, amount] = row;
-        if (currencyType && amount) {
-            currencyData[currencyType] = parseInt(amount);
-        }
-    });
-
-    // Update the UI with the fetched data
-    document.getElementById('gold-amount').innerText = currencyData['Gold'];
-    document.getElementById('silver-amount').innerText = currencyData['Silver'];
-    document.getElementById('copper-amount').innerText = currencyData['Copper'];
-    document.getElementById('platinum-amount').innerText = currencyData['Platinum'];
-    document.getElementById('electrum-amount').innerText = currencyData['Electrum'];
-}
-
-// Load the data from Google Sheets when the page loads
-document.addEventListener('DOMContentLoaded', fetchSheetData);
+// Load data from Firebase when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    fetchLootData();
+});
