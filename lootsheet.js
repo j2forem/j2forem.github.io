@@ -15,8 +15,9 @@ window.updateCurrency = function() {
 
 // No imports, because Firebase is loaded via the global firebase object
 
-// Ensure Firebase is initialized via the global object
-const db = firebase.firestore();  // Firestore instance
+// Remove this line from lootsheet.js
+// const db = firebase.firestore();   // This is already initialized in the HTML file
+
 
 // Initialize currency data
 let currencyData = {
