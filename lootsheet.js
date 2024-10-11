@@ -30,7 +30,7 @@ let currencyData = {
 
 // Fetch loot data from Firestore and update the DOM
 function fetchLootData() {
-  const docRef = db.collection("loot").doc("currency");
+  const docRef = db.collection("loot").doc("Currency");
 
   docRef.get().then((doc) => {
     if (doc.exists) {
@@ -85,7 +85,7 @@ function modifyItemQuantity(currencyType, amount) {
   currencyData[currencyType] = newAmount;
 
   // Push the updated value to Firestore
-  db.collection("loot").doc("currency").set(currencyData).then(() => {
+  db.collection("loot").doc("Currency").set(currencyData).then(() => {
     console.log(`Successfully updated ${currencyType} to ${newAmount} in Firestore`);
   }).catch((error) => {
     console.error("Error updating data in Firestore:", error);
