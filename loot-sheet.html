@@ -190,17 +190,17 @@
     
             <button type="button" onclick="updateCurrency()">Update Currency</button>
         </form>
-
-        <!-- Display updated currency amounts -->
-        <div class="currency-list">
-            <p class="currency-item">Gold Pieces: <span id="gold-amount">0</span></p>
-            <p class="currency-item">Silver Pieces: <span id="silver-amount">0</span></p>
-            <p class="currency-item">Copper Pieces: <span id="copper-amount">0</span></p>
-            <p class="currency-item">Platinum Pieces: <span id="platinum-amount">0</span></p>
-            <p class="currency-item">Electrum Pieces: <span id="electrum-amount">0</span></p>
-        </div>
     </div>
     
+
+    <!-- Display updated currency amounts -->
+    <div class="currency-list">
+        <p class="currency-item">Gold Pieces: <span id="gold-amount">0</span></p>
+        <p class="currency-item">Silver Pieces: <span id="silver-amount">0</span></p>
+        <p class="currency-item">Copper Pieces: <span id="copper-amount">0</span></p>
+        <p class="currency-item">Platinum Pieces: <span id="platinum-amount">0</span></p>
+        <p class="currency-item">Electrum Pieces: <span id="electrum-amount">0</span></p>
+    </div>
 </div>
 
 <!-- Firebase App (the core Firebase SDK) -->
@@ -211,6 +211,10 @@
 
 <!-- Your custom script (lootsheet.js) -->
 <script src="lootsheet.js"></script>
+
+<script>
+    console.log("Inline script is running!");
+</script>
 
 </body>
 </html>
