@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: "weekendweebz.appspot.com",
   messagingSenderId: "389932072090",
   appId: "1:389932072090:web:c3775748a2b0b2a09b3323",
-  measurementId: "G-VW5PN0R4ZD"
+  measurementId: "G-552DK30WLJ"
 };
 
 // Initialize Firebase app and Firestore
