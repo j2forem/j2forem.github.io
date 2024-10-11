@@ -11,19 +11,22 @@ let currencyData = {
 
 // Function to load the Google API client and initialize the Sheets API
 function handleClientLoad() {
-    gapi.load('client:auth2', initClient);
+    gapi.load('client:auth2', function() {
+        gapi.auth2.init().then(initClient).catch(function(error) {
+            console.error('Error during gapi client initialization', error);
+        });
+    });
 }
 
 // Function to initialize the Google API client after it has loaded
 function initClient() {
     gapi.client.init({
-        clientId: 'YOUR_CLIENT_ID',  // Replace with your actual OAuth Client ID
+        clientId: 'YOUR_REAL_CLIENT_ID',  // Replace with your actual OAuth Client ID
         scope: 'https://www.googleapis.com/auth/spreadsheets'
     }).then(function () {
-        // Once initialized, fetch the sheet data
-        fetchSheetData();  
+        fetchSheetData();  // Fetch the data once everything is initialized
     }).catch(function(error) {
-        console.error('Error during gapi client initialization', error);
+        console.error('Error initializing gapi client', error);
     });
 }
 
