@@ -19,7 +19,7 @@
         }
 
         /* Container for content */
-        .container {
+        .container, #tab-content {
             background-color: #fdf8e4;
             padding: 20px;
             border-radius: 12px;
@@ -28,6 +28,7 @@
             margin: 20px auto;
         }
 
+        /* Titles and headings */
         h1 {
             text-align: center;
             font-family: 'Uncial Antiqua', cursive;
@@ -41,17 +42,24 @@
             color: #2b1a0e;
         }
 
+        /* Tab bar styling */
         .tabs {
             display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+            justify-content: space-evenly; /* Distribute tabs evenly */
             background-color: #2b1a0e;
-            border-radius: 6px;
             padding: 10px;
+            border-radius: 12px; /* Rounded corners for the tab bar */
+            max-width: 100%; /* Ensure it doesn't extend beyond its parent */
+            margin: 0 auto; /* Center the tab bar */
+            box-sizing: border-box; /* Ensure padding is considered in the width */
         }
 
         .tab {
-            padding: 10px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Vertically and horizontally center text */
+            width: 150px;
+            height: 60px;
             background-color: #a98274;
             color: white;
             border-radius: 6px;
@@ -59,6 +67,8 @@
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s ease;
+            text-align: center;
+            font-family: 'Cinzel', serif;
         }
 
         .tab:hover {
@@ -69,20 +79,25 @@
             background-color: #5d4037;
         }
 
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-family: 'Cinzel', serif;
+        /* Button styles */
+        button {
+            padding: 12px 20px;
+            background-color: #5d4037;
+            color: white;
+            border: none;
+            border-radius: 6px;
             font-size: 18px;
-            color: #2b1a0e;
-            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            transition: background-color 0.3s ease;
         }
 
-        input[type="text"], input[type="number"], input[type="date"], select {
+        button:hover {
+            background-color: #d5a55d;
+        }
+
+        /* Form input styling */
+        input[type="text"], input[type="number"], select {
             width: 100%;
             padding: 10px;
             border: 2px solid #5d4037;
@@ -100,59 +115,20 @@
             color: #5d4037;
         }
 
-        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus {
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
             outline: none;
             border-color: #d5a55d;
         }
 
-        button {
-            padding: 12px 20px;
-            background-color: #5d4037;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 18px;
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #d5a55d;
-        }
-
-        .tab-content {
-            display: none;
+        /* Dynamic content area */
+        #tab-content {
+            background-color: #fdf8e4;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }
 
-        .active-content {
-            display: block;
-        }
-
-        .currency-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .currency-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            margin-bottom: 10px;
-            background-color: #fdf8e4;
-            border: 2px solid #5d4037;
-            border-radius: 8px;
-            font-size: 20px;
-            color: #2b1a0e;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-            font-weight: bold;
-        }
-
-        .currency-item span {
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -160,7 +136,7 @@
 <div class="container">
     <h1>D&D Loot Tracker</h1>
 
-    <!-- Tab bar -->
+    <!-- Tab bar for categories -->
     <div class="tabs">
         <span class="tab active-tab" onclick="showTab('money')">Money</span>
         <span class="tab" onclick="showTab('weapons')">Weapons</span>
@@ -168,72 +144,63 @@
         <span class="tab" onclick="showTab('potions')">Potions</span>
         <span class="tab" onclick="showTab('scrolls')">Scrolls</span>
         <span class="tab" onclick="showTab('gems')">Gems</span>
-        <span class="tab" onclick="showTab('miscmagicitems')">Misc Magic Items</span>
-        <span class="tab" onclick="showTab('unidmagicitems')">Not ID'd</span>
+        <span class="tab" onclick="showTab('magicalitems')">Magical Items</span>
+        <span class="tab" onclick="showTab('unidentifieditems')">Unidentified Items</span>
     </div>
 
-    <!-- Money Tab -->
-    <div id="money" class="tab-content active-content">
-        <h2>Money</h2>
-        <form class="currency-form">
-            <label for="currency-type">Select Currency:</label>
-            <select id="currency-type">
-                <option value="Gold">Gold Pieces</option>
-                <option value="Silver">Silver Pieces</option>
-                <option value="Copper">Copper Pieces</option>
-                <option value="Platinum">Platinum Pieces</option>
-                <option value="Electrum">Electrum Pieces</option>
-            </select>
-    
-            <label for="amount">Amount to Add/Remove:</label>
-            <input type="number" id="amount" placeholder="Enter amount" required>
-    
-            <button type="button" onclick="updateCurrency()">Update Currency</button>
-        </form>
-    </div>
-    
+    <!-- Dynamic content area for displaying forms and results based on user selection -->
+    <div id="tab-content" class="content-area">
 
-    <!-- Display updated currency amounts -->
-    <div class="currency-list">
-        <p class="currency-item">Gold Pieces: <span id="gold-amount">0</span></p>
-        <p class="currency-item">Silver Pieces: <span id="silver-amount">0</span></p>
-        <p class="currency-item">Copper Pieces: <span id="copper-amount">0</span></p>
-        <p class="currency-item">Platinum Pieces: <span id="platinum-amount">0</span></p>
-        <p class="currency-item">Electrum Pieces: <span id="electrum-amount">0</span></p>
+        
+        <!-- Content will be loaded dynamically here -->
+        <h2>Weapons Store</h2>
+        <table id="weapons-store" border="1">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Cost</th>
+              <th>Weight (lbs)</th>
+              <th>Size</th>
+              <th>Type</th>
+              <th>Speed Factor</th>
+              <th>Damage (S-M)</th>
+              <th>Damage (L)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="weapons-store-body">
+            <!-- Weapons data will be loaded here dynamically -->
+          </tbody>
+        </table>
+        
     </div>
+    <h2>Group Loot</h2>
+<!-- Button to manually load group loot -->
+<button onclick="loadGroupLoot()">View Current Group Loot</button>
+
+<!-- Table to display the group loot -->
+<table id="group-loot-table" border="1">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Cost</th>
+      <th>Weight (lbs)</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="group-loot-body">
+    <!-- Group loot will be dynamically loaded here -->
+  </tbody>
+</table>
+
 </div>
 
-<div class="container" id="weapons-section">
-    <h2>Weapons Database</h2>
-  
-    <!-- Form to add a weapon to Firestore -->
-    <form id="weapon-form">
-      <input type="text" id="weapon-name" placeholder="Weapon Name" required>
-      <input type="text" id="weapon-cost" placeholder="Cost (e.g., 500 gp)" required>
-      <input type="number" id="weapon-weight" placeholder="Weight (in lbs)" required>
-      <input type="text" id="weapon-size" placeholder="Size (S, M, L)" required>
-      <input type="text" id="weapon-type" placeholder="Type (P, S, B)" required>
-      <input type="number" id="weapon-speed" placeholder="Speed Factor" required>
-      <input type="text" id="weapon-damage-sm" placeholder="Damage (S-M)" required>
-      <input type="text" id="weapon-damage-l" placeholder="Damage (L)" required>
-      <button type="button" onclick="addWeapon()">Add Weapon</button>
-    </form>
-  
-    <!-- Search weapons -->
-    <h3>Search Weapons</h3>
-    <input type="text" id="weapon-search" placeholder="Search by weapon name..." oninput="searchWeapons()">
-    
-    <!-- Display matching weapons -->
-    <div id="weapon-list"></div>
-  </div>
-  
+
 
 <!-- Firebase App (compatibility mode) -->
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
-
 <!-- Firebase Firestore (compatibility mode) -->
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
-
 
 <script>
   // Initialize Firebase
@@ -248,7 +215,6 @@
 
   console.log("Firebase App Initialized:", firebase.app().name);
   console.log("Firestore Initialized:", db);
-
 </script>
 
 <script src="lootsheet.js"></script> <!-- JavaScript Logic -->

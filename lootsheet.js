@@ -28,21 +28,23 @@ let currencyData = {
   Electrum: 0
 };
 
-// Fetch loot data from Firestore and update the DOM
+// Fetch loot data from Firestore with loading state
 function fetchLootData() {
-  const docRef = db.collection("loot").doc("Currency");
-
-  docRef.get().then((doc) => {
-    if (doc.exists) {
-      currencyData = doc.data();  // Get data from Firestore
-      updateDOM();  // Update the DOM with the fetched data
-    } else {
-      console.error("No data found in Firestore");
-    }
-  }).catch(function (error) {
-    console.error("Error fetching data from Firestore:", error);
-  });
-}
+    document.getElementById("tab-content").innerHTML = "<p>Loading currency data...</p>";
+    const docRef = db.collection("loot").doc("Currency");
+  
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        currencyData = doc.data();  // Get data from Firestore
+        updateDOM();  // Update the DOM with the fetched data
+      } else {
+        console.error("No data found in Firestore");
+      }
+    }).catch(function (error) {
+      console.error("Error fetching data from Firestore:", error);
+    });
+  }
+  
 
 // Update the DOM with the current currency data
 function updateDOM() {
@@ -51,19 +53,6 @@ function updateDOM() {
   document.getElementById("copper-amount").innerText = currencyData.Copper;
   document.getElementById("platinum-amount").innerText = currencyData.Platinum;
   document.getElementById("electrum-amount").innerText = currencyData.Electrum;
-}
-
-// Handle currency updates (called when the "Update Currency" button is clicked)
-function updateCurrency() {
-  const currencyType = document.getElementById("currency-type").value;
-  const amount = parseInt(document.getElementById("amount").value);
-
-  if (isNaN(amount) || amount === 0) {
-    alert("Please enter a valid amount.");
-    return;
-  }
-
-  modifyItemQuantity(currencyType, amount);
 }
 
 // Modify the item quantity and update both Firestore and the DOM
@@ -129,12 +118,15 @@ function addWeapon() {
 function searchWeapons() {
     const searchQuery = document.getElementById("weapon-search").value.toLowerCase();
     const weaponList = document.getElementById("weapon-list");
-    
+  
     // Clear the current list
     weaponList.innerHTML = '';
   
-    // Query Firestore for weapons that match the search query
-    db.collection("weapons").where("name", ">=", searchQuery).where("name", "<=", searchQuery + "\uf8ff")
+    // Query Firestore for weapons that match the search query and limit the results to 10
+    db.collection("weapons")
+      .where("name", ">=", searchQuery)
+      .where("name", "<=", searchQuery + "\uf8ff")
+      .limit(10) // Limiting the search to 10 results
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
@@ -145,16 +137,28 @@ function searchWeapons() {
         // Display each matching weapon
         querySnapshot.forEach((doc) => {
           const weapon = doc.data();
+  
+          // Use optional chaining and default values to handle missing fields
+          const name = weapon.name || 'Unknown Name';
+          const cost = weapon.cost || 'N/A';
+          const weight = weapon.weight || 'N/A';
+          const size = weapon.size || 'N/A';
+          const type = weapon.type || 'N/A';
+          const speed = weapon.speed || 'N/A';
+          const damageSM = weapon.damageSM || 'N/A';
+          const damageL = weapon.damageL || 'N/A';
+  
+          // Create a weapon display item, showing N/A for missing fields
           const weaponItem = `
             <div class="weapon-item">
-              <h4>${weapon.name}</h4>
-              <p>Cost: ${weapon.cost}</p>
-              <p>Weight: ${weapon.weight} lbs</p>
-              <p>Size: ${weapon.size}</p>
-              <p>Type: ${weapon.type}</p>
-              <p>Speed Factor: ${weapon.speed}</p>
-              <p>Damage (S-M): ${weapon.damageSM}</p>
-              <p>Damage (L): ${weapon.damageL}</p>
+              <h4>${name}</h4>
+              <p>Cost: ${cost}</p>
+              <p>Weight: ${weight} lbs</p>
+              <p>Size: ${size}</p>
+              <p>Type: ${type}</p>
+              <p>Speed Factor: ${speed}</p>
+              <p>Damage (S-M): ${damageSM}</p>
+              <p>Damage (L): ${damageL}</p>
             </div>
           `;
           weaponList.innerHTML += weaponItem;
@@ -165,7 +169,143 @@ function searchWeapons() {
       });
   }
   
+  
+  
 // Load data from Firestore when the page loads
 document.addEventListener("DOMContentLoaded", function () {
   fetchLootData();
 });
+
+// Function to handle tab switching and load dynamic content
+function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab');
+    const tabContent = document.getElementById('tab-content');
+  
+    // Remove 'active-tab' class from all tabs
+    tabs.forEach(tab => tab.classList.remove('active-tab'));
+  
+    // Set the clicked tab as active
+    document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active-tab');
+  
+    // Load content based on the selected tab
+    loadTabContent(tabId);
+  }
+  
+  // Function to load dynamic content based on the selected tab
+  function loadTabContent(tabId) {
+    const tabContent = document.getElementById('tab-content');
+  
+    // Clear previous content
+    tabContent.innerHTML = '';
+  
+    // Load dynamic content based on the tab selected
+    switch (tabId) {
+      case 'money':
+        tabContent.innerHTML = `
+          <h2>Money Management</h2>
+          <p>Select an option to deposit or retrieve currency.</p>
+          <button onclick="loadMoneyAction('deposit')">Deposit</button>
+          <button onclick="loadMoneyAction('retrieve')">Retrieve</button>
+        `;
+        default:
+            tabContent.innerHTML = `<h2>Select a category to manage your inventory</h2>`;
+        break;
+  
+      case 'weapons':
+        tabContent.innerHTML = `
+          <h2>Manage Weapons</h2>
+          <p>Select an option to add or retrieve weapons.</p>
+          <button onclick="loadWeaponsAction('deposit')">Deposit</button>
+          <button onclick="loadWeaponsAction('retrieve')">Retrieve</button>
+        `;
+        
+        break;
+  
+      case 'armor':
+        tabContent.innerHTML = `
+          <h2>Manage Armor</h2>
+          <p>Select an option to add or retrieve armor.</p>
+          <button onclick="loadArmorAction('deposit')">Deposit</button>
+          <button onclick="loadArmorAction('retrieve')">Retrieve</button>
+        `;
+      
+        break;
+  
+      case 'potions':
+        tabContent.innerHTML = `
+          <h2>Manage Potions</h2>
+          <p>Select an option to add or retrieve potions.</p>
+          <button onclick="loadPotionsAction('deposit')">Deposit</button>
+          <button onclick="loadPotionsAction('retrieve')">Retrieve</button>
+        `;
+      
+        break;
+  
+      case 'scrolls':
+        tabContent.innerHTML = `
+          <h2>Manage Scrolls</h2>
+          <p>Select an option to add or retrieve scrolls.</p>
+          <button onclick="loadScrollsAction('deposit')">Deposit</button>
+          <button onclick="loadScrollsAction('retrieve')">Retrieve</button>
+        `;
+  
+        break;
+  
+      case 'gems':
+        tabContent.innerHTML = `
+          <h2>Manage Gems</h2>
+          <p>Select an option to add or retrieve gems.</p>
+          <button onclick="loadGemsAction('deposit')">Deposit</button>
+          <button onclick="loadGemsAction('retrieve')">Retrieve</button>
+        `;
+
+        break;
+  
+      case 'magicalitems':
+        tabContent.innerHTML = `
+          <h2>Manage Magical Items</h2>
+          <p>Select an option to add or retrieve magical items.</p>
+          <button onclick="loadMagicalItemsAction('deposit')">Deposit</button>
+          <button onclick="loadMagicalItemsAction('retrieve')">Retrieve</button>
+        `;
+
+        break;
+  
+      case 'unidentifieditems':
+        tabContent.innerHTML = `
+          <h2>Manage Unidentified Items</h2>
+          <p>Select an option to add or retrieve unidentified items.</p>
+          <button onclick="loadUnidentifiedItemsAction('deposit')">Deposit</button>
+          <button onclick="loadUnidentifiedItemsAction('retrieve')">Retrieve</button>
+        `;
+
+        break;
+  
+
+    }
+  }
+  
+  // Function to manually query and load the group loot from the database
+function loadGroupLoot() {
+    const lootTableBody = document.getElementById("group-loot-body");
+    lootTableBody.innerHTML = ''; // Clear any existing table content
+  
+    // Example Firestore query (adjust to your actual DB setup)
+    db.collection("groupLoot").get().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        const lootItem = doc.data();
+        const row = `
+          <tr>
+            <td>${lootItem.name}</td>
+            <td>${lootItem.cost}</td>
+            <td>${lootItem.weight}</td>
+            <td><button onclick="removeFromGroupLoot('${doc.id}')">Remove</button></td>
+          </tr>
+        `;
+        lootTableBody.innerHTML += row;
+      });
+    }).catch(error => {
+      console.error("Error fetching group loot: ", error);
+    });
+  }
+  
