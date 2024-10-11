@@ -217,7 +217,11 @@
 
   const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
+  console.log("Firebase App Initialized:", firebase.app().name);
+console.log("Firestore Initialized:", db);
+
 </script>
+
 <script src="lootsheet.js"></script> <!-- JavaScript Logic -->
 </body>
 </html>
