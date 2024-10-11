@@ -203,6 +203,31 @@
     </div>
 </div>
 
+<div class="container" id="weapons-section">
+    <h2>Weapons Database</h2>
+  
+    <!-- Form to add a weapon to Firestore -->
+    <form id="weapon-form">
+      <input type="text" id="weapon-name" placeholder="Weapon Name" required>
+      <input type="text" id="weapon-cost" placeholder="Cost (e.g., 500 gp)" required>
+      <input type="number" id="weapon-weight" placeholder="Weight (in lbs)" required>
+      <input type="text" id="weapon-size" placeholder="Size (S, M, L)" required>
+      <input type="text" id="weapon-type" placeholder="Type (P, S, B)" required>
+      <input type="number" id="weapon-speed" placeholder="Speed Factor" required>
+      <input type="text" id="weapon-damage-sm" placeholder="Damage (S-M)" required>
+      <input type="text" id="weapon-damage-l" placeholder="Damage (L)" required>
+      <button type="button" onclick="addWeapon()">Add Weapon</button>
+    </form>
+  
+    <!-- Search weapons -->
+    <h3>Search Weapons</h3>
+    <input type="text" id="weapon-search" placeholder="Search by weapon name..." oninput="searchWeapons()">
+    
+    <!-- Display matching weapons -->
+    <div id="weapon-list"></div>
+  </div>
+  
+
 <!-- Firebase App (compatibility mode) -->
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
 

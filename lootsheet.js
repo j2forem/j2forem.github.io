@@ -92,6 +92,79 @@ function modifyItemQuantity(currencyType, amount) {
   });
 }
 
+// Function to add a new weapon to Firestore
+function addWeapon() {
+    const name = document.getElementById("weapon-name").value;
+    const cost = document.getElementById("weapon-cost").value;
+    const weight = document.getElementById("weapon-weight").value;
+    const size = document.getElementById("weapon-size").value;
+    const type = document.getElementById("weapon-type").value;
+    const speed = document.getElementById("weapon-speed").value;
+    const damageSM = document.getElementById("weapon-damage-sm").value;
+    const damageL = document.getElementById("weapon-damage-l").value;
+  
+    // Create a weapon object to add to Firestore
+    const weapon = {
+      name: name,
+      cost: cost,
+      weight: weight,
+      size: size,
+      type: type,
+      speed: speed,
+      damageSM: damageSM,
+      damageL: damageL
+    };
+  
+    // Add weapon to Firestore
+    db.collection("weapons").add(weapon).then(() => {
+      console.log("Weapon added successfully!");
+      // Clear the form after submission
+      document.getElementById("weapon-form").reset();
+    }).catch((error) => {
+      console.error("Error adding weapon: ", error);
+    });
+  }
+  
+// Function to search weapons from Firestore based on name
+function searchWeapons() {
+    const searchQuery = document.getElementById("weapon-search").value.toLowerCase();
+    const weaponList = document.getElementById("weapon-list");
+    
+    // Clear the current list
+    weaponList.innerHTML = '';
+  
+    // Query Firestore for weapons that match the search query
+    db.collection("weapons").where("name", ">=", searchQuery).where("name", "<=", searchQuery + "\uf8ff")
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.empty) {
+          weaponList.innerHTML = '<p>No matching weapons found.</p>';
+          return;
+        }
+  
+        // Display each matching weapon
+        querySnapshot.forEach((doc) => {
+          const weapon = doc.data();
+          const weaponItem = `
+            <div class="weapon-item">
+              <h4>${weapon.name}</h4>
+              <p>Cost: ${weapon.cost}</p>
+              <p>Weight: ${weapon.weight} lbs</p>
+              <p>Size: ${weapon.size}</p>
+              <p>Type: ${weapon.type}</p>
+              <p>Speed Factor: ${weapon.speed}</p>
+              <p>Damage (S-M): ${weapon.damageSM}</p>
+              <p>Damage (L): ${weapon.damageL}</p>
+            </div>
+          `;
+          weaponList.innerHTML += weaponItem;
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching weapons: ", error);
+      });
+  }
+  
 // Load data from Firestore when the page loads
 document.addEventListener("DOMContentLoaded", function () {
   fetchLootData();
