@@ -60,6 +60,8 @@ function modifyItemQuantity(currencyType, amount) {
     return;
   }
 
+  console.log(`Updating ${currencyType} from ${currentAmount} to ${newAmount}`); //console logging
+
   // Update the DOM
   document.getElementById(`${currencyType.toLowerCase()}-amount`).innerText = newAmount;
 
