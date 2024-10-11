@@ -203,18 +203,21 @@
     </div>
 </div>
 
-<!-- Firebase App (the core Firebase SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-
-<!-- Firebase Realtime Database SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
-
-<!-- Your custom script (lootsheet.js) -->
-<script src="lootsheet.js"></script>
+<!-- Add Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>  <!-- Or check Firebase docs for the exact latest version -->
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
 
 <script>
-    console.log("Inline script is running!");
-</script>
+  // Initialize Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
+    authDomain: "weekendweebz.firebaseapp.com",
+    projectId: "weekendweebz",
+  };
 
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+<script src="lootsheet.js"></script> <!-- JavaScript Logic -->
 </body>
 </html>
