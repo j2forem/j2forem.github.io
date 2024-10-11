@@ -1,3 +1,18 @@
+console.log("Lootsheet.js loaded successfully");
+
+// Global function declaration to ensure it's accessible globally
+window.updateCurrency = function() {
+  const currencyType = document.getElementById("currency-type").value;
+  const amount = parseInt(document.getElementById("amount").value);
+
+  if (isNaN(amount) || amount === 0) {
+    alert("Please enter a valid amount.");
+    return;
+  }
+
+  modifyItemQuantity(currencyType, amount);
+}
+
 // No imports, because Firebase is loaded via the global firebase object
 
 // Ensure Firebase is initialized via the global object
