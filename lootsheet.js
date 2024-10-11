@@ -1,40 +1,36 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase Configuration and Initialization
 const firebaseConfig = {
-  apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
-  authDomain: "weekendweebz.firebaseapp.com",
-  projectId: "weekendweebz",
-  storageBucket: "weekendweebz.appspot.com",
-  messagingSenderId: "389932072090",
-  appId: "1:389932072090:web:c3775748a2b0b2a09b3323",
-  measurementId: "G-VW5PN0R4ZD"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-// Initialize currency data
-let currencyData = {
-    Gold: 0,
-    Silver: 0,
-    Copper: 0,
-    Platinum: 0,
-    Electrum: 0
-};
-
-// Fetch loot data from Firebase and update the DOM
-function fetchLootData() {
-    database.ref('loot').once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-            currencyData = snapshot.val(); // Get data from Firebase
-            updateDOM();  // Update the DOM with the fetched data
+    apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
+    authDomain: "weekendweebz.firebaseapp.com",
+    databaseURL: "https://weekendweebz-default-rtdb.firebaseio.com",  // Add the Realtime DB URL
+    projectId: "weekendweebz",
+    storageBucket: "weekendweebz.appspot.com",
+    messagingSenderId: "389932072090",
+    appId: "1:389932072090:web:c3775748a2b0b2a09b3323",
+    measurementId: "G-VW5PN0R4ZD"
+  };
+  
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const database = firebase.database(app);
+  
+  // Initialize currency data
+  let currencyData = {
+      Gold: 0,
+      Silver: 0,
+      Copper: 0,
+      Platinum: 0,
+      Electrum: 0
+  };
+  
+  // Fetch loot data from Firebase and update the DOM
+  function fetchLootData() {
+      database.ref('loot').once('value').then((snapshot) => {
+          if (snapshot.exists()) {
+              currencyData = snapshot.val(); // Get data from Firebase
+              updateDOM();  // Update the DOM with the fetched data
+         
+              updateDOM();  // Update the DOM with the fetched data
         } else {
             console.error('No data found in Firebase');
         }

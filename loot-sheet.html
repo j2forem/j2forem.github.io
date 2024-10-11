@@ -190,8 +190,6 @@
     
             <button type="button" onclick="updateCurrency()">Update Currency</button>
         </form>
-    </div>
-    
 
         <!-- Display updated currency amounts -->
         <div class="currency-list">
@@ -202,55 +200,17 @@
             <p class="currency-item">Electrum Pieces: <span id="electrum-amount">0</span></p>
         </div>
     </div>
-
-    <!-- Weapon Tab -->
-    <div id="weapons" class="tab-content">
-        <h2>Weapons</h2>
-        <button type="button" onclick="toggleForm('weapon-form')">Add New Weapon</button>
-
-        <form id="weapon-form" style="display:none; margin-top: 20px;">
-            <label for="weapon-name">Weapon Name:</label>
-            <input type="text" id="weapon-name" placeholder="Enter weapon name" required>
-
-            <label for="weapon-quantity">Quantity:</label>
-            <input type="number" id="weapon-quantity" placeholder="Enter quantity" required>
-
-            <label for="weapon-value">Assessed Value:</label>
-            <input type="number" id="weapon-value" placeholder="Enter assessed value" required>
-
-            <label for="weapon-location">Location Acquired:</label>
-            <input type="text" id="weapon-location" placeholder="Enter location acquired" required>
-
-            <label for="weapon-date">Date Acquired:</label>
-            <input type="date" id="weapon-date" required>
-
-            <button type="button" onclick="addItem('weapons')">Add Weapon</button>
-        </form>
-
-        <div id="weapon-list">
-            <!-- Dynamically added weapons will appear here -->
-        </div>
-    </div>
-    <!-- Add other categories similar to Weapons -->
-
-    <!-- Footer should be inside the body tag -->
-
-    </div> <!-- Closing for .container -->
     
- <!-- Firebase App (the core Firebase SDK) -->
+</div>
+
+<!-- Firebase App (the core Firebase SDK) -->
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
 
 <!-- Firebase Realtime Database SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
 
-    
-    
-    <!-- Your custom script (lootsheet.js) -->
-    <script src="lootsheet.js"></script>
-    
-    <script>
-        console.log("Inline script is running!");
-    </script>
-    
-    </body>
-    </html>
+<!-- Your custom script (lootsheet.js) -->
+<script src="lootsheet.js"></script>
+
+</body>
+</html>
