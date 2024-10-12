@@ -323,7 +323,7 @@ function loadWeaponsStore() {
         weapons.forEach(weapon => {
           const row = `
             <tr>
-              <td>${weapon.name}</td>
+              <td>${weapon.Item}</td>
               <td>${weapon.cost}</td>
               <td>${weapon.weight}</td>
               <td>${weapon.size}</td>
