@@ -52,25 +52,29 @@ function updateDOM() {
 let weaponCache = [];
 
 function cacheWeaponsFromFirestore() {
-  console.log("Caching weapons from Firestore...");
+  console.log("Attempting to cache weapons from Firestore...");
+  
   db.collection('weapons').get().then(querySnapshot => {
+    console.log(`Documents found: ${querySnapshot.size}`); // Add this to see the number of docs
+
     if (querySnapshot.empty) {
       console.error("No weapons found in Firestore.");
       return;
     }
 
     weaponCache = [];  // Reset the cache
-    
-    // Loop through and store weapons in cache
+
     querySnapshot.forEach(doc => {
+      console.log('Weapon doc:', doc.data());  // Log each weapon document
       weaponCache.push(doc.data());
     });
-    
+
     console.log('Weapons cached successfully:', weaponCache);
   }).catch(error => {
     console.error('Error caching weapons from Firestore:', error); // Add detailed error log
   });
 }
+
 
 
 // Search function that works on the cached weapons
