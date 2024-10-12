@@ -17,38 +17,24 @@
 <div class="container">
     <h1>D&D Loot Tracker</h1>
 
-    <!-- Tab bar for categories -->
     <div class="tabs">
-        <span class="tab active-tab" onclick="showTab('money')">Money</span>
-        <span class="tab" onclick="showTab('weapons')">Weapons</span>
-        <span class="tab" onclick="showTab('armor')">Armor</span>
-        <span class="tab" onclick="showTab('potions')">Potions</span>
-        <span class="tab" onclick="showTab('scrolls')">Scrolls</span>
-        <span class="tab" onclick="showTab('gems')">Gems</span>
-        <span class="tab" onclick="showTab('magicalitems')">Magical Items</span>
-        <span class="tab" onclick="showTab('unidentifieditems')">Unidentified Items</span>
-    </div>
-
-    <select id="category-select">
-      <option value="Weapons">Weapons</option>
-      <option value="Armor">Armor</option>
-      <option value="Potions">Potions</option>
-    </select>
-    
-
-    <!-- Dynamic content area for displaying forms and results based on user selection -->
-    <div id="tab-content" class="content-area">
-
-      <div>
-        <!-- Search input for items -->
-        <h2>Search for an Item</h2>
-        <input type="text" id="item-search" placeholder="Search for an item..." onkeyup="searchItems()" />
-    
-    
-        
-        <!-- Results will be displayed here -->
-        <div id="results"></div>
-    </div>
+      <span class="tab active-tab" onclick="setCategory('Money')">Money</span>
+      <span class="tab" onclick="setCategory('Weapons')">Weapons</span>
+      <span class="tab" onclick="setCategory('Armor')">Armor</span>
+      <span class="tab" onclick="setCategory('Potions')">Potions</span>
+      <span class="tab" onclick="setCategory('Scrolls')">Scrolls</span>
+      <span class="tab" onclick="setCategory('Gems')">Gems</span>
+      <span class="tab" onclick="setCategory('Magical Items')">Magical Items</span>
+      <span class="tab" onclick="setCategory('Unidentified Items')">Unidentified Items</span>
+  </div>
+  
+  <!-- Search input -->
+  <h2>Search for an Item</h2>
+  <input type="text" id="item-search" placeholder="Search for an item..." onkeyup="searchItems()" />
+  
+  <!-- Results will be displayed here -->
+  <div id="results"></div>
+  
     
 
       
