@@ -311,7 +311,7 @@ function loadGroupLoot() {
   
   // Function to load predefined items (weapons) from the JSON file
 function loadWeaponsStore() {
-    fetch('weapons.json') // Make sure the path to your JSON file is correct
+    fetch('weapons.js') // Make sure the path to your JSON file is correct
       .then(response => response.json())
       .then(weapons => {
         const tableBody = document.getElementById("weapons-store-body");
