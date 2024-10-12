@@ -52,7 +52,7 @@ export const getItems = async (category, searchTerm = '', itemsPerPage = 10, las
 
 // loot-search.js
 
-import { getItems } from './firebase.js';
+import { getItems } from './firebase.json';
 
 let timeout = null;
 let lastVisible = null;  // For lazy loading
