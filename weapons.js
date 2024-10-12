@@ -1,4 +1,4 @@
-[
+const weapons=[
     {
         "Item": "Alhulak",
         "Cost": "9 gp",
