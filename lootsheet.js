@@ -395,11 +395,13 @@ function loadWeaponsStore() {
     });
   }
   function uploadWeaponsToFirestore() {
+    console.log("Starting weapon upload...");
     weapons.forEach(weapon => {
+      console.log(`Checking weapon: ${weapon.name}`);
       // Check if the weapon already exists before adding
       db.collection("Weapons").where("name", "==", weapon.name).get().then((snapshot) => {
         if (snapshot.empty) {
-          // If the weapon does not exist, add it to Firestore
+          console.log(`Uploading: ${weapon.name}`);
           db.collection("Weapons").add(weapon).then(() => {
             console.log(`${weapon.name} has been added to Firestore!`);
           }).catch((error) => {
@@ -414,7 +416,6 @@ function loadWeaponsStore() {
     });
   }
   
-  // Call the function if needed here (you'll trigger manually, so no need for a direct call here)
   
   
   
