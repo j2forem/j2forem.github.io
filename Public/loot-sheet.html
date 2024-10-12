@@ -6,8 +6,8 @@
     <title>D&D Loot Tracker</title>
 
     <link rel="stylesheet" href="css/loot-sheet.css">
-    <script src="js/firebase.js" defer></script> <!-- Firestore Setup -->
-    <script src="js/loot-search.js" defer></script> <!-- Search & Caching -->
+    <script src="firebase.json" defer></script> <!-- Firestore Setup -->
+    <script src="js/lootsearch.js" defer></script> <!-- Search & Caching -->
 </head>
 
 
@@ -98,9 +98,6 @@ const db = firebase.firestore();
   console.log("Firebase App Initialized:", firebase.app().name);
   console.log("Firestore Initialized:", db);
 </script>
-
-<script src="weapons.js" defer></script>
-<script src="lootsheet.js" defer></script>
 
 
 </body>
