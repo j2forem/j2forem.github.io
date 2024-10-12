@@ -1,13 +1,11 @@
 // firebase.js
 
-// Ensure your Firebase configuration is properly initialized above this (if not already)
-
 // Function to retrieve items from Firestore based on category and search term
 function getItems(category, searchTerm) {
-    return db.collection('items')  // Replace 'items' with your Firestore collection
-      .where('category', '==', category)
-      .where('name', '>=', searchTerm)
-      .where('name', '<=', searchTerm + '\uf8ff')  // This ensures a partial match search
+    return db.collection('Weapons')  // Ensure 'Weapons' is the collection name
+      .where('category', '==', category)  // Filter by category to reduce unnecessary reads
+      .where('name', '>=', searchTerm)  // Search for names starting with searchTerm
+      .where('name', '<=', searchTerm + '\uf8ff')  // Partial match to capture similar names
       .get()
       .then(snapshot => {
         const items = [];
@@ -21,4 +19,6 @@ function getItems(category, searchTerm) {
         throw error;
       });
   }
+  
+  
   
