@@ -199,8 +199,11 @@
     projectId: "weekendweebz",
   };
 
-  const app = firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+  // Initialize Firebase (ensure your config object is correct)
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+
 
   console.log("Firebase App Initialized:", firebase.app().name);
   console.log("Firestore Initialized:", db);
