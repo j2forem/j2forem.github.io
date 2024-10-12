@@ -309,36 +309,40 @@ function loadGroupLoot() {
     });
   }
   
-  // Function to load predefined items (weapons) from the JSON file
+// Function to load predefined items (weapons) from Firestore
 function loadWeaponsStore() {
-    fetch('weapons.js') // Make sure the path to your JSON file is correct
-      .then(response => response.json())
-      .then(weapons => {
-        const tableBody = document.getElementById("weapons-store-body");
-  
-        // Clear any existing rows
-        tableBody.innerHTML = '';
-  
-        // Loop through weapons and create table rows
-        weapons.forEach(weapon => {
-          const row = `
-            <tr>
-              <td>${weapon.Item}</td>
-              <td>${weapon.cost}</td>
-              <td>${weapon.weight}</td>
-              <td>${weapon.size}</td>
-              <td>${weapon.type}</td>
-              <td>${weapon.speed}</td>
-              <td>${weapon.damageSM}</td>
-              <td>${weapon.damageL}</td>
-            </tr>
-          `;
-          tableBody.innerHTML += row;
-        });
+  db.collection("Weapons") // Your Firestore collection name
+      .get() // Fetch all documents in the collection
+      .then((querySnapshot) => {
+          const tableBody = document.getElementById("weapons-store-body");
+
+          // Clear any existing rows
+          tableBody.innerHTML = '';
+
+          // Loop through each document and display its data
+          querySnapshot.forEach((doc) => {
+              const weapon = doc.data();
+              const row = `
+                  <tr>
+                      <td>${weapon.Item}</td>
+                      <td>${weapon.Cost}</td>
+                      <td>${weapon["Weight (lbs.)"]}</td>
+                      <td>${weapon.Size}</td>
+                      <td>${weapon.Type}</td>
+                      <td>${weapon["Speed Factor"]}</td>
+                      <td>${weapon["S-M Dmg"]}</td>
+                      <td>${weapon["L Dmg"]}</td>
+                  </tr>
+              `;
+              tableBody.innerHTML += row;
+          });
       })
-      .catch(error => console.error('Error loading weapons:', error));
-  }
-  
+      .catch((error) => {
+          console.error("Error fetching weapons from Firestore:", error);
+      });
+}
+
+
   function showTab(tabId) {
     const tabs = document.querySelectorAll('.tab');
     const tabContent = document.getElementById('tab-content');
