@@ -384,16 +384,7 @@ function loadWeaponsStore() {
         tabContent.innerHTML = `<h2>Select a category to manage your inventory</h2>`;
     }
   }
-  function uploadWeaponsToFirestore() {
-    // Loop through the weapons array loaded from weapons.js
-    weapons.forEach(weapon => {
-      db.collection("Weapons").add(weapon).then(() => {
-        console.log(`${weapon.name} has been added to Firestore!`);
-      }).catch((error) => {
-        console.error("Error adding weapon:", error);
-      });
-    });
-  }
+
   function uploadWeaponsToFirestore() {
     console.log("Starting weapon upload...");
     weapons.forEach(weapon => {
