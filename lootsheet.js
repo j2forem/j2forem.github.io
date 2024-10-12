@@ -324,14 +324,14 @@ function loadWeaponsStore() {
               const weapon = doc.data();
               const row = `
                   <tr>
-                      <td>${weapon.Item}</td>
-                      <td>${weapon.Cost}</td>
-                      <td>${weapon["Weight (lbs.)"]}</td>
-                      <td>${weapon.Size}</td>
-                      <td>${weapon.Type}</td>
-                      <td>${weapon["Speed Factor"]}</td>
-                      <td>${weapon["S-M Dmg"]}</td>
-                      <td>${weapon["L Dmg"]}</td>
+                      <td>${weapon.name}</td>
+                      <td>${weapon.cost}</td>
+                      <td>${weapon.weight["Weight (lbs.)"]}</td>
+                      <td>${weapon.size}</td>
+                      <td>${weapon.type}</td>
+                      <td>${weapon.speed["Speed Factor"]}</td>
+                      <td>${weapon.damageSM["S-M Dmg"]}</td>
+                      <td>${weapon.damageL["L Dmg"]}</td>
                   </tr>
               `;
               tableBody.innerHTML += row;
