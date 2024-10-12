@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Loot Tracker</title>
+
+    <link rel="stylesheet" href="css/loot-sheet.css">
+    
+    <script src="firebase.js" defer></script>  <!-- Firestore setup -->
+    <script src="lootsheet.js" defer></script> <!-- Display logic -->
+    <script src="lootsearch.js" defer></script> <!-- Search logic -->
+</head>
+
+
+<body>
+
+<div class="container">
+    <h1>D&D Loot Tracker</h1>
+
+    <div class="tabs">
+      <span class="tab active-tab" onclick="setCategory('Money')">Money</span>
+      <span class="tab" onclick="setCategory('Weapons')">Weapons</span>
+      <span class="tab" onclick="setCategory('Armor')">Armor</span>
+      <span class="tab" onclick="setCategory('Potions')">Potions</span>
+      <span class="tab" onclick="setCategory('Scrolls')">Scrolls</span>
+      <span class="tab" onclick="setCategory('Gems')">Gems</span>
+      <span class="tab" onclick="setCategory('Magical Items')">Magical Items</span>
+      <span class="tab" onclick="setCategory('Unidentified Items')">Unidentified Items</span>
+  </div>
+  
+  <!-- Search input -->
+  <h2>Search for an Item</h2>
+  <input type="text" id="item-search" placeholder="Search for an item..." onkeyup="searchItems()" />
+  
+  <!-- Results will be displayed here -->
+  <div id="results"></div>
+  
+    
+
+      
+      <div>
+        <h2>Group Loot</h2>
+        <!-- Button to manually load group loot -->
+        <button onclick="loadGroupLoot()">View Current Group Loot</button>
+      
+        <!-- Table to display the group loot -->
+        <table id="group-loot-table" border="1">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Cost</th>
+              <th>Weight (lbs)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="group-loot-body">
+            <!-- Group loot will be dynamically loaded here -->
+          </tbody>
+        </table>
+      </div>
+      
+
+
+
+<!-- Correct Firebase Initialization Script -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+  // Your Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
+    authDomain: "weekendweebz.firebaseapp.com",
+    projectId: "weekendweebz",
+    storageBucket: "weekendweebz.appspot.com",
+    messagingSenderId: "389932072090",
+    appId: "1:389932072090:web:104a13fc57762a449b3323",
+    measurementId: "G-552DK30WLJ"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Initialize Firestore
+  const db = firebase.firestore();
+
+  // Debugging - check if Firebase and Firestore are properly initialized
+  console.log("Firebase App Initialized:", firebase.app().name);
+  console.log("Firestore Initialized:", db);
+</script>
+
+
+
+</body>
+</html>
