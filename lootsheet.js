@@ -426,6 +426,50 @@ function loadWeaponsStore() {
     });
   }
   
-  
+  // Function to search for weapons by name and display them
+function searchWeapons() {
+  const searchQuery = document.getElementById("weapon-search").value.toLowerCase();
+  const weaponList = document.getElementById("weapon-list");
+
+  // Clear the current list
+  weaponList.innerHTML = '';
+
+  // Query Firestore for weapons that match the search query
+  db.collection("Weapons")
+      .where("name", ">=", searchQuery)
+      .where("name", "<=", searchQuery + "\uf8ff") // To ensure case-insensitive search
+      .limit(10) // Limit the number of results to 10
+      .get()
+      .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+              weaponList.innerHTML = '<p>No matching weapons found.</p>';
+              return;
+          }
+
+          // Iterate through results and display them
+          querySnapshot.forEach((doc) => {
+              const weapon = doc.data();
+              const weaponItem = `
+                  <div class="weapon-item">
+                      <h4>${weapon.name}</h4>
+                      <p>Cost: ${weapon.cost || 'N/A'}</p>
+                      <p>Weight: ${weapon.weight || 'N/A'} lbs</p>
+                      <p>Size: ${weapon.size || 'N/A'}</p>
+                      <p>Type: ${weapon.type || 'N/A'}</p>
+                      <p>Speed Factor: ${weapon.speed || 'N/A'}</p>
+                      <p>Damage (S-M): ${weapon.damageSM || 'N/A'}</p>
+                      <p>Damage (L): ${weapon.damageL || 'N/A'}</p>
+                      <p>Source: ${weapon.source || 'N/A'}</p>
+                  </div>
+              `;
+              weaponList.innerHTML += weaponItem;
+          });
+      })
+      .catch((error) => {
+          console.error("Error fetching weapons: ", error);
+          weaponList.innerHTML = '<p>Error fetching weapons.</p>';
+      });
+}
+
   
   
