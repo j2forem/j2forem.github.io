@@ -24,19 +24,19 @@ let currencyData = {
 
 // Fetch loot data from Firestore with loading state
 function fetchLootData() {
-    document.getElementById("tab-content").innerHTML = "<p>Loading currency data...</p>";
-    const docRef = db.collection("loot").doc("Currency");
+  document.getElementById("tab-content").innerHTML = "<p>Loading currency data...</p>";
+  const docRef = db.collection("loot").doc("Currency");
 
-    docRef.get().then((doc) => {
-      if (doc.exists) {
-        currencyData = doc.data();  // Get data from Firestore
-        updateDOM();  // Update the DOM with the fetched data
-      } else {
-        console.error("No data found in Firestore");
-      }
-    }).catch(function (error) {
-      console.error("Error fetching data from Firestore:", error);
-    });
+  docRef.get().then((doc) => {
+    if (doc.exists) {
+      currencyData = doc.data();  // Get data from Firestore
+      updateDOM();  // Update the DOM with the fetched data
+    } else {
+      console.error("No data found in Firestore");
+    }
+  }).catch(function (error) {
+    console.error("Error fetching data from Firestore:", error);
+  });
 }
 
 // Update the DOM with the current currency data
@@ -48,78 +48,26 @@ function updateDOM() {
   document.getElementById("electrum-amount").innerText = currencyData.Electrum;
 }
 
-// Modify the item quantity and update both Firestore and the DOM
-function modifyItemQuantity(currencyType, amount) {
-  const currentAmount = currencyData[currencyType];
-  const newAmount = currentAmount + amount;
+// Cache to store weapons
+let weaponCache = [];
 
-  if (newAmount < 0) {
-    alert("You cannot have a negative amount of currency.");
-    return;
-  }
-
-  // Update the DOM
-  document.getElementById(`${currencyType.toLowerCase()}-amount`).innerText = newAmount;
-
-  // Update the internal data structure
-  currencyData[currencyType] = newAmount;
-
-  // Push the updated value to Firestore
-  db.collection("loot").doc("Currency").set(currencyData).then(() => {
-    console.log(`Successfully updated ${currencyType} to ${newAmount} in Firestore`);
-  }).catch((error) => {
-    console.error("Error updating data in Firestore:", error);
-  });
-}
-
-// Add a new weapon to Firestore
-function addWeapon() {
-  const name = document.getElementById("weapon-name").value;
-  const cost = document.getElementById("weapon-cost").value;
-  const weight = document.getElementById("weapon-weight").value;
-  const size = document.getElementById("weapon-size").value;
-  const type = document.getElementById("weapon-type").value;
-  const speed = document.getElementById("weapon-speed").value;
-  const damageSM = document.getElementById("weapon-damage-sm").value;
-  const damageL = document.getElementById("weapon-damage-l").value;
-
-  // Create a weapon object
-  const weapon = {
-    name: name,
-    cost: cost,
-    weight: weight,
-    size: size,
-    type: type,
-    speed: speed,
-    damageSM: damageSM,
-    damageL: damageL
-  };
-
-  // Add weapon to Firestore
-  db.collection("weapons").add(weapon).then(() => {
-    console.log("Weapon added successfully!");
-    document.getElementById("weapon-form").reset();  // Clear form
-  }).catch((error) => {
-    console.error("Error adding weapon: ", error);
-  });
-}
-
-// Search weapons from cached data
-let weaponCache = [];  // Cache to store weapons
-
+// Cache weapons from Firestore into the browser's memory
 function cacheWeaponsFromFirestore() {
   db.collection('weapons').get().then(querySnapshot => {
-    weaponCache = [];
+    weaponCache = [];  // Reset the cache
+
+    // Loop through and store weapons in cache
     querySnapshot.forEach(doc => {
       weaponCache.push(doc.data());
     });
+
     console.log('Weapons cached:', weaponCache);
   }).catch(error => {
     console.error('Error caching weapons:', error);
   });
 }
 
-// Search function from cached weapons
+// Search function that works on the cached weapons
 function searchWeapons() {
   const searchQuery = document.getElementById("weapon-search").value.toLowerCase();
   const weaponResults = document.getElementById("weapon-results");
@@ -127,7 +75,13 @@ function searchWeapons() {
   // Clear previous search results
   weaponResults.innerHTML = '';
 
-  // Filter weapons from the cache
+  // Check if the weaponCache has data
+  if (weaponCache.length === 0) {
+    weaponResults.innerHTML = '<p>No weapons loaded into cache. Please reload the page or check Firestore connection.</p>';
+    return;
+  }
+
+  // Filter weapons from the cache based on the search query
   const filteredWeapons = weaponCache.filter(weapon => 
     weapon.name.toLowerCase().includes(searchQuery)
   );
