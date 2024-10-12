@@ -309,3 +309,113 @@ function loadGroupLoot() {
     });
   }
   
+  // Function to load predefined items (weapons) from the JSON file
+function loadWeaponsStore() {
+    fetch('weapons.json') // Make sure the path to your JSON file is correct
+      .then(response => response.json())
+      .then(weapons => {
+        const tableBody = document.getElementById("weapons-store-body");
+  
+        // Clear any existing rows
+        tableBody.innerHTML = '';
+  
+        // Loop through weapons and create table rows
+        weapons.forEach(weapon => {
+          const row = `
+            <tr>
+              <td>${weapon.name}</td>
+              <td>${weapon.cost}</td>
+              <td>${weapon.weight}</td>
+              <td>${weapon.size}</td>
+              <td>${weapon.type}</td>
+              <td>${weapon.speed}</td>
+              <td>${weapon.damageSM}</td>
+              <td>${weapon.damageL}</td>
+            </tr>
+          `;
+          tableBody.innerHTML += row;
+        });
+      })
+      .catch(error => console.error('Error loading weapons:', error));
+  }
+  
+  function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab');
+    const tabContent = document.getElementById('tab-content');
+  
+    // Clear previous content
+    tabContent.innerHTML = '';
+  
+    // Remove 'active-tab' class from all tabs
+    tabs.forEach(tab => tab.classList.remove('active-tab'));
+  
+    // Set the clicked tab as active
+    document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active-tab');
+  
+    // Load content based on the selected tab
+    switch (tabId) {
+      case 'weapons':
+        tabContent.innerHTML = `
+          <h2>Weapons Store</h2>
+          <table id="weapons-store" border="1">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Weight (lbs)</th>
+                <th>Size</th>
+                <th>Type</th>
+                <th>Speed Factor</th>
+                <th>Damage (S-M)</th>
+                <th>Damage (L)</th>
+              </tr>
+            </thead>
+            <tbody id="weapons-store-body">
+              <!-- Weapons data will be loaded here dynamically -->
+            </tbody>
+          </table>
+        `;
+        loadWeaponsStore(); // Call the function to load the weapons data
+        break;
+  
+      // Add other cases for other tabs if needed...
+      
+      default:
+        tabContent.innerHTML = `<h2>Select a category to manage your inventory</h2>`;
+    }
+  }
+  function uploadWeaponsToFirestore() {
+    // Loop through the weapons array loaded from weapons.js
+    weapons.forEach(weapon => {
+      db.collection("Weapons").add(weapon).then(() => {
+        console.log(`${weapon.name} has been added to Firestore!`);
+      }).catch((error) => {
+        console.error("Error adding weapon:", error);
+      });
+    });
+  }
+  function uploadWeaponsToFirestore() {
+    weapons.forEach(weapon => {
+      // Check if the weapon already exists before adding
+      db.collection("Weapons").where("name", "==", weapon.name).get().then((snapshot) => {
+        if (snapshot.empty) {
+          // If the weapon does not exist, add it to Firestore
+          db.collection("Weapons").add(weapon).then(() => {
+            console.log(`${weapon.name} has been added to Firestore!`);
+          }).catch((error) => {
+            console.error("Error adding weapon:", error);
+          });
+        } else {
+          console.log(`${weapon.name} already exists in Firestore.`);
+        }
+      }).catch((error) => {
+        console.error("Error checking Firestore for existing weapon:", error);
+      });
+    });
+  }
+  
+  // Call the function if needed here (you'll trigger manually, so no need for a direct call here)
+  
+  
+  
+  
