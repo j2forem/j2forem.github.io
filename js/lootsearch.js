@@ -4,10 +4,12 @@ let selectedCategory = 'Weapons';  // Default category
 
 // Set the current category based on tab selection
 function setCategory(category) {
-  selectedCategory = category;  // Update the selected category
-  console.log(`Category set to: ${selectedCategory}`);
-  searchItems();  // Perform the search for the selected category
-}
+    console.log('setCategory function triggered');  // Log when the function is triggered
+    selectedCategory = category;  // Update the selected category
+    console.log(`Category set to: ${selectedCategory}`);  // Log the selected category
+    searchItems();  // Perform the search for the selected category
+  }
+  
 
 // Search function to handle items search by category and name
 function searchItems() {
