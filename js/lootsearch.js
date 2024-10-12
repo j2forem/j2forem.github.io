@@ -1,50 +1,59 @@
 // lootsearch.js
 
+let selectedCategory = 'Weapons';  // Default category
+
+// Set the current category based on tab selection
+function setCategory(category) {
+  selectedCategory = category;  // Update the selected category
+  console.log(`Category set to: ${selectedCategory}`);
+  searchItems();  // Perform the search for the selected category
+}
+
 // Search function to handle items search by category and name
 function searchItems() {
-    const searchTerm = document.getElementById('item-search').value.trim();
-    const category = document.getElementById('category-select').value;  // Category selection dropdown
-  
-    if (searchTerm && category) {
-      handleSearch(category, searchTerm);  // Pass category as the collection name
-    }
+  const searchTerm = document.getElementById('item-search').value.trim();
+
+  if (searchTerm && selectedCategory) {
+    handleSearch(selectedCategory, searchTerm);  // Pass selectedCategory as the collection name
   }
+}
+
+// Handle search logic for the selected category
+async function handleSearch(category, searchTerm) {
+  console.log(`Searching in category: ${category} for term: ${searchTerm}`);
   
-  // Handle search logic for the selected category
-  async function handleSearch(category, searchTerm) {
-    console.log(`Searching in category: ${category} for term: ${searchTerm}`);
-    
-    try {
-      const { items } = await getItems(category, searchTerm);  // Fetch items from the correct collection
-      displayResults(items);  // Display the results in the UI
-    } catch (error) {
-      console.error('Error fetching items:', error);
-    }
+  try {
+    const { items } = await getItems(category, searchTerm);  // Fetch items from the correct collection
+    displayResults(items);  // Display the results in the UI
+  } catch (error) {
+    console.error('Error fetching items:', error);
   }
-  
-  // Display search results
-  function displayResults(items) {
-    const resultsContainer = document.getElementById('results');
-    if (!resultsContainer) {
-      console.error("Results container not found");
-      return;
-    }
-  
-    resultsContainer.innerHTML = '';  // Clear previous results
-  
-    // If no items are found, show a message
-    if (!items || items.length === 0) {
-      resultsContainer.textContent = 'No items found.';
-      return;
-    }
-  
-    // Append each result to the results container
-    items.forEach(item => {
-      const itemDiv = document.createElement('div');
-      itemDiv.textContent = `${item.name} - ${item.cost}`;  // Adjust fields as needed
-      resultsContainer.appendChild(itemDiv);
-    });
+}
+
+// Display search results
+function displayResults(items) {
+  const resultsContainer = document.getElementById('results');
+  if (!resultsContainer) {
+    console.error("Results container not found");
+    return;
   }
+
+  resultsContainer.innerHTML = '';  // Clear previous results
+
+  // If no items are found, show a message
+  if (!items || items.length === 0) {
+    resultsContainer.textContent = 'No items found.';
+    return;
+  }
+
+  // Append each result to the results container
+  items.forEach(item => {
+    const itemDiv = document.createElement('div');
+    itemDiv.textContent = `${item.name} - ${item.cost}`;  // Adjust fields as needed
+    resultsContainer.appendChild(itemDiv);
+  });
+}
+
   
 
 // Lazy loading functionality (Optional, depending on your use case)
