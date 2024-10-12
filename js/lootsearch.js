@@ -1,6 +1,6 @@
 // lootsearch.js
 
-import { getItems } from './firebase.js';  // Ensure your firebase.js file contains Firestore setup
+// We assume getItems is defined globally in firebase.js, so no import statement is needed here
 
 let timeout = null;
 let lastVisible = null;  // For lazy loading
@@ -55,6 +55,10 @@ async function handleSearch(category, searchTerm) {
 // Display search results
 function displayResults(items) {
   const resultsContainer = document.getElementById('results');
+  if (!resultsContainer) {
+    console.error("Results container with id 'results' not found.");
+    return;
+  }
   resultsContainer.innerHTML = '';  // Clear previous results
   items.forEach(item => {
     const itemDiv = document.createElement('div');
@@ -63,12 +67,21 @@ function displayResults(items) {
   });
 }
 
+// Function for searching weapons
+function searchWeapons() {
+  const searchTerm = document.getElementById('weapon-search').value.trim();
+  handleSearch('Weapons', searchTerm);
+}
+
 // Debounced search input
-document.getElementById('search-input').addEventListener('input', debounce((event) => {
-  const category = document.getElementById('category-select').value;
-  const searchTerm = event.target.value.trim();
-  handleSearch(category, searchTerm);
-}, 300));
+const searchInput = document.getElementById('search-input');
+if (searchInput) {
+  searchInput.addEventListener('input', debounce((event) => {
+    const category = document.getElementById('category-select').value;
+    const searchTerm = event.target.value.trim();
+    handleSearch(category, searchTerm);
+  }, 300));
+}
 
 // Lazy loading functionality
 window.addEventListener('scroll', async () => {

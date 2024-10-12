@@ -28,6 +28,13 @@
         <span class="tab" onclick="showTab('unidentifieditems')">Unidentified Items</span>
     </div>
 
+    <select id="category-select">
+      <option value="Weapons">Weapons</option>
+      <option value="Armor">Armor</option>
+      <option value="Potions">Potions</option>
+    </select>
+    
+
     <!-- Dynamic content area for displaying forms and results based on user selection -->
     <div id="tab-content" class="content-area">
 
@@ -36,11 +43,8 @@
         <h2>Search for a Weapon</h2>
         <input type="text" id="weapon-search" placeholder="Search for a weapon..." onkeyup="searchWeapons()" />
         
-        <!-- Search results table -->
-        <div id="weapon-results">
-          <!-- Search results will be dynamically loaded here -->
-        </div>
-      </div>
+        <div id="results"></div>
+
       
       <div>
         <h2>Group Loot</h2>
