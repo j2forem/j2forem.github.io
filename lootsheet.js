@@ -326,12 +326,12 @@ function loadWeaponsStore() {
                   <tr>
                       <td>${weapon.name}</td>
                       <td>${weapon.cost}</td>
-                      <td>${weapon.weight["Weight (lbs.)"]}</td>
+                      <td>${weapon.weight}</td>
                       <td>${weapon.size}</td>
                       <td>${weapon.type}</td>
-                      <td>${weapon.speed["Speed Factor"]}</td>
-                      <td>${weapon.damageSM["S-M Dmg"]}</td>
-                      <td>${weapon.damageL["L Dmg"]}</td>
+                      <td>${weapon.speed}</td>
+                      <td>${weapon.damageSM}</td>
+                      <td>${weapon.damageL}</td>
                   </tr>
               `;
               tableBody.innerHTML += row;
