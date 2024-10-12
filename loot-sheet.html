@@ -40,11 +40,22 @@
     <div id="tab-content" class="content-area">
 
       <div>
-        <!-- Search input -->
-        <h2>Search for a Weapon</h2>
-        <input type="text" id="weapon-search" placeholder="Search for a weapon..." onkeyup="searchWeapons()" />
+        <!-- Search input for items -->
+        <h2>Search for an Item</h2>
+        <input type="text" id="item-search" placeholder="Search for an item..." onkeyup="searchItems()" />
+    
+        <!-- Category selection dropdown -->
+        <select id="category-select">
+          <option value="Weapons">Weapons</option>
+          <option value="Armor">Armor</option>
+          <option value="Potions">Potions</option>
+          <!-- Add other categories here -->
+        </select>
         
+        <!-- Results will be displayed here -->
         <div id="results"></div>
+    </div>
+    
 
       
       <div>

@@ -1,93 +1,57 @@
 // lootsearch.js
 
-// We assume getItems is defined globally in firebase.js, so no import statement is needed here
-
-let timeout = null;
-let lastVisible = null;  // For lazy loading
-let searchCount = 0;
-const searchLimit = 5;  // Max 5 searches per minute
-const resetTime = 60000; // 1 minute in milliseconds
-
-// Reset search count every minute
-function resetSearchCount() {
-  setTimeout(() => searchCount = 0, resetTime);
-}
-
-// Debounce function to limit how often search is triggered
-function debounce(fn, delay) {
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn(...args), delay);
-  };
-}
-
-// Caching results in local storage
-function cacheResults(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
-}
-
-// Retrieve cached results
-function getCachedResults(key) {
-  const cachedData = localStorage.getItem(key);
-  return cachedData ? JSON.parse(cachedData) : null;
-}
-
-// Handle search logic
-async function handleSearch(category, searchTerm) {
-  const cacheKey = `${category}-${searchTerm}`;
-  const cached = getCachedResults(cacheKey);
-
-  if (cached) {
-    console.log('Using cached results', cached);
-    displayResults(cached);
-  } else if (searchCount < searchLimit) {
-    searchCount++;
-    const { items } = await getItems(category, searchTerm);  // Fetch items from Firestore
-    cacheResults(cacheKey, items);
-    displayResults(items);
-
-    if (searchCount === 1) resetSearchCount();  // Start rate limit reset timer
-  } else {
-    console.log('Search limit exceeded. Try again later.');
+// Search function to handle items search by category and name
+function searchItems() {
+    const searchTerm = document.getElementById('item-search').value.trim();
+    const category = document.getElementById('category-select').value;  // Category selection dropdown
+  
+    if (searchTerm && category) {
+      handleSearch(category, searchTerm);  // Pass category as the collection name
+    }
   }
-}
-
-// Display search results
-function displayResults(items) {
-  const resultsContainer = document.getElementById('results');
-  if (!resultsContainer) {
-    console.error("Results container with id 'results' not found.");
-    return;
+  
+  // Handle search logic for the selected category
+  async function handleSearch(category, searchTerm) {
+    console.log(`Searching in category: ${category} for term: ${searchTerm}`);
+    
+    try {
+      const { items } = await getItems(category, searchTerm);  // Fetch items from the correct collection
+      displayResults(items);  // Display the results in the UI
+    } catch (error) {
+      console.error('Error fetching items:', error);
+    }
   }
-  resultsContainer.innerHTML = '';  // Clear previous results
-  items.forEach(item => {
-    const itemDiv = document.createElement('div');
-    itemDiv.textContent = `${item.name} - ${item.value} gold`;
-    resultsContainer.appendChild(itemDiv);
-  });
-}
+  
+  // Display search results
+  function displayResults(items) {
+    const resultsContainer = document.getElementById('results');
+    if (!resultsContainer) {
+      console.error("Results container not found");
+      return;
+    }
+  
+    resultsContainer.innerHTML = '';  // Clear previous results
+  
+    // If no items are found, show a message
+    if (!items || items.length === 0) {
+      resultsContainer.textContent = 'No items found.';
+      return;
+    }
+  
+    // Append each result to the results container
+    items.forEach(item => {
+      const itemDiv = document.createElement('div');
+      itemDiv.textContent = `${item.name} - ${item.cost}`;  // Adjust fields as needed
+      resultsContainer.appendChild(itemDiv);
+    });
+  }
+  
 
-// Function for searching weapons
-function searchWeapons() {
-  const searchTerm = document.getElementById('weapon-search').value.trim();
-  handleSearch('Weapons', searchTerm);
-}
-
-// Debounced search input
-const searchInput = document.getElementById('search-input');
-if (searchInput) {
-  searchInput.addEventListener('input', debounce((event) => {
-    const category = document.getElementById('category-select').value;
-    const searchTerm = event.target.value.trim();
-    handleSearch(category, searchTerm);
-  }, 300));
-}
-
-// Lazy loading functionality
+// Lazy loading functionality (Optional, depending on your use case)
 window.addEventListener('scroll', async () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) { // Near bottom
     const category = document.getElementById('category-select').value;
-    const searchTerm = document.getElementById('search-input').value.trim();
+    const searchTerm = document.getElementById('weapon-search').value.trim();
     const { items, last } = await getItems(category, searchTerm, 10, lastVisible);
     lastVisible = last;  // Keep track of the last item for pagination
     displayResults(items);
