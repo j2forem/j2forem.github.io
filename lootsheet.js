@@ -388,25 +388,43 @@ function loadWeaponsStore() {
   function uploadWeaponsToFirestore() {
     console.log("Starting weapon upload...");
     weapons.forEach(weapon => {
-      console.log(`Checking weapon: ${weapon.name}`);
+      console.log("Weapon object:", weapon); // Log the entire weapon object for debugging
+  
+      // Check if the weapon has a valid Item (name) before querying Firestore
+      if (!weapon.Item) {
+        console.error("Weapon name (Item) is undefined for one of the items:", weapon);
+        return; // Skip this weapon if the Item (name) is undefined
+      }
+  
+      console.log(`Checking weapon: ${weapon.Item}`);
+      
       // Check if the weapon already exists before adding
-      db.collection("Weapons").where("name", "==", weapon.name).get().then((snapshot) => {
+      db.collection("Weapons").where("name", "==", weapon.Item).get().then((snapshot) => {
         if (snapshot.empty) {
-          console.log(`Uploading: ${weapon.name}`);
-          db.collection("Weapons").add(weapon).then(() => {
-            console.log(`${weapon.name} has been added to Firestore!`);
+          console.log(`Uploading: ${weapon.Item}`);
+          db.collection("Weapons").add({
+            name: weapon.Item,
+            cost: weapon["Cost"] || "N/A",
+            weight: weapon["Weight (lbs.)"] || 0,
+            size: weapon.Size || "N/A",
+            type: weapon.Type || "N/A",
+            speed: weapon["Speed Factor"] || "N/A",
+            damageSM: weapon["S-M Dmg"] || "N/A",
+            damageL: weapon["L Dmg"] || "N/A",
+            source: weapon.Source || "N/A"
+          }).then(() => {
+            console.log(`${weapon.Item} has been added to Firestore!`);
           }).catch((error) => {
             console.error("Error adding weapon:", error);
           });
         } else {
-          console.log(`${weapon.name} already exists in Firestore.`);
+          console.log(`${weapon.Item} already exists in Firestore.`);
         }
       }).catch((error) => {
         console.error("Error checking Firestore for existing weapon:", error);
       });
     });
   }
-  
   
   
   
