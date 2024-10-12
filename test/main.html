@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Loot Tracker</title>
+    <!-- Import fantasy-themed Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cinzel', serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+        }
+        .container {
+            background-color: #fdf8e4;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        h1 {
+            text-align: center;
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 3em;
+            color: #2b1a0e;
+        }
+        .currency-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .currency-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #fdf8e4;
+            border: 2px solid #5d4037;
+            border-radius: 8px;
+            font-size: 20px;
+            color: #2b1a0e;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+        .currency-item span {
+            font-weight: bold;
+        }
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>D&D Loot Tracker</h1>
+
+        <!-- Display updated currency amounts -->
+        <div class="currency-list">
+            <div class="currency-item">
+                Gold Pieces: <span id="gold-amount">0</span>
+                <button onclick="updateCurrency('Gold', 1)">+</button>
+                <button onclick="updateCurrency('Gold', -1)">-</button>
+            </div>
+            <div class="currency-item">
+                Silver Pieces: <span id="silver-amount">0</span>
+                <button onclick="updateCurrency('Silver', 1)">+</button>
+                <button onclick="updateCurrency('Silver', -1)">-</button>
+            </div>
+            <div class="currency-item">
+                Copper Pieces: <span id="copper-amount">0</span>
+                <button onclick="updateCurrency('Copper', 1)">+</button>
+                <button onclick="updateCurrency('Copper', -1)">-</button>
+            </div>
+            <div class="currency-item">
+                Platinum Pieces: <span id="platinum-amount">0</span>
+                <button onclick="updateCurrency('Platinum', 1)">+</button>
+                <button onclick="updateCurrency('Platinum', -1)">-</button>
+            </div>
+            <div class="currency-item">
+                Electrum Pieces: <span id="electrum-amount">0</span>
+                <button onclick="updateCurrency('Electrum', 1)">+</button>
+                <button onclick="updateCurrency('Electrum', -1)">-</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
