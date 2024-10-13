@@ -1,4 +1,5 @@
-import { getItems } from './firebase.js';  // Import getItems function from firebase.js
+// Remove this line:
+// import { getItems } from './firebase.js';  // This is no longer needed
 
 let selectedCategory = 'Weapons';  // Default category
 
@@ -24,15 +25,9 @@ function debounce(fn, delay) {
 async function searchItems() {
   const searchTerm = document.getElementById('search-input').value.trim();  // Input search term
 
-  // Check if search term is empty, and prevent unnecessary queries
-  if (!searchTerm) {
-    console.log('No search term provided.');
-    return;
-  }
-
-  // Use the getItems function from firebase.js to fetch data from Firestore
+  // Use the global getItems function to fetch data from Firestore
   try {
-    const { items } = await getItems(selectedCategory, searchTerm);  // Fetch from Firestore
+    const { items } = await window.getItems(selectedCategory, searchTerm);  // Fetch from Firestore
     displayResults(items);  // Display results in the UI
   } catch (error) {
     console.error('Error searching for items:', error);
@@ -57,8 +52,17 @@ function displayResults(items) {
   });
 }
 
-// Wait for the DOM to fully load before attaching event listeners
+// Attach event listeners after DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  // Handle category tab clicks
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (event) => {
+      const category = event.target.getAttribute('data-category');  // Get the category from the data attribute
+      setCategory(category);  // Switch the category
+    });
+  });
+
   // Debounced search input (attach to the search bar)
   const searchInput = document.getElementById('search-input');
   if (searchInput) {

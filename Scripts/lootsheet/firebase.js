@@ -1,6 +1,3 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, where, limit } from 'firebase/firestore';
-
 // Firebase config (replace with your own Firebase project configuration)
 const firebaseConfig = {
   apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
@@ -13,10 +10,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase app
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 // Initialize Firestore instance
-const db = getFirestore(app);
+const db = firebase.firestore();
 
 /**
  * Function to retrieve items from a specific Firestore collection based on category and search term
@@ -24,21 +21,19 @@ const db = getFirestore(app);
  * @param {string} searchTerm - Search term to find items by name
  * @returns {Promise} - Returns a promise that resolves with the list of matching items
  */
-export async function getItems(category, searchTerm) {
+async function getItems(category, searchTerm) {
   try {
     // Reference to the collection based on category
-    const collectionRef = collection(db, category);
+    const collectionRef = db.collection(category);
 
     // Create a query for items where the name matches the searchTerm (with partial matching support)
-    const q = query(
-      collectionRef,
-      where('name', '>=', searchTerm),  // Search for names starting with searchTerm
-      where('name', '<=', searchTerm + '\uf8ff'),  // Allow partial matches (name starts with searchTerm)
-      limit(10)  // Optionally limit the number of results (you can adjust as needed)
-    );
+    const q = collectionRef
+      .where('name', '>=', searchTerm)
+      .where('name', '<=', searchTerm + '\uf8ff')
+      .limit(10);
 
     // Execute the query and get the matching documents
-    const snapshot = await getDocs(q);
+    const snapshot = await q.get();
 
     // Process the snapshot and extract the items
     const items = snapshot.docs.map(doc => ({
@@ -53,5 +48,6 @@ export async function getItems(category, searchTerm) {
   }
 }
 
-export { db };  // Export Firestore instance in case it's needed elsewhere
+// Make the function globally accessible
+window.getItems = getItems;
 

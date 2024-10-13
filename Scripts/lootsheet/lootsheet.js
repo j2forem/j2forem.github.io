@@ -1,4 +1,5 @@
-import { getItems } from './firebase.js';  // Import getItems function from firebase.js
+// REMOVE this line if it exists in your file:
+// import { getItems } from './firebase.js';  // No longer needed since getItems is global
 
 let selectedCategory = 'Weapons';  // Default category
 
@@ -8,6 +9,8 @@ function setCategory(category) {
   selectedCategory = category;  // Update the selected category
   searchItems();  // Perform the search for the new category
 }
+window.setCategory = setCategory;  // Expose globally
+
 
 // Debounced search input handler
 function debounce(fn, delay) {
@@ -22,15 +25,9 @@ function debounce(fn, delay) {
 async function searchItems() {
   const searchTerm = document.getElementById('search-input').value.trim();  // Input search term
 
-  // Check if search term is empty, and prevent unnecessary queries
-  if (!searchTerm) {
-    console.log('No search term provided.');
-    return;
-  }
-
-  // Use the getItems function from firebase.js to fetch data from Firestore
+  // Use the global getItems function to fetch data from Firestore
   try {
-    const { items } = await getItems(selectedCategory, searchTerm);  // Fetch from Firestore
+    const { items } = await window.getItems(selectedCategory, searchTerm);  // Fetch from Firestore
     displayResults(items);  // Display results in the UI
   } catch (error) {
     console.error('Error searching for items:', error);
