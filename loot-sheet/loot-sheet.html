@@ -5,92 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D&D Loot Tracker</title>
 
-    <link rel="stylesheet" href="css/loot-sheet.css">
+    <!-- Link to D&D-themed CSS and Google Fonts -->
+    <link rel="stylesheet" href="style.css">  
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Uncial+Antiqua&display=swap" rel="stylesheet">
     
-    <script src="firebase.js" defer></script>  <!-- Firestore setup -->
-    <script src="lootsheet.js" defer></script> <!-- Display logic -->
-    <script src="lootsearch.js" defer></script> <!-- Search logic -->
-</head>
 
+    <script src="/Scripts/lootsheet/firebase.js" defer></script>  <!-- Firestore setup -->
+    <script src="/Scripts/lootsheet/lootsheet.js" defer></script> <!-- Display logic -->
+    <script src="/Scripts/lootsheet/lootsearch.js" defer></script> <!-- Search logic -->
+</head>
 
 <body>
 
-<div class="container">
-    <h1>D&D Loot Tracker</h1>
-
-    <div class="tabs">
-      <span class="tab active-tab" onclick="setCategory('Money')">Money</span>
-      <span class="tab" onclick="setCategory('Weapons')">Weapons</span>
-      <span class="tab" onclick="setCategory('Armor')">Armor</span>
-      <span class="tab" onclick="setCategory('Potions')">Potions</span>
-      <span class="tab" onclick="setCategory('Scrolls')">Scrolls</span>
-      <span class="tab" onclick="setCategory('Gems')">Gems</span>
-      <span class="tab" onclick="setCategory('Magical Items')">Magical Items</span>
-      <span class="tab" onclick="setCategory('Unidentified Items')">Unidentified Items</span>
+  <div class="container">
+      <!-- Header Section -->
+      <header>
+        <h1>D&D Loot Tracker</h1>
+        <p>Track your adventurers' loot and treasure with ease.</p>
+      </header>
+  
+      <!-- Tabs for Categories -->
+      <div class="tabs">
+          <span class="tab active-tab" onclick="setCategory('Money')">Money and Gems</span>
+          <span class="tab" onclick="setCategory('Weapons')">Weapons</span>
+          <span class="tab" onclick="setCategory('Armor')">Armor</span>
+          <span class="tab" onclick="setCategory('Potions')">Potions</span>
+          <span class="tab" onclick="setCategory('Scrolls')">Scrolls</span>
+          <span class="tab" onclick="setCategory('Magical Items')">Magical Items</span>
+          <span class="tab" onclick="setCategory('Unidentified Items')">Unidentified Items</span>
+          <span class="tab" onclick="setCategory('Equipment')">Equipment</span>
+      </div>
+  
+      <!-- Search Bar -->
+      <div class="search-section">
+          <label for="search-input">Search Items:</label>
+          <input type="text" id="search-input" placeholder="Enter item name...">
+      </div>
+  
+      <!-- Results Section -->
+      <div id="results" class="results-section">
+          <h2>Results:</h2>
+          <!-- Search results will be injected here -->
+      </div>
+  
+      <!-- Footer Section -->
+      <footer>
+        <p>Adventurers' Compendium - Brought to you by Dungeon Masters Guild</p>
+      </footer>
   </div>
   
-  <!-- Search input -->
-  <h2>Search for an Item</h2>
-  <input type="text" id="item-search" placeholder="Search for an item..." onkeyup="searchItems()" />
-  
-  <!-- Results will be displayed here -->
-  <div id="results"></div>
-  
-    
-
-      
-      <div>
-        <h2>Group Loot</h2>
-        <!-- Button to manually load group loot -->
-        <button onclick="loadGroupLoot()">View Current Group Loot</button>
-      
-        <!-- Table to display the group loot -->
-        <table id="group-loot-table" border="1">
-          <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Cost</th>
-              <th>Weight (lbs)</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="group-loot-body">
-            <!-- Group loot will be dynamically loaded here -->
-          </tbody>
-        </table>
-      </div>
-      
-
-
-
-<!-- Correct Firebase Initialization Script -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-<script>
-  // Your Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
-    authDomain: "weekendweebz.firebaseapp.com",
-    projectId: "weekendweebz",
-    storageBucket: "weekendweebz.appspot.com",
-    messagingSenderId: "389932072090",
-    appId: "1:389932072090:web:104a13fc57762a449b3323",
-    measurementId: "G-552DK30WLJ"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  // Initialize Firestore
-  const db = firebase.firestore();
-
-  // Debugging - check if Firebase and Firestore are properly initialized
-  console.log("Firebase App Initialized:", firebase.app().name);
-  console.log("Firestore Initialized:", db);
-</script>
-
-
-
-</body>
-</html>
+  </body>
+  </html>

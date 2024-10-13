@@ -1,0 +1,124 @@
+/* Global Settings */
+body {
+    background-color: #f4f1de;  /* Parchment-like background color */
+    font-family: 'IM Fell DW Pica', serif;  /* Fantasy font */
+    color: #2c2c2c;  /* Text color */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;  /* Increased line spacing for better readability */
+  }
+  
+  /* Container to center content */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 25px;  /* Increased padding */
+    background-color: #f7f0d5;  /* Lighter parchment background */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 2px solid #8d5524;  /* Darker brown border */
+  }
+  
+  /* Header styles */
+  header {
+    text-align: center;
+    margin-bottom: 25px;  /* Increased margin for better spacing */
+  }
+  
+  header h1 {
+    font-family: 'Uncial Antiqua', cursive;  /* Fancy title font */
+    font-size: 40px;  /* Increased font size */
+    color: #61210f;  /* Dark brown title */
+    margin-bottom: 10px;
+  }
+  
+  header p {
+    font-size: 20px;  /* Larger font for easier readability */
+    color: #8d5524;
+  }
+  
+  /* Tabs for Category Selection */
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px;  /* Slightly larger padding */
+    background-color: #fff7e6;
+    border: 2px solid #8d5524;
+    border-radius: 8px;
+    margin-bottom: 25px;  /* Increased margin to improve spacing */
+  }
+  
+  .tab {
+    cursor: pointer;
+    padding: 12px 15px;  /* Larger padding for easier clicking */
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: 18px;  /* Larger font size for tabs */
+  }
+  
+  .tab:hover {
+    border: 1px solid #8d5524;
+    background-color: #fef6e4;
+  }
+  
+  .active-tab {
+    font-weight: bold;
+    border-bottom: 2px solid #8d5524;
+  }
+  
+  /* Currency Section */
+  #currency {
+    background-color: #fef6e4;
+    padding: 20px;  /* Increased padding */
+    border-radius: 8px;
+    border: 1px solid #8d5524;
+    margin-bottom: 25px;
+  }
+  
+  #currency h2 {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 26px;  /* Larger font size */
+    color: #61210f;
+    margin-bottom: 15px;
+  }
+  
+  #currency p {
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: 20px;  /* Larger font for currency values */
+    color: #2c2c2c;
+  }
+  
+  /* Results Section */
+  .results-section {
+    background-color: #fef6e4;
+    padding: 20px;  /* Increased padding */
+    border-radius: 8px;
+    border: 1px solid #8d5524;
+  }
+  
+  .results-section h2 {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 26px;  /* Larger font size */
+    color: #61210f;
+    margin-bottom: 15px;
+  }
+  
+  .results-section div {
+    background-color: #fffbe6;
+    padding: 15px;  /* Larger padding for results */
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #8d5524;
+    font-size: 18px;  /* Larger font size for results */
+  }
+  
+  /* Footer Styles */
+  footer {
+    text-align: center;
+    margin-top: 35px;
+    font-size: 16px;  /* Slightly larger font size for footer */
+    color: #8d5524;
+    font-family: 'IM Fell DW Pica', serif;
+  }
+  

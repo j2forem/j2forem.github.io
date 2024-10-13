@@ -1,0 +1,3 @@
+to run inventory-management.js
+cd to root
+node scripts/inventory-management.js

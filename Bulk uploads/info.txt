@@ -1,0 +1,24 @@
+// Function to set the selected category
+function setCategory(category) {
+  console.log('Category switched to:', category);
+  selectedCategory = category;
+  searchItems();  // Trigger search when category changes
+}
+
+// Make the setCategory function globally available
+window.setCategory = setCategory;
+
+// Function to handle search input (simplified example)
+function searchItems() {
+  const searchTerm = document.getElementById('search-input').value.trim();
+  console.log(`Searching for items in category ${selectedCategory} with term: ${searchTerm}`);
+  
+  // Call your Firestore search function here, e.g., getItems()
+  // displayResults() to show the search results
+}
+
+// Add Event Listeners to tabs if you want to replace inline `onclick` (optional)
+document.addEventListener('DOMContentLoaded', () => {
+  handleTabClicks();  // Initialize tab click event listeners
+});
+

@@ -1,0 +1,156 @@
+[
+    {
+      "Type": "Banded Mail",
+      "Value": "200 gp",
+      "Weight": "35 lbs",
+      "AC": "4",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Brigandine",
+      "Value": "120 gp",
+      "Weight": "35 lbs",
+      "AC": "6",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Bronze plate mail",
+      "Value": "400 gp",
+      "Weight": "40 lbs",
+      "AC": "4",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Chain mail",
+      "Value": "75 gp",
+      "Weight": "40 lbs",
+      "AC": "5",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Field plate",
+      "Value": "2000 gp",
+      "Weight": "60 lbs",
+      "AC": "2",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Full plate",
+      "Value": "4000 - 10000 gp",
+      "Weight": "70 lbs",
+      "AC": "1",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Helmet",
+      "Value": "",
+      "Weight": "",
+      "AC": "",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Great helm",
+      "Value": "30 gp",
+      "Weight": "10 lbs",
+      "AC": "",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Basinet",
+      "Value": "8 gp",
+      "Weight": "5 lbs",
+      "AC": "",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Hide",
+      "Value": "15 gp",
+      "Weight": "30 lbs",
+      "AC": "6",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Leather",
+      "Value": "5 gp",
+      "Weight": "15 lbs",
+      "AC": "8",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Padded",
+      "Value": "4 gp",
+      "Weight": "10 lbs",
+      "AC": "8",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Plate mail",
+      "Value": "600 gp",
+      "Weight": "50 lbs",
+      "AC": "3",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Ring mail",
+      "Value": "100 gp",
+      "Weight": "30 lbs",
+      "AC": "7",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Scale mail",
+      "Value": "120 gp",
+      "Weight": "40 lbs",
+      "AC": "6",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Shield",
+      "Value": "",
+      "Weight": "",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Body Shield",
+      "Value": "10 gp",
+      "Weight": "15 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Buckler",
+      "Value": "1 gp",
+      "Weight": "3 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Medium Shield",
+      "Value": "7 gp",
+      "Weight": "10 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Small Shield",
+      "Value": "3 gp",
+      "Weight": "5 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Splint mail",
+      "Value": "80 gp",
+      "Weight": "40 lbs",
+      "AC": "4",
+      "HumanoidSizeType": ""
+    },
+    {
+      "Type": "Studded leather",
+      "Value": "20 gp",
+      "Weight": "25 lbs",
+      "AC": "7",
+      "HumanoidSizeType": ""
+    }
+  ]

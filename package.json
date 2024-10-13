@@ -1,0 +1,17 @@
+{
+  "name": "j2forem.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "bulk-upload": "node bulk-uploads/bulk-upload.js",
+  "inventory": "node scripts/inventory-management.js"
+  },
+
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+
+  
+}

@@ -30,14 +30,16 @@ signInAnonymously(auth).then(() => {
 // Firestore function to fetch items
 export const getItems = async (category, searchTerm = '', itemsPerPage = 10, lastVisible = null) => {
   const itemsCollection = collection(db, category);
-
   let q;
+
+  // Query with search term
   if (searchTerm) {
     q = query(itemsCollection, where('name', '>=', searchTerm), where('name', '<=', searchTerm + '\uf8ff'), limit(itemsPerPage));
   } else {
-    q = query(itemsCollection, limit(itemsPerPage));
+    q = query(itemsCollection, limit(itemsPerPage));  // Fallback for general fetch
   }
 
+  // For pagination (lazy loading)
   if (lastVisible) {
     q = query(q, startAfter(lastVisible));
   }
@@ -45,17 +47,17 @@ export const getItems = async (category, searchTerm = '', itemsPerPage = 10, las
   const querySnapshot = await getDocs(q);
   const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-  // Return both items and the last visible document for pagination (lazy loading)
+  // Return both items and last visible for pagination
   const last = querySnapshot.docs[querySnapshot.docs.length - 1];
   return { items, last };
 };
 
 // loot-search.js
 
-import { getItems } from './firebase.json';
+import { getItems } from './firebase.js';  // Corrected import from .json to .js
 
 let timeout = null;
-let lastVisible = null;  // For lazy loading
+let lastVisible = null;  // For pagination (optional for now)
 let searchCount = 0;
 const searchLimit = 5;  // Max 5 searches per minute
 const resetTime = 60000; // 1 minute in milliseconds
@@ -84,40 +86,49 @@ function getCachedResults(key) {
   return cachedData ? JSON.parse(cachedData) : null;
 }
 
-// Handle search logic
+// Main search handler (search term + category)
 async function handleSearch(category, searchTerm) {
-  const cacheKey = `${category}-${searchTerm}`;
+  const cacheKey = `${category}-${searchTerm}`;  // Unique cache key per search
   const cached = getCachedResults(cacheKey);
 
+  // If cached results exist, use them
   if (cached) {
     console.log('Using cached results', cached);
     displayResults(cached);
-  } else if (searchCount < searchLimit) {
-    searchCount++;
-    const { items } = await getItems(category, searchTerm);  // Fetch items from Firestore
-    cacheResults(cacheKey, items);
-    displayResults(items);
-
-    if (searchCount === 1) resetSearchCount();  // Start rate limit reset timer
-  } else {
-    console.log('Search limit exceeded. Try again later.');
+    return;
   }
+
+  // Enforce search limit (5 per minute)
+  if (searchCount >= searchLimit) {
+    console.log('Search limit exceeded. Try again later.');
+    return;
+  }
+
+  // Fetch new results from Firestore
+  searchCount++;
+  const { items } = await getItems(category, searchTerm);  
+  cacheResults(cacheKey, items);  // Cache new results
+  displayResults(items);  // Display results
+
+  if (searchCount === 1) resetSearchCount();  // Start the rate limit reset timer
 }
 
-// Display search results
+// Display search results (DOM manipulation)
 function displayResults(items) {
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = '';  // Clear previous results
+
+  // Create and append new results
   items.forEach(item => {
     const itemDiv = document.createElement('div');
-    itemDiv.textContent = `${item.name} - ${item.value} gold`;
+    itemDiv.textContent = `${item.name} - ${item.value} gold`;  // Customize this as needed
     resultsContainer.appendChild(itemDiv);
   });
 }
 
-// Debounced search input
+// Debounced search input (attach to the search bar)
 document.getElementById('search-input').addEventListener('input', debounce((event) => {
-  const category = document.getElementById('category-select').value;
-  const searchTerm = event.target.value.trim();
-  handleSearch(category, searchTerm);
-}, 300));
+  const category = document.getElementById('category-select').value;  // Dropdown for category
+  const searchTerm = event.target.value.trim();  // User's input for search term
+  handleSearch(category, searchTerm);  // Trigger search
+}, 300));  // 300ms debounce delay

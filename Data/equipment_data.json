@@ -1,0 +1,978 @@
+{
+    "Clothing": [
+        {
+            "Item": "Belt",
+            "Price": "3 sp"
+        },
+        {
+            "Item": "Boots",
+            "Price": "\u2014"
+        },
+        {
+            "Item": "Riding Boots",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Soft Boots",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Breeches",
+            "Price": "2 gp"
+        },
+        {
+            "Item": "Cap, hat",
+            "Price": "1 sp"
+        },
+        {
+            "Item": "Cloak",
+            "Price": "\u2014"
+        },
+        {
+            "Item": "Good cloth",
+            "Price": "8 sp"
+        },
+        {
+            "Item": "Fine fur",
+            "Price": "50 gp"
+        },
+        {
+            "Item": "Girdle",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Gloves",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Gown, common",
+            "Price": "12 sp"
+        },
+        {
+            "Item": "Hose",
+            "Price": "2 gp"
+        },
+        {
+            "Item": "Knife sheath",
+            "Price": "3 cp"
+        },
+        {
+            "Item": "Mittens",
+            "Price": "3 sp"
+        },
+        {
+            "Item": "Pin",
+            "Price": "6 gp"
+        },
+        {
+            "Item": "Plain brooch",
+            "Price": "10 gp"
+        },
+        {
+            "Item": "Robe",
+            "Price": "\u2014"
+        },
+        {
+            "Item": "Common Robe",
+            "Price": "9 sp"
+        },
+        {
+            "Item": "Embroidered Robe",
+            "Price": "20 gp"
+        },
+        {
+            "Item": "Sandals",
+            "Price": "5 cp"
+        },
+        {
+            "Item": "Sash",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Shoes",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Silk jacket",
+            "Price": "80 gp"
+        },
+        {
+            "Item": "Surcoat",
+            "Price": "6 sp"
+        },
+        {
+            "Item": "Sword scabbard, hanger, baldric",
+            "Price": "4 gp"
+        },
+        {
+            "Item": "Tabard",
+            "Price": "6 sp"
+        },
+        {
+            "Item": "Toga, coarse",
+            "Price": "8 gp"
+        },
+        {
+            "Item": "Tunic",
+            "Price": "8 sp"
+        },
+        {
+            "Item": "Vest",
+            "Price": "6 sp"
+        },
+        {
+            "Item": "Belt",
+            "Price": "3 sp"
+        },
+        {
+            "Item": "Boots",
+            "Price": "\u2014"
+        },
+        {
+            "Item": "Riding Boots",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Soft Boots",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Breeches",
+            "Price": "2 gp"
+        },
+        {
+            "Item": "Cap, hat",
+            "Price": "1 sp"
+        },
+        {
+            "Item": "Cloak",
+            "Price": "\u2014"
+        },
+        {
+            "Item": "Good cloth",
+            "Price": "8 sp"
+        },
+        {
+            "Item": "Fine fur",
+            "Price": "50 gp"
+        },
+        {
+            "Item": "Girdle",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Gloves",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Gown, common",
+            "Price": "12 sp"
+        },
+        {
+            "Item": "Hose",
+            "Price": "2 gp"
+        },
+        {
+            "Item": "Knife sheath",
+            "Price": "3 cp"
+        },
+        {
+            "Item": "Mittens",
+            "Price": "3 sp"
+        },
+        {
+            "Item": "Pin",
+            "Price": "6 gp"
+        },
+        {
+            "Item": "Plain brooch",
+            "Price": "10 gp"
+        },
+        {
+            "Item": "Robe",
+            "Price": "\u2014"
+        },
+        {
+            "Item": "Common Robe",
+            "Price": "9 sp"
+        },
+        {
+            "Item": "Embroidered Robe",
+            "Price": "20 gp"
+        },
+        {
+            "Item": "Sandals",
+            "Price": "5 cp"
+        },
+        {
+            "Item": "Sash",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Shoes",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Silk jacket",
+            "Price": "80 gp"
+        },
+        {
+            "Item": "Surcoat",
+            "Price": "6 sp"
+        },
+        {
+            "Item": "Sword scabbard, hanger, baldric",
+            "Price": "4 gp"
+        },
+        {
+            "Item": "Tabard",
+            "Price": "6 sp"
+        },
+        {
+            "Item": "Toga, coarse",
+            "Price": "8 gp"
+        },
+        {
+            "Item": "Tunic",
+            "Price": "8 sp"
+        },
+        {
+            "Item": "Vest",
+            "Price": "6 sp"
+        }
+    ],
+    "Food_and_Lodging": [
+        {
+            "Item": "Ale (per gallon)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Banquet (per person)",
+            "Price": "10 gp"
+        },
+        {
+            "Item": "Bread",
+            "Price": "5 cp"
+        },
+        {
+            "Item": "Cheese",
+            "Price": "4 sp"
+        },
+        {
+            "Item": "City rooms (Common)",
+            "Price": "20 gp"
+        },
+        {
+            "Item": "City rooms (Poor)",
+            "Price": "6 sp"
+        },
+        {
+            "Item": "Common wine (pitcher)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Egg or fresh vegetables",
+            "Price": "1 cp"
+        },
+        {
+            "Item": "Grain and stabling for horse (daily)",
+            "Price": "5 sp"
+        },
+        {
+            "Item": "Honey",
+            "Price": "5 sp"
+        },
+        {
+            "Item": "Inn lodging (Common, per day/week)",
+            "Price": "5 sp/3 gp"
+        },
+        {
+            "Item": "Inn lodging (Poor, per day/week)",
+            "Price": "5 cp/2 sp"
+        },
+        {
+            "Item": "Meat for one meal",
+            "Price": "1 sp"
+        },
+        {
+            "Item": "Meals (Good, per day)",
+            "Price": "5 sp"
+        },
+        {
+            "Item": "Meals (Common, per day)",
+            "Price": "3 sp"
+        },
+        {
+            "Item": "Meals (Poor, per day)",
+            "Price": "1 sp"
+        },
+        {
+            "Item": "Separate latrine for rooms (per month)",
+            "Price": "2 gp"
+        },
+        {
+            "Item": "Small beer (per gallon)",
+            "Price": "5 cp"
+        },
+        {
+            "Item": "Soup",
+            "Price": "5 cp"
+        }
+    ],
+    "Household_Provisioning": [
+        {
+            "Item": "Barrel of pickled fish",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Butter (per lb.)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Coarse sugar (per lb.)",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Dry rations (per week)",
+            "Price": "10 gp"
+        },
+        {
+            "Item": "Eggs (per 100)",
+            "Price": "8 sp"
+        },
+        {
+            "Item": "Eggs (per two dozen)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Figs (per lb.)",
+            "Price": "3 sp"
+        },
+        {
+            "Item": "Firewood (per day)",
+            "Price": "1 cp"
+        },
+        {
+            "Item": "Herbs (per lb.)",
+            "Price": "5 cp"
+        },
+        {
+            "Item": "Nuts (per lb.)",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Raisins (per lb.)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Rations, standard (1 wk)",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Rations, iron (1 wk)",
+            "Price": "5 gp"
+        },
+        {
+            "Item": "Rice (per lb.)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Salt (per lb.)",
+            "Price": "1 sp"
+        },
+        {
+            "Item": "Salted herring (per 100)",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Spice (Exotic, saffron, clove)",
+            "Price": "15 gp"
+        },
+        {
+            "Item": "Spice (Rare, pepper, ginger)",
+            "Price": "2 gp"
+        },
+        {
+            "Item": "Spice (Uncommon, cinnamon)",
+            "Price": "1 gp"
+        },
+        {
+            "Item": "Tun of cider (250 gal.)",
+            "Price": "8 gp"
+        },
+        {
+            "Item": "Tun of good wine (250 gal.)",
+            "Price": "20 gp"
+        }
+    ],
+    "Transport": [
+        {
+            "Item": "Barge",
+            "Price": "500 gp"
+        },
+        {
+            "Item": "Canoe (Small)",
+            "Price": "30 gp"
+        },
+        {
+            "Item": "Canoe (War)",
+            "Price": "50 gp"
+        },
+        {
+            "Item": "Caravel",
+            "Price": "10,000 gp"
+        },
+        {
+            "Item": "Carriage (Common)",
+            "Price": "150 gp"
+        },
+        {
+            "Item": "Carriage (Coach, ornamented)",
+            "Price": "7,000 gp"
+        },
+        {
+            "Item": "Chariot (Riding)",
+            "Price": "200 gp"
+        },
+        {
+            "Item": "Chariot (War)",
+            "Price": "500 gp"
+        },
+        {
+            "Item": "Coaster",
+            "Price": "5,000 gp"
+        },
+        {
+            "Item": "Cog",
+            "Price": "10,000 gp"
+        },
+        {
+            "Item": "Curragh",
+            "Price": "500 gp"
+        },
+        {
+            "Item": "Drakkar",
+            "Price": "25,000 gp"
+        },
+        {
+            "Item": "Dromond",
+            "Price": "15,000 gp"
+        },
+        {
+            "Item": "Galleon",
+            "Price": "50,000 gp"
+        },
+        {
+            "Item": "Great galley",
+            "Price": "30,000 gp"
+        },
+        {
+            "Item": "Knarr",
+            "Price": "3,000 gp"
+        },
+        {
+            "Item": "Longship",
+            "Price": "10,000 gp"
+        },
+        {
+            "Item": "Oar (Common)",
+            "Price": "2 gp"
+        },
+        {
+            "Item": "Oar (Galley)",
+            "Price": "10 gp"
+        },
+        {
+            "Item": "Raft or small keelboat",
+            "Price": "100 gp"
+        },
+        {
+            "Item": "Sail",
+            "Price": "20 gp"
+        },
+        {
+            "Item": "Sedan chair",
+            "Price": "100 gp"
+        },
+        {
+            "Item": "Wagon or cart wheel",
+            "Price": "5 gp"
+        }
+    ],
+    "Services": [
+        {
+            "Item": "Bath",
+            "Price": "3 cp"
+        },
+        {
+            "Item": "Clerk (per letter)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Doctor, leech, or bleeding",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Guide, in city (per day)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Lantern or torchbearer (per night)",
+            "Price": "1 sp"
+        },
+        {
+            "Item": "Laundry (by load)",
+            "Price": "1 cp"
+        },
+        {
+            "Item": "Messenger, in city (per message)",
+            "Price": "1 sp"
+        },
+        {
+            "Item": "Minstrel (per performance)",
+            "Price": "3 gp"
+        },
+        {
+            "Item": "Mourner (per funeral)",
+            "Price": "2 sp"
+        },
+        {
+            "Item": "Teamster w/wagon (per mile)",
+            "Price": "1 sp/mile"
+        }
+    ],
+    "Tack_and_Harness": [
+        {
+            "Item": "Barding (Chain)",
+            "Price": "500 gp",
+            "Weight": "70 lbs."
+        },
+        {
+            "Item": "Barding (Full plate)",
+            "Price": "2,000 gp",
+            "Weight": "85 lbs."
+        },
+        {
+            "Item": "Barding (Full scale)",
+            "Price": "1,000 gp",
+            "Weight": "75 lbs."
+        },
+        {
+            "Item": "Barding (Half brigandine)",
+            "Price": "500 gp",
+            "Weight": "45 lbs."
+        },
+        {
+            "Item": "Barding (Half padded)",
+            "Price": "100 gp",
+            "Weight": "25 lbs."
+        },
+        {
+            "Item": "Barding (Half scale)",
+            "Price": "500 gp",
+            "Weight": "50 lbs."
+        },
+        {
+            "Item": "Barding (Leather or padded)",
+            "Price": "150 gp",
+            "Weight": "60 lbs."
+        },
+        {
+            "Item": "Bit and bridle",
+            "Price": "15 sp",
+            "Weight": "3 lbs."
+        },
+        {
+            "Item": "Cart harness",
+            "Price": "2 gp",
+            "Weight": "10 lbs."
+        },
+        {
+            "Item": "Halter",
+            "Price": "5 cp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Horseshoes & shoeing",
+            "Price": "1 gp",
+            "Weight": "10 lbs."
+        },
+        {
+            "Item": "Saddle (Pack)",
+            "Price": "5 gp",
+            "Weight": "15 lbs."
+        },
+        {
+            "Item": "Saddle (Riding)",
+            "Price": "10 gp",
+            "Weight": "35 lbs."
+        },
+        {
+            "Item": "Saddle bags (Large)",
+            "Price": "4 gp",
+            "Weight": "8 lbs."
+        },
+        {
+            "Item": "Saddle bags (Small)",
+            "Price": "3 gp",
+            "Weight": "5 lbs."
+        },
+        {
+            "Item": "Saddle blanket",
+            "Price": "3 sp",
+            "Weight": "4 lbs."
+        },
+        {
+            "Item": "Yoke (Horse)",
+            "Price": "5 gp",
+            "Weight": "15 lbs."
+        },
+        {
+            "Item": "Yoke (Ox)",
+            "Price": "3 gp",
+            "Weight": "20 lbs."
+        }
+    ],
+    "Misc_Equipment": [
+        {
+            "Item": "Backpack",
+            "Price": "2 gp",
+            "Weight": "2 lbs."
+        },
+        {
+            "Item": "Barrel, small",
+            "Price": "2 gp",
+            "Weight": "30 lbs."
+        },
+        {
+            "Item": "Basket (Large)",
+            "Price": "3 sp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Basket (Small)",
+            "Price": "5 cp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Bell",
+            "Price": "1 gp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Belt pouch (Large)",
+            "Price": "1 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Belt pouch (Small)",
+            "Price": "7 sp",
+            "Weight": "\u00bd lb."
+        },
+        {
+            "Item": "Block and tackle",
+            "Price": "5 gp",
+            "Weight": "5 lbs."
+        },
+        {
+            "Item": "Bolt case",
+            "Price": "1 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Bucket",
+            "Price": "5 sp",
+            "Weight": "3 lbs."
+        },
+        {
+            "Item": "Chain (Heavy, per ft.)",
+            "Price": "4 gp",
+            "Weight": "3 lbs."
+        },
+        {
+            "Item": "Chain (Light, per ft.)",
+            "Price": "3 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Chest (Large)",
+            "Price": "2 gp",
+            "Weight": "25 lbs."
+        },
+        {
+            "Item": "Chest (Small)",
+            "Price": "1 gp",
+            "Weight": "10 lbs."
+        },
+        {
+            "Item": "Cloth (Common, per 10 sq. yds.)",
+            "Price": "7 gp",
+            "Weight": "10 lbs."
+        },
+        {
+            "Item": "Cloth (Fine, per 10 sq. yds.)",
+            "Price": "50 gp",
+            "Weight": "10 lbs."
+        },
+        {
+            "Item": "Cloth (Rich, per 10 sq. yds.)",
+            "Price": "100 gp",
+            "Weight": "10 lbs."
+        },
+        {
+            "Item": "Candle",
+            "Price": "1 cp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Canvas (per sq. yard)",
+            "Price": "4 sp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Chalk",
+            "Price": "1 cp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Crampons",
+            "Price": "4 gp",
+            "Weight": "2 lbs."
+        },
+        {
+            "Item": "Fishhook",
+            "Price": "1 sp",
+            "Weight": "**"
+        },
+        {
+            "Item": "Fishing net, 10 ft. sq.",
+            "Price": "4 gp",
+            "Weight": "5 lbs."
+        },
+        {
+            "Item": "Flint and steel",
+            "Price": "5 sp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Glass bottle",
+            "Price": "10 gp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Grappling hook",
+            "Price": "8 sp",
+            "Weight": "4 lbs."
+        },
+        {
+            "Item": "Holy item (symbol, water, etc.)",
+            "Price": "25 gp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Hourglass",
+            "Price": "25 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Iron pot",
+            "Price": "5 sp",
+            "Weight": "2 lbs."
+        },
+        {
+            "Item": "Ladder, 10 ft.",
+            "Price": "5 cp",
+            "Weight": "20 lbs."
+        },
+        {
+            "Item": "Lantern (Beacon)",
+            "Price": "150 gp",
+            "Weight": "50 lbs."
+        },
+        {
+            "Item": "Lantern (Bullseye)",
+            "Price": "12 gp",
+            "Weight": "3 lbs."
+        },
+        {
+            "Item": "Lantern (Hooded)",
+            "Price": "7 gp",
+            "Weight": "2 lbs."
+        },
+        {
+            "Item": "Lock (Good)",
+            "Price": "100 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Lock (Poor)",
+            "Price": "20 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Magnifying glass",
+            "Price": "100 gp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Map or scroll case",
+            "Price": "8 sp",
+            "Weight": "\u00bd lb."
+        },
+        {
+            "Item": "Merchant's scale",
+            "Price": "2 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Mirror, small metal",
+            "Price": "10 gp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Musical instrument",
+            "Price": "5\u2013100 gp",
+            "Weight": "\u00bd\u20133 lbs."
+        },
+        {
+            "Item": "Oil (Greek fire)",
+            "Price": "10 gp",
+            "Weight": "2 lbs."
+        },
+        {
+            "Item": "Oil (Lamp)",
+            "Price": "6 cp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Paper (per sheet)",
+            "Price": "2 gp",
+            "Weight": "**"
+        },
+        {
+            "Item": "Papyrus (per sheet)",
+            "Price": "8 sp",
+            "Weight": "**"
+        },
+        {
+            "Item": "Parchment (per sheet)",
+            "Price": "1 gp",
+            "Weight": "**"
+        },
+        {
+            "Item": "Perfume (per vial)",
+            "Price": "5 gp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Piton",
+            "Price": "3 cp",
+            "Weight": "\u00bd lb."
+        },
+        {
+            "Item": "Quiver",
+            "Price": "8 sp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Rope (Hemp, per 50 ft.)",
+            "Price": "1 gp",
+            "Weight": "20 lbs."
+        },
+        {
+            "Item": "Rope (Silk, per 50 ft.)",
+            "Price": "10 gp",
+            "Weight": "8 lbs."
+        },
+        {
+            "Item": "Sack (Large)",
+            "Price": "2 sp",
+            "Weight": "\u00bd lb."
+        },
+        {
+            "Item": "Sack (Small)",
+            "Price": "5 cp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Sealing/candle wax (per lb.)",
+            "Price": "1 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Sewing needle",
+            "Price": "5 sp",
+            "Weight": "**"
+        },
+        {
+            "Item": "Signal whistle",
+            "Price": "8 sp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Signet ring or personal seal",
+            "Price": "5 gp",
+            "Weight": "*"
+        },
+        {
+            "Item": "Soap (per lb.)",
+            "Price": "5 sp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Spyglass",
+            "Price": "1,000 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Tent (Large)",
+            "Price": "25 gp",
+            "Weight": "20 lbs."
+        },
+        {
+            "Item": "Tent (Pavilion)",
+            "Price": "100 gp",
+            "Weight": "50 lbs."
+        },
+        {
+            "Item": "Tent (Small)",
+            "Price": "5 gp",
+            "Weight": "10 lbs."
+        },
+        {
+            "Item": "Thieves' picks",
+            "Price": "30 gp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Torch",
+            "Price": "1 cp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Water clock",
+            "Price": "1,000 gp",
+            "Weight": "200 lbs."
+        },
+        {
+            "Item": "Whetstone",
+            "Price": "2 cp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Wineskin",
+            "Price": "8 sp",
+            "Weight": "1 lb."
+        },
+        {
+            "Item": "Winter blanket",
+            "Price": "5 sp",
+            "Weight": "3 lbs."
+        },
+        {
+            "Item": "Writing ink (per vial)",
+            "Price": "8 gp",
+            "Weight": "*"
+        }
+    ]
+}
