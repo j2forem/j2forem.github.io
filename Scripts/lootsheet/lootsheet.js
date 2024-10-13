@@ -71,18 +71,6 @@ setInterval(() => {
 document.addEventListener('DOMContentLoaded', displayPartyFunds);
 
 
-// Function to calculate total gold from all coins
-function calculateTotalGold() {
-  const totalGold = 
-    initialCurrency.platinum * conversionRates.platinumToGold +
-    initialCurrency.gold +
-    initialCurrency.electrum * conversionRates.electrumToGold +
-    initialCurrency.silver * conversionRates.silverToGold +
-    initialCurrency.copper * conversionRates.copperToGold;
-
-  document.getElementById('total-gold').textContent = totalGold.toFixed(2);
-}
-
 // Function to modify coins and update Firestore
 async function modifyCoins(coinType) {
   try {
