@@ -14,6 +14,9 @@ firebase.initializeApp(firebaseConfig);
 
 // Initialize Firestore
 const db = firebase.firestore();  // Ensure this is initialized
+console.log("Firebase App Initialized:", firebase.app().name);
+console.log("Firestore Initialized:", db);
+
 
 /**
  * Fetch party funds (Platinum, Gold, etc.) directly from the 'Currency' document.

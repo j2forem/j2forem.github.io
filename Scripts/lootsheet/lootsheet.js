@@ -57,7 +57,7 @@ function calculateTotalGold() {
   document.getElementById('total-gold').textContent = totalGold.toFixed(2);
 }
 
-// Function to handle coin modifications and push to DB
+// Function to handle coin modifications and push to Firestore
 async function modifyCoins(coinType) {
   try {
     const inputField = document.getElementById(`${coinType}-input`);
@@ -74,7 +74,7 @@ async function modifyCoins(coinType) {
     const updates = {};
     updates[capitalizeFirstLetter(coinType)] = newCoinValue;
 
-    await window.updatePartyFunds(updates);
+    await window.updatePartyFunds(updates);  // Ensure this function is globally available
 
     // Refresh the UI to reflect updated coin values
     await displayPartyFunds();
@@ -90,6 +90,7 @@ async function modifyCoins(coinType) {
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 
 // Auto-refresh total party funds every 5 seconds
 setInterval(displayPartyFunds, 5000);  // Fetch latest data from Firestore every 5 seconds
