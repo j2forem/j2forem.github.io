@@ -23,11 +23,11 @@ async function displayPartyFunds() {
     if (currencyData) {
       // Update the UI with coin values
       initialCurrency = {
-        platinum: currencyData.Platinum || 0,
-        gold: currencyData.Gold || 0,
-        electrum: currencyData.Electrum || 0,
-        silver: currencyData.Silver || 0,
-        copper: currencyData.Copper || 0
+        platinum: parseFloat(currencyData.Platinum) || 0,
+        gold: parseFloat(currencyData.Gold) || 0,
+        electrum: parseFloat(currencyData.Electrum) || 0,
+        silver: parseFloat(currencyData.Silver) || 0,
+        copper: parseFloat(currencyData.Copper) || 0
       };
 
       // Display individual coin values in the UI
@@ -70,10 +70,11 @@ async function modifyCoins(coinType) {
       return;
     }
 
-    // Update the DB with the new value
-    const currencyUpdate = {};
-    currencyUpdate[capitalizeFirstLetter(coinType)] = newCoinValue;
-    await window.updatePartyFunds(currencyUpdate);
+    // Update the database with the new value
+    const updates = {};
+    updates[capitalizeFirstLetter(coinType)] = newCoinValue;
+
+    await window.updatePartyFunds(updates);
 
     // Refresh the UI to reflect updated coin values
     await displayPartyFunds();

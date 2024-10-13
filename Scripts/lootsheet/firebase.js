@@ -9,23 +9,15 @@ const firebaseConfig = {
   measurementId: "G-552DK30WLJ"
 };
 
-};
-
-// Initialize Firebase app
-firebase.initializeApp(firebaseConfig);
-
-// Initialize Firestore instance
-const db = firebase.firestore();
-
 /**
- * Fetch party funds from the database.
+ * Fetch party funds (Platinum, Gold, etc.) directly from the 'Currency' document.
  * @returns {Promise<Object>} Returns an object with coin values.
  */
 async function fetchPartyFunds() {
   try {
     const doc = await db.collection('PartyInventory').doc('Currency').get();
     if (doc.exists) {
-      return doc.data(); // {Platinum: X, Gold: Y, etc.}
+      return doc.data(); // Returns an object {Platinum: X, Gold: Y, Electrum: Z, ...}
     } else {
       console.error('No such document!');
       return null;
@@ -35,13 +27,13 @@ async function fetchPartyFunds() {
     throw error;
   }
 }
-
 /**
- * Update party funds in the database.
+ * Update the fields in the 'Currency' document directly (e.g., Platinum, Gold).
  * @param {Object} updates - An object containing updated coin values.
  */
 async function updatePartyFunds(updates) {
   try {
+    // Update specific fields in the Currency document
     await db.collection('PartyInventory').doc('Currency').update(updates);
     console.log('Party funds updated successfully!');
   } catch (error) {
@@ -49,6 +41,7 @@ async function updatePartyFunds(updates) {
     throw error;
   }
 }
+
 
 // Make these functions globally accessible
 window.fetchPartyFunds = fetchPartyFunds;
