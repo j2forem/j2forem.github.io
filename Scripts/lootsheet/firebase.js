@@ -9,6 +9,8 @@ const firebaseConfig = {
   measurementId: "G-552DK30WLJ"
 };
 
+};
+
 // Initialize Firebase app
 firebase.initializeApp(firebaseConfig);
 
@@ -16,53 +18,38 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 /**
- * Function to retrieve items from a specific Firestore collection based on category and search term
- * @param {string} category - Firestore collection name (e.g., 'Weapons', 'Armor')
- * @param {string} searchTerm - Search term to find items by name
- * @returns {Promise} - Returns a promise that resolves with the list of matching items
+ * Fetch party funds from the database.
+ * @returns {Promise<Object>} Returns an object with coin values.
  */
-async function getItems(category, searchTerm) {
+async function fetchPartyFunds() {
   try {
-    const collectionRef = db.collection(category);
-    const q = collectionRef
-      .where('name', '>=', searchTerm)
-      .where('name', '<=', searchTerm + '\uf8ff')
-      .limit(10);
-
-    const snapshot = await q.get();
-
-    const items = snapshot.docs.map(doc => ({
-      id: doc.id,  
-      ...doc.data()  
-    }));
-
-    return { items };
+    const doc = await db.collection('PartyInventory').doc('Currency').get();
+    if (doc.exists) {
+      return doc.data(); // {Platinum: X, Gold: Y, etc.}
+    } else {
+      console.error('No such document!');
+      return null;
+    }
   } catch (error) {
-    console.error('Error fetching items from Firestore:', error);
+    console.error('Error fetching party funds:', error);
     throw error;
   }
 }
 
 /**
- * New Function: Fetch party funds from 'PartyInventory/Currency' document
+ * Update party funds in the database.
+ * @param {Object} updates - An object containing updated coin values.
  */
-async function fetchPartyFunds() {
+async function updatePartyFunds(updates) {
   try {
-    const currencyDoc = await db.collection('PartyInventory').doc('Currency').get();
-    
-    if (currencyDoc.exists) {
-      const currencyData = currencyDoc.data();  // Get the data from the document
-      return currencyData;  // Return currency data (Platinum, Gold, etc.)
-    } else {
-      console.log('No Currency document found in PartyInventory.');
-      return null;
-    }
+    await db.collection('PartyInventory').doc('Currency').update(updates);
+    console.log('Party funds updated successfully!');
   } catch (error) {
-    console.error('Error fetching currency data:', error);
-    return null;
+    console.error('Error updating party funds:', error);
+    throw error;
   }
 }
 
-// Make functions globally accessible
-window.getItems = getItems;
+// Make these functions globally accessible
 window.fetchPartyFunds = fetchPartyFunds;
+window.updatePartyFunds = updatePartyFunds;
