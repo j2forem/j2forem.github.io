@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D&D Loot Tracker</title>
 
+    <!-- Fonts and Styles -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
+    <!-- Firebase Setup -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
 
     <!-- Load JS as modules -->
     <script type="module" src="/Scripts/lootsheet/firebase.js" defer></script>  <!-- Firestore setup -->
@@ -18,79 +19,68 @@
     <script type="module" src="/Scripts/lootsheet/lootsearch.js" defer></script> <!-- Search logic -->
 </head>
 
-<h2 id="total-funds" onclick="displayPartyFunds()">Total Party Funds in Gold: <span id="total-gold">0.00</span></h2>
+<body>
 
-<div id="currency">
-  <div>
-    <label for="Platinum-input">Platinum:</label>
-    <input id="Platinum-input" type="number" step="1" min="0" />
-    <button onclick="playerRequest('Platinum')">Get Platinum Count</button>
-    <button onclick="playerdbUpdate('Platinum')">Update Platinum</button>
-    <span id="Platinum-display">0 coins</span>
-    <span id="Platinum-weight">0 lbs</span>
-  </div>
+    <h2 id="total-funds" onclick="displayPartyFunds()">Total Party Funds in Gold: <span id="total-gold">0.00</span></h2>
 
-  <div>
-    <label for="Gold-input">Gold:</label>
-    <input id="Gold-input" type="number" step="1" min="0" />
-    <button onclick="playerRequest('Gold')">Get Gold Count</button>
-    <button onclick="playerdbUpdate('Gold')">Update Gold</button>
-    <span id="Gold-display">0 coins</span>
-    <span id="Gold-weight">0 lbs</span>
-  </div>
+    <div class="currency">
+        <label for="Platinum-input">Platinum:</label>
+        <input id="Platinum-input" type="number" step="1" min="0" />
+        <button onclick="playerdbUpdate('Platinum')">Update Platinum</button>
+        <span id="Platinum-display">0 coins</span>
+        <span id="Platinum-weight">0 lbs</span>
+    </div>
 
-  <div>
-    <label for="Electrum-input">Electrum:</label>
-    <input id="Electrum-input" type="number" step="1" min="0" />
-    <button onclick="playerRequest('Electrum')">Get Electrum Count</button>
-    <button onclick="playerdbUpdate('Electrum')">Update Electrum</button>
-    <span id="Electrum-display">0 coins</span>
-    <span id="Electrum-weight">0 lbs</span>
-  </div>
+    <div class="currency">
+        <label for="Gold-input">Gold:</label>
+        <input id="Gold-input" type="number" step="1" min="0" />
+        <button onclick="playerdbUpdate('Gold')">Update Gold</button>
+        <span id="Gold-display">0 coins</span>
+        <span id="Gold-weight">0 lbs</span>
+    </div>
 
-  <div>
-    <label for="Silver-input">Silver:</label>
-    <input id="Silver-input" type="number" step="1" min="0" />
-    <button onclick="playerRequest('Silver')">Get Silver Count</button>
-    <button onclick="playerdbUpdate('Silver')">Update Silver</button>
-    <span id="Silver-display">0 coins</span>
-    <span id="Silver-weight">0 lbs</span>
-  </div>
+    <div class="currency">
+        <label for="Electrum-input">Electrum:</label>
+        <input id="Electrum-input" type="number" step="1" min="0" />
+        <button onclick="playerdbUpdate('Electrum')">Update Electrum</button>
+        <span id="Electrum-display">0 coins</span>
+        <span id="Electrum-weight">0 lbs</span>
+    </div>
 
-  <div>
-    <label for="Copper-input">Copper:</label>
-    <input id="Copper-input" type="number" step="1" min="0" />
-    <button onclick="playerRequest('Copper')">Get Copper Count</button>
-    <button onclick="playerdbUpdate('Copper')">Update Copper</button>
-    <span id="Copper-display">0 coins</span>
-    <span id="Copper-weight">0 lbs</span>
-  </div>
-</div>
+    <div class="currency">
+        <label for="Silver-input">Silver:</label>
+        <input id="Silver-input" type="number" step="1" min="0" />
+        <button onclick="playerdbUpdate('Silver')">Update Silver</button>
+        <span id="Silver-display">0 coins</span>
+        <span id="Silver-weight">0 lbs</span>
+    </div>
 
+    <div class="currency">
+        <label for="Copper-input">Copper:</label>
+        <input id="Copper-input" type="number" step="1" min="0" />
+        <button onclick="playerdbUpdate('Copper')">Update Copper</button>
+        <span id="Copper-display">0 coins</span>
+        <span id="Copper-weight">0 lbs</span>
+    </div>
 
-<!-- Error Display Section -->
-<div id="error-message" style="color: red;"></div>  <!-- This will display any errors -->
+    <!-- Error Display Section -->
+    <div id="error-message" style="color: red;"></div>  <!-- This will display any errors -->
 
+    <!-- Search Bar -->
+    <div class="search-section">
+        <label for="search-input">Search Items:</label>
+        <input type="text" id="search-input" placeholder="Enter item name...">
+    </div>
 
-  
-  
-  
-      <!-- Search Bar -->
-      <div class="search-section">
-          <label for="search-input">Search Items:</label>
-          <input type="text" id="search-input" placeholder="Enter item name...">
-      </div>
-  
-      <!-- Results Section -->
-      <div id="results" class="results-section">
-          <h2>Results:</h2>
-          <!-- Search results will be injected here -->
-      </div>
-  
-      <footer>
-        <p>Adventurers' Compendium - Brought to you by Dungeon Masters Guild</p>
-      </footer>
-  </div>
-  
-  </body>
-  </html>
+    <!-- Results Section -->
+    <div id="results" class="results-section">
+        <h2>Results:</h2>
+        <!-- Search results will be injected here -->
+    </div>
+
+    <footer>
+      <p>Adventurers' Compendium - Brought to you by Dungeon Masters Guild</p>
+    </footer>
+
+</body>
+</html>
