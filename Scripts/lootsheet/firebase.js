@@ -24,9 +24,25 @@ console.log("Firestore Initialized:", db);
  */
 async function fetchPartyFunds() {
   try {
+    console.log('Fetching Party Funds...');
     const doc = await db.collection('PartyInventory').doc('Currency').get();
+
+    console.log('Document Snapshot:', doc);  // Log the snapshot to see if we get a response
+
     if (doc.exists) {
-      return doc.data(); // Returns an object {Platinum: X, Gold: Y, Electrum: Z, ...}
+      const data = doc.data();  // Get the document data
+
+      // Log and provide default values for undefined fields
+      console.log('Document Data:', data);
+
+      // Ensure the data is in the correct format
+      return {
+        Platinum: data.Platinum || 0,
+        Gold: data.Gold || 0,
+        Electrum: data.Electrum || 0,
+        Silver: data.Silver || 0,
+        Copper: data.Copper || 0  // Make sure this field is numeric
+      };
     } else {
       console.error('No such document!');
       return null;
@@ -36,6 +52,7 @@ async function fetchPartyFunds() {
     throw error;
   }
 }
+
 
 /**
  * Update the fields in the 'Currency' document directly (e.g., Platinum, Gold).
