@@ -20,55 +20,54 @@
 
 <body>
 
-  <div class="container">
-      <header>
-        <h1>D&D Loot Tracker</h1>
-        <p>Track your adventurers' loot and treasure with ease.</p>
-      </header>
+  <div id="currency-display">
+    <h2 id="party-funds" style="cursor: pointer;">Party Funds</h2>
+    <h3>Total Party Funds in Gold: <span id="total-gold">0</span></h3>
   
-      <div id="currency-display">
-        <h2 id="party-funds" style="cursor: pointer;">Party Funds</h2>
-        <h3>Total Party Funds in Gold: <span id="total-gold">0</span></h3>
-      
-        <div>
-          <p>Platinum: 
-            <input type="number" id="platinum-input" value="0" placeholder="Enter Platinum" /> 
-            <button onclick="fetchCoinValue('platinum')">Get Platinum Coins</button>
-            <span id="platinum-display">0 coins</span> 
-            (<span id="platinum-weight">0 lbs</span>)
-          </p>
-      
-          <p>Gold: 
-            <input type="number" id="gold-input" value="0" placeholder="Enter Gold" /> 
-            <button onclick="fetchCoinValue('gold')">Get Gold Coins</button>
-            <span id="gold-display">0 coins</span> 
-            (<span id="gold-weight">0 lbs</span>)
-          </p>
-      
-          <p>Electrum: 
-            <input type="number" id="electrum-input" value="0" placeholder="Enter Electrum" /> 
-            <button onclick="fetchCoinValue('electrum')">Get Electrum Coins</button>
-            <span id="electrum-display">0 coins</span> 
-            (<span id="electrum-weight">0 lbs</span>)
-          </p>
-      
-          <p>Silver: 
-            <input type="number" id="silver-input" value="0" placeholder="Enter Silver" /> 
-            <button onclick="fetchCoinValue('silver')">Get Silver Coins</button>
-            <span id="silver-display">0 coins</span> 
-            (<span id="silver-weight">0 lbs</span>)
-          </p>
-      
-          <p>Copper: 
-            <input type="number" id="copper-input" value="0" placeholder="Enter Copper" /> 
-            <button onclick="fetchCoinValue('copper')">Get Copper Coins</button>
-            <span id="copper-display">0 coins</span> 
-            (<span id="copper-weight">0 lbs</span>)
-          </p>
-        </div>
-      </div>
-      
-      
+    <div>
+      <p>
+        <span style="cursor: pointer;" onclick="fetchCoinValue('platinum')">Platinum</span>: 
+        <input type="number" id="platinum-input" value="0" placeholder="Add/Subtract Platinum" /> 
+        <button onclick="modifyCoins('platinum')">Update Platinum</button>
+        <span id="platinum-display">0 coins</span> 
+        (<span id="platinum-weight">0 lbs</span>)
+      </p>
+  
+      <p>
+        <span style="cursor: pointer;" onclick="fetchCoinValue('gold')">Gold</span>: 
+        <input type="number" id="gold-input" value="0" placeholder="Add/Subtract Gold" /> 
+        <button onclick="modifyCoins('gold')">Update Gold</button>
+        <span id="gold-display">0 coins</span> 
+        (<span id="gold-weight">0 lbs</span>)
+      </p>
+  
+      <p>
+        <span style="cursor: pointer;" onclick="fetchCoinValue('electrum')">Electrum</span>: 
+        <input type="number" id="electrum-input" value="0" placeholder="Add/Subtract Electrum" /> 
+        <button onclick="modifyCoins('electrum')">Update Electrum</button>
+        <span id="electrum-display">0 coins</span> 
+        (<span id="electrum-weight">0 lbs</span>)
+      </p>
+  
+      <p>
+        <span style="cursor: pointer;" onclick="fetchCoinValue('silver')">Silver</span>: 
+        <input type="number" id="silver-input" value="0" placeholder="Add/Subtract Silver" /> 
+        <button onclick="modifyCoins('silver')">Update Silver</button>
+        <span id="silver-display">0 coins</span> 
+        (<span id="silver-weight">0 lbs</span>)
+      </p>
+  
+      <p>
+        <span style="cursor: pointer;" onclick="fetchCoinValue('copper')">Copper</span>: 
+        <input type="number" id="copper-input" value="0" placeholder="Add/Subtract Copper" /> 
+        <button onclick="modifyCoins('copper')">Update Copper</button>
+        <span id="copper-display">0 coins</span> 
+        (<span id="copper-weight">0 lbs</span>)
+      </p>
+    </div>
+  </div>
+  
+  
   
       <!-- Search Bar -->
       <div class="search-section">

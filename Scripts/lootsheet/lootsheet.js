@@ -10,10 +10,7 @@ let initialCurrency = {
   copper: 0
 };
 
-// Function to fetch total party funds manually when clicking the "Party Funds" header
-document.getElementById('party-funds').addEventListener('click', calculateTotalGold);
-
-// Fetch individual coin values when player requests it (for each coin type)
+// Function to fetch individual coin values when the player clicks the coin label
 async function fetchCoinValue(coinType) {
   try {
     const currencyData = await window.fetchPartyFunds();  // Use the global fetchPartyFunds function
@@ -23,13 +20,57 @@ async function fetchCoinValue(coinType) {
     document.getElementById(`${coinType}-display`).textContent = `${coinAmount} coins`;
     document.getElementById(`${coinType}-weight`).textContent = `${(coinAmount / 50).toFixed(2)} lbs`;  // Weight based on 50 coins per pound
 
-    // Update the initial currency so that the total is calculated correctly
+    // Store the fetched value in the initialCurrency object
     initialCurrency[coinType] = coinAmount;
 
-    // Recalculate total after fetching the coin value
+    // Only recalculate total after fetching from the DB
     calculateTotalGold();
   } catch (error) {
     console.error(`Error fetching ${coinType} coins:`, error);
+  }
+}
+
+// Function to modify the number of coins and push the new value to the DB
+async function modifyCoins(coinType) {
+  try {
+    const inputField = document.getElementById(`${coinType}-input`);
+    const modificationAmount = parseFloat(inputField.value) || 0;
+
+    // Calculate the new total for this coin type
+    const newCoinValue = initialCurrency[coinType] + modificationAmount;
+    if (newCoinValue < 0) {
+      console.log(`Cannot have negative ${coinType} coins.`);
+      return;
+    }
+
+    // Update the display and weight based on the new coin value
+    document.getElementById(`${coinType}-display`).textContent = `${newCoinValue} coins`;
+    document.getElementById(`${coinType}-weight`).textContent = `${(newCoinValue / 50).toFixed(2)} lbs`;
+
+    // Update the DB with the new value
+    const currencyUpdate = {};
+    currencyUpdate[capitalizeFirstLetter(coinType)] = newCoinValue;
+    await window.updatePartyFunds(currencyUpdate);  // Assuming window.updatePartyFunds is defined elsewhere to update the DB
+
+    // Fetch updated values from the DB after modification and update the display
+    const updatedCurrencyData = await window.fetchPartyFunds();  // Fetch the latest values from the DB after the update
+
+    // Update the initialCurrency object with the new values from the DB
+    initialCurrency = {
+      platinum: updatedCurrencyData.Platinum || 0,
+      gold: updatedCurrencyData.Gold || 0,
+      electrum: updatedCurrencyData.Electrum || 0,
+      silver: updatedCurrencyData.Silver || 0,
+      copper: updatedCurrencyData.Copper || 0
+    };
+
+    // Recalculate the total gold value based on the latest data from the DB
+    calculateTotalGold();
+
+    // Clear the input field after successful update
+    inputField.value = 0;
+  } catch (error) {
+    console.error(`Error updating ${coinType} coins:`, error);
   }
 }
 
@@ -46,32 +87,39 @@ const conversionRates = {
   platinumToGold: 5              // 1 platinum = 5 gold
 };
 
-// Function to calculate total gold based on initial DB values and manual inputs
+// Function to calculate total gold based on initial DB values only (no manual input)
 function calculateTotalGold() {
-  const platinum = parseFloat(document.getElementById('platinum-input').value) || 0;
-  const gold = parseFloat(document.getElementById('gold-input').value) || 0;
-  const electrum = parseFloat(document.getElementById('electrum-input').value) || 0;
-  const silver = parseFloat(document.getElementById('silver-input').value) || 0;
-  const copper = parseFloat(document.getElementById('copper-input').value) || 0;
-
-  // Convert each currency (DB + Player input) to gold equivalent
   const totalGold = 
-    (initialCurrency.platinum + platinum) * conversionRates.platinumToGold + 
-    (initialCurrency.gold + gold) + 
-    (initialCurrency.electrum + electrum) * conversionRates.electrumToGold + 
-    (initialCurrency.silver + silver) * conversionRates.silverToGold + 
-    (initialCurrency.copper + copper) * conversionRates.copperToGold;
+    initialCurrency.platinum * conversionRates.platinumToGold + 
+    initialCurrency.gold + 
+    initialCurrency.electrum * conversionRates.electrumToGold + 
+    initialCurrency.silver * conversionRates.silverToGold + 
+    initialCurrency.copper * conversionRates.copperToGold;
   
   // Update the total gold display
   document.getElementById('total-gold').textContent = totalGold.toFixed(2);  // Limit to 2 decimal places
 }
 
-// Add event listeners to each currency input for real-time calculation
-document.getElementById('platinum-input').addEventListener('input', calculateTotalGold);
-document.getElementById('gold-input').addEventListener('input', calculateTotalGold);
-document.getElementById('electrum-input').addEventListener('input', calculateTotalGold);
-document.getElementById('silver-input').addEventListener('input', calculateTotalGold);
-document.getElementById('copper-input').addEventListener('input', calculateTotalGold);
+// Auto-refresh the total party funds every 5 seconds
+setInterval(async function () {
+  try {
+    const currencyData = await window.fetchPartyFunds();  // Fetch the latest values from the DB
+
+    // Update the initialCurrency object with the fetched values
+    initialCurrency = {
+      platinum: currencyData.Platinum || 0,
+      gold: currencyData.Gold || 0,
+      electrum: currencyData.Electrum || 0,
+      silver: currencyData.Silver || 0,
+      copper: currencyData.Copper || 0
+    };
+
+    // Recalculate the total gold value based on the latest data
+    calculateTotalGold();
+  } catch (error) {
+    console.error("Error auto-refreshing total party funds:", error);
+  }
+}, 5000);  // Refresh every 5 seconds
 
 // On page load, don't automatically fetch the total party funds or coins, but fetch on demand
 document.addEventListener('DOMContentLoaded', () => {
