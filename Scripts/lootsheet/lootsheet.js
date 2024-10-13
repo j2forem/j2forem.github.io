@@ -57,39 +57,51 @@ function calculateTotalGold() {
   document.getElementById('total-gold').textContent = totalGold.toFixed(2);
 }
 
-// Function to handle coin modifications and push to Firestore
+// Function to modify coins and update Firestore
 async function modifyCoins(coinType) {
   try {
     const inputField = document.getElementById(`${coinType}-input`);
     const modificationAmount = parseFloat(inputField.value) || 0;
 
-    // Calculate the new value for this coin type
-    const newCoinValue = initialCurrency[coinType] + modificationAmount;
+    // Ensure that `initialCurrency` is up-to-date
+    if (!initialCurrency) {
+      console.error('Currency data not loaded.');
+      return;
+    }
+
+    // Calculate the new coin value
+    const currentCoinValue = initialCurrency[capitalizeFirstLetter(coinType)] || 0; // Ensure proper case
+    const newCoinValue = currentCoinValue + modificationAmount;
+
+    // Prevent negative coin values
     if (newCoinValue < 0) {
       console.log(`Cannot have negative ${coinType} coins.`);
       return;
     }
 
-    // Update the database with the new value
+    // Prepare the update object for Firestore
     const updates = {};
-    updates[capitalizeFirstLetter(coinType)] = newCoinValue;
+    updates[capitalizeFirstLetter(coinType)] = newCoinValue;  // Use proper case here
 
-    await window.updatePartyFunds(updates);  // Ensure this function is globally available
+    // Update Firestore with the new coin value
+    await window.updatePartyFunds(updates);
 
-    // Refresh the UI to reflect updated coin values
+    // Refresh the display with the updated party funds
     await displayPartyFunds();
 
-    // Clear the input field
+    // Reset the input field
     inputField.value = 0;
+
   } catch (error) {
     console.error(`Error updating ${coinType} coins:`, error);
   }
 }
 
-// Helper function to capitalize the first letter of the coin type (for matching the database fields)
+// Helper function to capitalize the first letter (ensure correct Firestore field matching)
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 
 
 // Auto-refresh total party funds every 5 seconds
