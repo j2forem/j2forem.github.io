@@ -1,116 +1,40 @@
-// firebase.js
+import { getItems } from './firebase.js';  // Import getItems function from firebase.js
 
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, where, limit, startAfter } from 'firebase/firestore';
-import { getAuth, signInAnonymously } from 'firebase/auth'; 
+let selectedCategory = 'Weapons';  // Default category
 
-// Firebase config (replace with your own)
-const firebaseConfig = {
-  apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
-  authDomain: "weekendweebz.firebaseapp.com",
-  projectId: "weekendweebz",
-  storageBucket: "weekendweebz.appspot.com",
-  messagingSenderId: "389932072090",
-  appId: "1:389932072090:web:104a13fc57762a449b3323",
-  measurementId: "G-552DK30WLJ"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
-// Sign in anonymously
-signInAnonymously(auth).then(() => {
-  console.log('Signed in anonymously');
-}).catch(error => {
-  console.error('Error signing in:', error);
-});
-
-// Firestore function to fetch items
-export const getItems = async (category, searchTerm = '', itemsPerPage = 10, lastVisible = null) => {
-  const itemsCollection = collection(db, category);
-  let q;
-
-  // Query with search term
-  if (searchTerm) {
-    q = query(itemsCollection, where('name', '>=', searchTerm), where('name', '<=', searchTerm + '\uf8ff'), limit(itemsPerPage));
-  } else {
-    q = query(itemsCollection, limit(itemsPerPage));  // Fallback for general fetch
-  }
-
-  // For pagination (lazy loading)
-  if (lastVisible) {
-    q = query(q, startAfter(lastVisible));
-  }
-
-  const querySnapshot = await getDocs(q);
-  const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-  // Return both items and last visible for pagination
-  const last = querySnapshot.docs[querySnapshot.docs.length - 1];
-  return { items, last };
-};
-
-// loot-search.js
-
-import { getItems } from './firebase.js';  // Corrected import from .json to .js
-
-let timeout = null;
-let lastVisible = null;  // For pagination (optional for now)
-let searchCount = 0;
-const searchLimit = 5;  // Max 5 searches per minute
-const resetTime = 60000; // 1 minute in milliseconds
-
-// Reset search count every minute
-function resetSearchCount() {
-  setTimeout(() => searchCount = 0, resetTime);
+// Set the current category based on tab or dropdown selection
+function setCategory(category) {
+  console.log('Category switched to:', category);
+  selectedCategory = category;  // Update the selected category
+  searchItems();  // Perform the search for the new category
 }
 
-// Debounce function to limit how often search is triggered
+// Debounced search input handler
 function debounce(fn, delay) {
+  let timeout;
   return (...args) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => fn(...args), delay);
   };
 }
 
-// Caching results in local storage
-function cacheResults(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
-}
+// Main search handler (with category and search term)
+async function searchItems() {
+  const searchTerm = document.getElementById('search-input').value.trim();  // Input search term
 
-// Retrieve cached results
-function getCachedResults(key) {
-  const cachedData = localStorage.getItem(key);
-  return cachedData ? JSON.parse(cachedData) : null;
-}
-
-// Main search handler (search term + category)
-async function handleSearch(category, searchTerm) {
-  const cacheKey = `${category}-${searchTerm}`;  // Unique cache key per search
-  const cached = getCachedResults(cacheKey);
-
-  // If cached results exist, use them
-  if (cached) {
-    console.log('Using cached results', cached);
-    displayResults(cached);
+  // Check if search term is empty, and prevent unnecessary queries
+  if (!searchTerm) {
+    console.log('No search term provided.');
     return;
   }
 
-  // Enforce search limit (5 per minute)
-  if (searchCount >= searchLimit) {
-    console.log('Search limit exceeded. Try again later.');
-    return;
+  // Use the getItems function from firebase.js to fetch data from Firestore
+  try {
+    const { items } = await getItems(selectedCategory, searchTerm);  // Fetch from Firestore
+    displayResults(items);  // Display results in the UI
+  } catch (error) {
+    console.error('Error searching for items:', error);
   }
-
-  // Fetch new results from Firestore
-  searchCount++;
-  const { items } = await getItems(category, searchTerm);  
-  cacheResults(cacheKey, items);  // Cache new results
-  displayResults(items);  // Display results
-
-  if (searchCount === 1) resetSearchCount();  // Start the rate limit reset timer
 }
 
 // Display search results (DOM manipulation)
@@ -118,17 +42,33 @@ function displayResults(items) {
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = '';  // Clear previous results
 
-  // Create and append new results
+  if (!items || items.length === 0) {
+    resultsContainer.textContent = 'No items found.';
+    return;
+  }
+
   items.forEach(item => {
     const itemDiv = document.createElement('div');
-    itemDiv.textContent = `${item.name} - ${item.value} gold`;  // Customize this as needed
+    const cost = item.cost ? `${item.cost} gold` : 'Unknown cost';  // Check if cost exists
+    itemDiv.textContent = `${item.name} - ${cost}`;  // Customize as needed
     resultsContainer.appendChild(itemDiv);
   });
 }
 
-// Debounced search input (attach to the search bar)
-document.getElementById('search-input').addEventListener('input', debounce((event) => {
-  const category = document.getElementById('category-select').value;  // Dropdown for category
-  const searchTerm = event.target.value.trim();  // User's input for search term
-  handleSearch(category, searchTerm);  // Trigger search
-}, 300));  // 300ms debounce delay
+// Attach event listeners after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Handle category tab clicks
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (event) => {
+      const category = event.target.getAttribute('data-category');  // Get the category from the data attribute
+      setCategory(category);  // Switch the category
+    });
+  });
+
+  // Debounced search input (attach to the search bar)
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(searchItems, 300));  // 300ms debounce
+  }
+});

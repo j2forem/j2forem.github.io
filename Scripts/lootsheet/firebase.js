@@ -1,7 +1,22 @@
+import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, query, where, limit } from 'firebase/firestore';
 
-// Firebase Firestore instance
-const db = getFirestore();  // Assuming Firebase has already been initialized elsewhere
+// Firebase config (replace with your own Firebase project configuration)
+const firebaseConfig = {
+  apiKey: "AIzaSyAeSSRmlA-pYs_DOIGvgm4fdVZID6uFUIs",
+  authDomain: "weekendweebz.firebaseapp.com",
+  projectId: "weekendweebz",
+  storageBucket: "weekendweebz.appspot.com",
+  messagingSenderId: "389932072090",
+  appId: "1:389932072090:web:104a13fc57762a449b3323",
+  measurementId: "G-552DK30WLJ"
+};
+
+// Initialize Firebase app
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firestore instance
+const db = getFirestore(app);
 
 /**
  * Function to retrieve items from a specific Firestore collection based on category and search term
@@ -37,3 +52,6 @@ export async function getItems(category, searchTerm) {
     throw error;
   }
 }
+
+export { db };  // Export Firestore instance in case it's needed elsewhere
+

@@ -1,24 +1,75 @@
-// Function to set the selected category
+import { getItems } from './firebase.js';  // Import getItems function from firebase.js
+
+let selectedCategory = 'Weapons';  // Default category
+
+// Set the current category based on tab or dropdown selection
 function setCategory(category) {
   console.log('Category switched to:', category);
-  selectedCategory = category;
-  searchItems();  // Trigger search when category changes
+  selectedCategory = category;  // Update the selected category
+  searchItems();  // Perform the search for the new category
 }
 
-// Make the setCategory function globally available
-window.setCategory = setCategory;
-
-// Function to handle search input (simplified example)
-function searchItems() {
-  const searchTerm = document.getElementById('search-input').value.trim();
-  console.log(`Searching for items in category ${selectedCategory} with term: ${searchTerm}`);
-  
-  // Call your Firestore search function here, e.g., getItems()
-  // displayResults() to show the search results
+// Debounced search input handler
+function debounce(fn, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
 }
 
-// Add Event Listeners to tabs if you want to replace inline `onclick` (optional)
+// Main search handler (with category and search term)
+async function searchItems() {
+  const searchTerm = document.getElementById('search-input').value.trim();  // Input search term
+
+  // Check if search term is empty, and prevent unnecessary queries
+  if (!searchTerm) {
+    console.log('No search term provided.');
+    return;
+  }
+
+  // Use the getItems function from firebase.js to fetch data from Firestore
+  try {
+    const { items } = await getItems(selectedCategory, searchTerm);  // Fetch from Firestore
+    displayResults(items);  // Display results in the UI
+  } catch (error) {
+    console.error('Error searching for items:', error);
+  }
+}
+
+// Display search results (DOM manipulation)
+function displayResults(items) {
+  const resultsContainer = document.getElementById('results');
+  resultsContainer.innerHTML = '';  // Clear previous results
+
+  if (!items || items.length === 0) {
+    resultsContainer.textContent = 'No items found.';
+    return;
+  }
+
+  items.forEach(item => {
+    const itemDiv = document.createElement('div');
+    const cost = item.cost ? `${item.cost} gold` : 'Unknown cost';  // Check if cost exists
+    itemDiv.textContent = `${item.name} - ${cost}`;  // Customize as needed
+    resultsContainer.appendChild(itemDiv);
+  });
+}
+
+// Attach event listeners after DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  handleTabClicks();  // Initialize tab click event listeners
+  // Handle category tab clicks
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (event) => {
+      const category = event.target.getAttribute('data-category');  // Get the category from the data attribute
+      setCategory(category);  // Switch the category
+    });
+  });
+
+  // Debounced search input (attach to the search bar)
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(searchItems, 300));  // 300ms debounce
+  }
 });
 
