@@ -45,6 +45,32 @@ async function displayPartyFunds() {
   }
 }
 
+// Function to calculate and display the total gold equivalent
+function calculateTotalGold() {
+  // Convert all currency to the gold equivalent
+  const totalInGold =
+    initialCurrency.platinum * 5 +   // 1 Platinum = 5 Gold
+    initialCurrency.gold +           // 1 Gold = 1 Gold
+    initialCurrency.electrum * 0.5 + // 1 Electrum = 0.5 Gold
+    initialCurrency.silver * 0.1 +   // 1 Silver = 0.1 Gold
+    initialCurrency.copper * 0.01;   // 1 Copper = 0.01 Gold
+
+  // Update the total gold in the UI
+  document.getElementById('total-gold').textContent = totalInGold.toFixed(2);
+}
+
+// Manual refresh when clicking on the H2 element (if required)
+document.getElementById('total-funds').addEventListener('click', displayPartyFunds);
+
+// Auto-refresh every 5 seconds
+setInterval(() => {
+  displayPartyFunds();  // Call the function every 5 seconds to refresh total funds
+}, 5000);
+
+// Initial call to display the funds right when the page loads
+document.addEventListener('DOMContentLoaded', displayPartyFunds);
+
+
 // Function to calculate total gold from all coins
 function calculateTotalGold() {
   const totalGold = 
