@@ -1,12 +1,3 @@
-// Global variable to track initial currency
-let initialCurrency = {
-  platinum: 0,
-  gold: 0,
-  electrum: 0,
-  silver: 0,
-  copper: 0
-};
-
 // Function to display an error message in the UI
 function displayErrorMessage(message) {
   const errorMessageDiv = document.getElementById('error-message');
@@ -26,32 +17,24 @@ async function displayPartyFunds() {
     const currencyData = await window.fetchPartyFunds();  // Fetch latest data from Firestore
 
     if (currencyData) {
-      // Update the UI with coin values only if there are changes in the data
-      if (
-        currencyData.Platinum !== initialCurrency.platinum ||
-        currencyData.Gold !== initialCurrency.gold ||
-        currencyData.Electrum !== initialCurrency.electrum ||
-        currencyData.Silver !== initialCurrency.silver ||
-        currencyData.Copper !== initialCurrency.copper
-      ) {
-        initialCurrency = {
-          platinum: parseFloat(currencyData.Platinum) || 0,
-          gold: parseFloat(currencyData.Gold) || 0,
-          electrum: parseFloat(currencyData.Electrum) || 0,
-          silver: parseFloat(currencyData.Silver) || 0,
-          copper: parseFloat(currencyData.Copper) || 0
-        };
+      // Update the UI with coin values
+      initialCurrency = {
+        Platinum: parseFloat(currencyData.Platinum) || 0,
+        Gold: parseFloat(currencyData.Gold) || 0,
+        Electrum: parseFloat(currencyData.Electrum) || 0,
+        Silver: parseFloat(currencyData.Silver) || 0,
+        Copper: parseFloat(currencyData.Copper) || 0
+      };
 
-        // Display individual coin values in the UI
-        document.getElementById('platinum-display').textContent = `${initialCurrency.platinum} coins`;
-        document.getElementById('gold-display').textContent = `${initialCurrency.gold} coins`;
-        document.getElementById('electrum-display').textContent = `${initialCurrency.electrum} coins`;
-        document.getElementById('silver-display').textContent = `${initialCurrency.silver} coins`;
-        document.getElementById('copper-display').textContent = `${initialCurrency.copper} coins`;
+      // Display individual coin values in the UI
+      document.getElementById('Platinum-display').textContent = `${initialCurrency.Platinum} coins`;
+      document.getElementById('Gold-display').textContent = `${initialCurrency.Gold} coins`;
+      document.getElementById('Electrum-display').textContent = `${initialCurrency.Electrum} coins`;
+      document.getElementById('Silver-display').textContent = `${initialCurrency.Silver} coins`;
+      document.getElementById('Copper-display').textContent = `${initialCurrency.Copper} coins`;
 
-        // Calculate and display the total gold equivalent
-        calculateTotalGold();
-      }
+      // Calculate and display the total gold equivalent
+      calculateTotalGold();
     } else {
       displayErrorMessage('No currency data found in the database.');
     }
@@ -66,11 +49,11 @@ function calculateTotalGold() {
   try {
     // Convert all currency to the gold equivalent
     const totalInGold =
-      initialCurrency.platinum * 5 +   // 1 Platinum = 5 Gold
-      initialCurrency.gold +           // 1 Gold = 1 Gold
-      initialCurrency.electrum * 0.5 + // 1 Electrum = 0.5 Gold
-      initialCurrency.silver * 0.1 +   // 1 Silver = 0.1 Gold
-      initialCurrency.copper * 0.01;   // 1 Copper = 0.01 Gold
+      initialCurrency.Platinum * 5 +   // 1 Platinum = 5 Gold
+      initialCurrency.Gold +           // 1 Gold = 1 Gold
+      initialCurrency.Electrum * 0.5 + // 1 Electrum = 0.5 Gold
+      initialCurrency.Silver * 0.1 +   // 1 Silver = 0.1 Gold
+      initialCurrency.Copper * 0.01;   // 1 Copper = 0.01 Gold
 
     // Update the total gold in the UI
     document.getElementById('total-gold').textContent = totalInGold.toFixed(2);
@@ -80,11 +63,28 @@ function calculateTotalGold() {
   }
 }
 
-// Function to modify coins and update Firestore
-async function modifyCoins(coinType) {
+// Function to fetch individual coin values when player requests it (Get coin count)
+async function playerRequest(coinType) {
+  try {
+    const currencyData = await window.fetchPartyFunds();  // Fetch the latest currency data
+    const coinCount = currencyData[coinType] || 0;
+    document.getElementById(`${coinType}-display`).textContent = `${coinCount} coins`;
+
+    // Update the weight display
+    const weight = (coinCount * 0.02).toFixed(2);  // Each coin weighs 1/50 lb (0.02 lbs)
+    document.getElementById(`${coinType}-weight`).textContent = `${weight} lbs`;
+
+  } catch (error) {
+    displayErrorMessage(`Error fetching ${coinType} count: ${error.message}`);
+    console.error(`Error fetching ${coinType} count:`, error);
+  }
+}
+
+// Function to modify coins and update Firestore (Add/Subtract coins)
+async function playerdbUpdate(coinType) {
   try {
     clearErrorMessage();  // Clear any previous errors
-    const inputField = document.getElementById(`${coinType.toLowerCase()}-input`);
+    const inputField = document.getElementById(`${coinType}-input`);
     const modificationAmount = parseFloat(inputField.value) || 0;
 
     if (modificationAmount === 0) {
@@ -92,7 +92,8 @@ async function modifyCoins(coinType) {
       return;
     }
 
-    const newCoinValue = initialCurrency[coinType.toLowerCase()] + modificationAmount;
+    const currencyData = await window.fetchPartyFunds();
+    const newCoinValue = currencyData[coinType] + modificationAmount;
 
     if (newCoinValue < 0) {
       displayErrorMessage(`Cannot have negative ${coinType} coins.`);
