@@ -23,31 +23,46 @@ const db = firebase.firestore();
  */
 async function getItems(category, searchTerm) {
   try {
-    // Reference to the collection based on category
     const collectionRef = db.collection(category);
-
-    // Create a query for items where the name matches the searchTerm (with partial matching support)
     const q = collectionRef
       .where('name', '>=', searchTerm)
       .where('name', '<=', searchTerm + '\uf8ff')
       .limit(10);
 
-    // Execute the query and get the matching documents
     const snapshot = await q.get();
 
-    // Process the snapshot and extract the items
     const items = snapshot.docs.map(doc => ({
-      id: doc.id,  // Add the document ID to the item object
-      ...doc.data()  // Spread the document data into the object
+      id: doc.id,  
+      ...doc.data()  
     }));
 
-    return { items };  // Return the list of items
+    return { items };
   } catch (error) {
     console.error('Error fetching items from Firestore:', error);
     throw error;
   }
 }
 
-// Make the function globally accessible
-window.getItems = getItems;
+/**
+ * New Function: Fetch party funds from 'PartyInventory/Currency' document
+ */
+async function fetchPartyFunds() {
+  try {
+    const currencyDoc = await db.collection('PartyInventory').doc('Currency').get();
+    
+    if (currencyDoc.exists) {
+      const currencyData = currencyDoc.data();  // Get the data from the document
+      return currencyData;  // Return currency data (Platinum, Gold, etc.)
+    } else {
+      console.log('No Currency document found in PartyInventory.');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching currency data:', error);
+    return null;
+  }
+}
 
+// Make functions globally accessible
+window.getItems = getItems;
+window.fetchPartyFunds = fetchPartyFunds;
