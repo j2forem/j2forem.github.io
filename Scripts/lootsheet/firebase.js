@@ -9,6 +9,12 @@ const firebaseConfig = {
   measurementId: "G-552DK30WLJ"
 };
 
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Initialize Firestore
+const db = firebase.firestore();  // Ensure this is initialized
+
 /**
  * Fetch party funds (Platinum, Gold, etc.) directly from the 'Currency' document.
  * @returns {Promise<Object>} Returns an object with coin values.
@@ -27,6 +33,7 @@ async function fetchPartyFunds() {
     throw error;
   }
 }
+
 /**
  * Update the fields in the 'Currency' document directly (e.g., Platinum, Gold).
  * @param {Object} updates - An object containing updated coin values.
@@ -41,7 +48,6 @@ async function updatePartyFunds(updates) {
     throw error;
   }
 }
-
 
 // Make these functions globally accessible
 window.fetchPartyFunds = fetchPartyFunds;
