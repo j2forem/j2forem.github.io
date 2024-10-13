@@ -21,31 +21,34 @@
 <h2 id="total-funds" onclick="displayPartyFunds()">Total Party Funds in Gold: <span id="total-gold">0.00</span></h2>
 
 <div id="currency">
-  <label for="Copper-input">Copper:</label>
-  <input id="Copper-input" type="number" step="1" min="0" />
-  <button onclick="modifyCoins('Copper')">Update Copper</button>
-  <span id="Copper-display">0 coins</span>
-
-  <label for="Electrum-input">Electrum:</label>
-  <input id="Electrum-input" type="number" step="1" min="0" />
-  <button onclick="modifyCoins('Electrum')">Update Electrum</button>
-  <span id="Electrum-display">0 coins</span>
-
-  <label for="Gold-input">Gold:</label>
-  <input id="Gold-input" type="number" step="1" min="0" />
-  <button onclick="modifyCoins('Gold')">Update Gold</button>
-  <span id="Gold-display">0 coins</span>
-
-  <label for="Platinum-input">Platinum:</label>
-  <input id="Platinum-input" type="number" step="1" min="0" />
+  <label for="platinum-input">Platinum:</label>
+  <input id="platinum-input" type="number" step="1" min="0" />
   <button onclick="modifyCoins('Platinum')">Update Platinum</button>
-  <span id="Platinum-display">0 coins</span>
+  <span id="platinum-display">0 coins</span>
 
-  <label for="Silver-input">Silver:</label>
-  <input id="Silver-input" type="number" step="1" min="0" />
+  <label for="gold-input">Gold:</label>
+  <input id="gold-input" type="number" step="1" min="0" />
+  <button onclick="modifyCoins('Gold')">Update Gold</button>
+  <span id="gold-display">0 coins</span>
+
+  <label for="electrum-input">Electrum:</label>
+  <input id="electrum-input" type="number" step="1" min="0" />
+  <button onclick="modifyCoins('Electrum')">Update Electrum</button>
+  <span id="electrum-display">0 coins</span>
+
+  <label for="silver-input">Silver:</label>
+  <input id="silver-input" type="number" step="1" min="0" />
   <button onclick="modifyCoins('Silver')">Update Silver</button>
-  <span id="Silver-display">0 coins</span>
+  <span id="silver-display">0 coins</span>
+
+  <label for="copper-input">Copper:</label>
+  <input id="copper-input" type="number" step="1" min="0" />
+  <button onclick="modifyCoins('Copper')">Update Copper</button>
+  <span id="copper-display">0 coins</span>
 </div>
+
+<!-- Error Display Section -->
+<div id="error-message" style="color: red;"></div>  <!-- This will display any errors -->
 
 
   
