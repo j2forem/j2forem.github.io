@@ -17,7 +17,7 @@ async function displayPartyFunds() {
     const currencyData = await window.fetchPartyFunds();  // Fetch latest data from Firestore
 
     if (currencyData) {
-      // Update the UI with coin values
+      // Update the UI with coin values (Use correct case-sensitive field names)
       initialCurrency = {
         Platinum: parseFloat(currencyData.Platinum) || 0,
         Gold: parseFloat(currencyData.Gold) || 0,
@@ -26,7 +26,7 @@ async function displayPartyFunds() {
         Copper: parseFloat(currencyData.Copper) || 0
       };
 
-      // Display individual coin values in the UI
+      // Display individual coin values in the UI (Match the correct IDs in the HTML)
       document.getElementById('Platinum-display').textContent = `${initialCurrency.Platinum} coins`;
       document.getElementById('Gold-display').textContent = `${initialCurrency.Gold} coins`;
       document.getElementById('Electrum-display').textContent = `${initialCurrency.Electrum} coins`;
@@ -63,27 +63,21 @@ function calculateTotalGold() {
   }
 }
 
-// Function to fetch individual coin values when player requests it (Get coin count)
-async function playerRequest(coinType) {
+// Function to calculate and display the weight of the coins
+function calculateWeight(coinType, coinCount) {
   try {
-    const currencyData = await window.fetchPartyFunds();  // Fetch the latest currency data
-    const coinCount = currencyData[coinType] || 0;
-    document.getElementById(`${coinType}-display`).textContent = `${coinCount} coins`;
-
-    // Update the weight display
-    const weight = (coinCount * 0.02).toFixed(2);  // Each coin weighs 1/50 lb (0.02 lbs)
-    document.getElementById(`${coinType}-weight`).textContent = `${weight} lbs`;
-
+    const coinWeight = (coinCount / 50).toFixed(2);  // Each coin weighs 1/50 lb
+    document.getElementById(`${coinType}-weight`).textContent = `${coinWeight} lbs`;
   } catch (error) {
-    displayErrorMessage(`Error fetching ${coinType} count: ${error.message}`);
-    console.error(`Error fetching ${coinType} count:`, error);
+    displayErrorMessage(`Error calculating weight for ${coinType}: ${error.message}`);
+    console.error(`Error calculating weight for ${coinType}:`, error);
   }
 }
 
-// Function to modify coins and update Firestore (Add/Subtract coins)
+// Function to modify coins and update Firestore (triggered by "Update" button)
 async function playerdbUpdate(coinType) {
   try {
-    clearErrorMessage();  // Clear any previous errors
+    clearErrorMessage();
     const inputField = document.getElementById(`${coinType}-input`);
     const modificationAmount = parseFloat(inputField.value) || 0;
 
@@ -92,22 +86,22 @@ async function playerdbUpdate(coinType) {
       return;
     }
 
-    const currencyData = await window.fetchPartyFunds();
-    const newCoinValue = currencyData[coinType] + modificationAmount;
+    const currencyData = await window.fetchPartyFunds();  // Fetch the current values from Firestore
+    const currentCoinValue = parseFloat(currencyData[coinType.charAt(0).toUpperCase() + coinType.slice(1)]) || 0;
+    const newCoinValue = currentCoinValue + modificationAmount;
 
     if (newCoinValue < 0) {
       displayErrorMessage(`Cannot have negative ${coinType} coins.`);
       return;
     }
 
-    // Update Firestore with the exact case-sensitive field names
+    // Update Firestore with the new value
     const updates = {};
-    updates[coinType] = newCoinValue;
-
+    updates[coinType.charAt(0).toUpperCase() + coinType.slice(1)] = newCoinValue;
     await window.updatePartyFunds(updates);
 
-    await displayPartyFunds();  // Refresh to show updated values
-
+    // Refresh the coin count and weight
+    await playerRequest(coinType);
     inputField.value = 0;  // Reset the input field after update
   } catch (error) {
     displayErrorMessage(`Error updating ${coinType} coins: ${error.message}`);
@@ -115,10 +109,24 @@ async function playerdbUpdate(coinType) {
   }
 }
 
-// Initial call to display the funds when the page loads
-document.addEventListener('DOMContentLoaded', displayPartyFunds);
+// Existing functions like displayPartyFunds(), calculateTotalGold(), etc. can remain unchanged
 
 // Auto-refresh total funds every 5 seconds
 setInterval(() => {
-  displayPartyFunds();
+  displayPartyFunds();  // Auto-refresh total party funds
 }, 5000);
+
+// Error handling display function
+function displayErrorMessage(message) {
+  const errorMessageDiv = document.getElementById('error-message');
+  errorMessageDiv.textContent = message;
+}
+
+// Function to clear error message
+function clearErrorMessage() {
+  const errorMessageDiv = document.getElementById('error-message');
+  errorMessageDiv.textContent = '';  // Clear any existing error messages
+}
+
+// Initial call to display the funds when the page loads
+document.addEventListener('DOMContentLoaded', displayPartyFunds);
