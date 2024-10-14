@@ -113,6 +113,9 @@ async function playerdbUpdate(coinType) {
   }
 }
 
+window.playerdbUpdate = playerdbUpdate;
+window.fetchPartyFunds = fetchPartyFunds;
+window.updatePartyFunds = updatePartyFunds;
 
 // Function to modify coins and update Firestore
 async function modifyCoins(coinType) {
