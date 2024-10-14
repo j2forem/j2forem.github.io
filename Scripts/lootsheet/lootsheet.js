@@ -72,6 +72,48 @@ function calculateTotalGold() {
   }
 }
 
+// Function to modify coins and update Firestore (Add/Subtract coins)
+async function playerdbUpdate(coinType) {
+  try {
+    clearErrorMessage();  // Clear any previous errors
+    const inputField = document.getElementById(`${coinType}-input`);
+    const modificationAmount = parseFloat(inputField.value) || 0;
+
+    if (modificationAmount === 0) {
+      displayErrorMessage(`No modification amount entered for ${coinType}.`);
+      return;
+    }
+
+    // Fetch the current coin values from the database
+    const currencyData = await window.fetchPartyFunds();
+
+    // Get the current value for the selected coin type
+    const currentCoinValue = currencyData[coinType] || 0;
+    
+    // Calculate the new coin value (adding or subtracting)
+    const newCoinValue = currentCoinValue + modificationAmount;
+
+    if (newCoinValue < 0) {
+      displayErrorMessage(`Cannot have negative ${coinType} coins.`);
+      return;
+    }
+
+    // Update Firestore with the new value for the specific currency field
+    const updates = {};
+    updates[coinType] = newCoinValue;
+
+    await window.updatePartyFunds(updates);
+
+    await displayPartyFunds();  // Refresh to show updated values
+
+    inputField.value = 0;  // Reset the input field after update
+  } catch (error) {
+    displayErrorMessage(`Error updating ${coinType} coins: ${error.message}`);
+    console.error(`Error updating ${coinType} coins:`, error);
+  }
+}
+
+
 // Function to modify coins and update Firestore
 async function modifyCoins(coinType) {
   try {
