@@ -21,52 +21,48 @@
 
 <body>
 
+  <!-- weight calulations for individual currencies below not being called.  need to sort it -->
+
     <div id="currency">
-        <div>
-          <label for="Platinum-input">Platinum:</label>
-          <input id="Platinum-input" type="number" step="1" min="0" />
-          <button onclick="playerRequest('Platinum')">Get Platinum Count</button>
-          <button onclick="playerdbUpdate('Platinum')">Update Platinum</button>
-          <span id="Platinum-display">0 coins</span>
-          <span id="Platinum-weight">0 lbs</span>
-        </div>
-      
-        <div>
-          <label for="Gold-input">Gold:</label>
-          <input id="Gold-input" type="number" step="1" min="0" />
-          <button onclick="playerRequest('Gold')">Get Gold Count</button>
-          <button onclick="playerdbUpdate('Gold')">Update Gold</button>
-          <span id="Gold-display">0 coins</span>
-          <span id="Gold-weight">0 lbs</span>
-        </div>
-      
-        <div>
-          <label for="Electrum-input">Electrum:</label>
-          <input id="Electrum-input" type="number" step="1" min="0" />
-          <button onclick="playerRequest('Electrum')">Get Electrum Count</button>
-          <button onclick="playerdbUpdate('Electrum')">Update Electrum</button>
-          <span id="Electrum-display">0 coins</span>
-          <span id="Electrum-weight">0 lbs</span>
-        </div>
-      
-        <div>
-          <label for="Silver-input">Silver:</label>
-          <input id="Silver-input" type="number" step="1" min="0" />
-          <button onclick="playerRequest('Silver')">Get Silver Count</button>
-          <button onclick="playerdbUpdate('Silver')">Update Silver</button>
-          <span id="Silver-display">0 coins</span>
-          <span id="Silver-weight">0 lbs</span>
-        </div>
-      
-        <div>
-          <label for="Copper-input">Copper:</label>
-          <input id="Copper-input" type="number" step="1" min="0" />
-          <button onclick="playerRequest('Copper')">Get Copper Count</button>
-          <button onclick="playerdbUpdate('Copper')">Update Copper</button>
-          <span id="Copper-display">0 coins</span>
-          <span id="Copper-weight">0 lbs</span>
-        </div>
-      </div>
+    <h2 id="total-funds" onclick="displayPartyFunds()">Total Party Funds in Gold: <span id="total-gold">0.00</span></h2>
+  
+
+ 
+    <label for="Platinum-input">Platinum:</label>
+    <input id="Platinum-input" type="number" step="1" min="0" />
+    <button onclick="playerdbUpdate('Platinum')">Update Platinum</button>
+    <span id="Platinum-display">0 coins</span>
+    <span id="Platinum-weight">0 lbs</span> <!-- Weight field -->
+  
+    <label for="Gold-input">Gold:</label>
+    <input id="Gold-input" type="number" step="1" min="0" />
+    <button onclick="playerdbUpdate('Gold')">Update Gold</button>
+    <span id="Gold-display">0 coins</span>
+    <span id="Gold-weight">0 lbs</span> <!-- Weight field -->
+  
+    <label for="Electrum-input">Electrum:</label>
+    <input id="Electrum-input" type="number" step="1" min="0" />
+    <button onclick="playerdbUpdate('Electrum')">Update Electrum</button>
+    <span id="Electrum-display">0 coins</span>
+    <span id="Electrum-weight">0 lbs</span> <!-- Weight field -->
+  
+    <label for="Silver-input">Silver:</label>
+    <input id="Silver-input" type="number" step="1" min="0" />
+    <button onclick="playerdbUpdate('Silver')">Update Silver</button>
+    <span id="Silver-display">0 coins</span>
+    <span id="Silver-weight">0 lbs</span> <!-- Weight field -->
+  
+    <label for="Copper-input">Copper:</label>
+    <input id="Copper-input" type="number" step="1" min="0" />
+    <button onclick="playerdbUpdate('Copper')">Update Copper</button>
+    <span id="Copper-display">0 coins</span>
+    <span id="Copper-weight">0 lbs</span> <!-- Weight field -->
+  
+    <div id="error-message"></div>
+  </div>
+  
+ 
+  
       
 
     <!-- Error Display Section -->
