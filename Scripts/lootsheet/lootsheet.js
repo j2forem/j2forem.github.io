@@ -114,6 +114,7 @@ async function playerdbUpdate(coinType) {
 }
 
 window.playerdbUpdate = playerdbUpdate;
+window.playerRequest = playerRequest;
 window.fetchPartyFunds = fetchPartyFunds;
 window.updatePartyFunds = updatePartyFunds;
 
@@ -155,11 +156,19 @@ async function modifyCoins(coinType) {
 async function playerRequest(coinType) {
   try {
     const currencyData = await window.fetchPartyFunds();  // Fetch the latest currency data
-    const coinCount = currencyData[coinType] || 0;
+    const coinCount = currencyData[coinType] || 0;        // Get the coin count from the DB
+    
+    // Update the coin display in the UI
     document.getElementById(`${coinType}-display`).textContent = `${coinCount} coins`;
 
-    // Update the weight display
-    const weight = (coinCount * 0.02).toFixed(2);  // Each coin weighs 1/50 lb (0.02 lbs)
+    // Log the coin count for debugging
+    console.log(`${coinType} Count from DB: `, coinCount);
+
+    // Calculate the weight of the coins (each coin weighs 0.02 lbs)
+    const weight = (coinCount * 0.02).toFixed(2);  // Weight calculation
+    console.log(`${coinType} Weight: `, weight);   // Log the calculated weight
+
+    // Update the weight display in the UI
     document.getElementById(`${coinType}-weight`).textContent = `${weight} lbs`;
 
   } catch (error) {
@@ -167,6 +176,8 @@ async function playerRequest(coinType) {
     console.error(`Error fetching ${coinType} count:`, error);
   }
 }
+
+
 
 
 // Initial call to display the funds when the page loads
