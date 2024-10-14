@@ -151,6 +151,24 @@ async function modifyCoins(coinType) {
   }
 }
 
+// Function to fetch individual coin values when player requests it (Get coin count)
+async function playerRequest(coinType) {
+  try {
+    const currencyData = await window.fetchPartyFunds();  // Fetch the latest currency data
+    const coinCount = currencyData[coinType] || 0;
+    document.getElementById(`${coinType}-display`).textContent = `${coinCount} coins`;
+
+    // Update the weight display
+    const weight = (coinCount * 0.02).toFixed(2);  // Each coin weighs 1/50 lb (0.02 lbs)
+    document.getElementById(`${coinType}-weight`).textContent = `${weight} lbs`;
+
+  } catch (error) {
+    displayErrorMessage(`Error fetching ${coinType} count: ${error.message}`);
+    console.error(`Error fetching ${coinType} count:`, error);
+  }
+}
+
+
 // Initial call to display the funds when the page loads
 document.addEventListener('DOMContentLoaded', displayPartyFunds);
 
