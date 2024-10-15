@@ -11,6 +11,12 @@ let initialCurrency = {
 // Expose spendFromTotalFunds for testing in the console
 window.spendFromTotalFunds = spendFromTotalFunds;
 // Display party funds and calculate total gold
+document.addEventListener('DOMContentLoaded', () => {
+  // Test spending from total funds after the page is loaded
+  spendFromTotalFunds(50);  // Spend 50 gold
+});
+
+
 async function displayPartyFunds() {
   try {
     clearErrorMessage();
