@@ -63,7 +63,13 @@ window.spendFromTotalFunds = spendFromTotalFunds;
 async function spendFromTotalFunds(amountInGold) {
   // Fetch the latest party funds data
   const currencyData = await fetchPartyFunds();
-  const { platinum, gold, electrum, silver, copper } = currencyData;
+  
+  // Make sure the coin values are converted to numbers
+  const platinum = parseFloat(currencyData.platinum) || 0;
+  const gold = parseFloat(currencyData.gold) || 0;
+  const electrum = parseFloat(currencyData.electrum) || 0;
+  const silver = parseFloat(currencyData.silver) || 0;
+  const copper = parseFloat(currencyData.copper) || 0;
 
   // Calculate total funds in gold equivalent
   const totalGold = platinum * 5 + gold + electrum * 0.5 + silver * 0.1 + copper * 0.01;
@@ -95,7 +101,7 @@ async function spendFromTotalFunds(amountInGold) {
   let copperToDeduct = Math.min(remainingAmount / 0.01, copper);
   remainingAmount -= copperToDeduct * 0.01;
 
-  // Create an object with the updated values for each coin type
+  // Create an object with the updated values
   const updates = {
     platinum: platinum - platinumToDeduct,
     gold: gold - goldToDeduct,
@@ -107,9 +113,9 @@ async function spendFromTotalFunds(amountInGold) {
   // Log the updates object to ensure it's correctly created
   console.log("Preparing to call updatePartyFunds with updates:", updates);
 
-  // Update the Firestore database with the new values
+  // Now call updatePartyFunds with the updates object
   try {
-    await updatePartyFunds(updates);  // Ensure updatePartyFunds is called correctly
+    await updatePartyFunds(updates);  // Ensure the update happens
     console.log("Firestore updated successfully!");
   } catch (error) {
     console.error("Error updating Firestore:", error);
@@ -118,6 +124,7 @@ async function spendFromTotalFunds(amountInGold) {
   // Refresh the display with the updated totals from Firestore
   await displayPartyFunds();
 }
+
 
 
 
