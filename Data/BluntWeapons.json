@@ -1,0 +1,90 @@
+{
+  "Weapons": {
+    "BluntWeapons": [
+      {
+        "name": "Warhammer",
+        "cost": "2 gp",
+        "weight": "6 lbs",
+        "size": "M",
+        "type": "B",
+        "speedFactor": 4,
+        "damage": {
+          "S-M": "1d4+1",
+          "L": "1d4"
+        }
+      },
+      {
+        "name": "Club",
+        "cost": "N/A",
+        "weight": "3 lbs",
+        "size": "M",
+        "type": "B",
+        "speedFactor": 4,
+        "damage": {
+          "S-M": "1d6",
+          "L": "1d3"
+        }
+      },
+      {
+        "name": "Footman’s Mace",
+        "cost": "8 gp",
+        "weight": "10 lbs",
+        "size": "M",
+        "type": "B",
+        "speedFactor": 7,
+        "damage": {
+          "S-M": "1d6+1",
+          "L": "1d6"
+        }
+      },
+      {
+        "name": "Morning Star",
+        "cost": "10 gp",
+        "weight": "12 lbs",
+        "size": "M",
+        "type": "P/B",
+        "speedFactor": 7,
+        "damage": {
+          "S-M": "2d4",
+          "L": "1d6+1"
+        }
+      },
+      {
+        "name": "Footman’s Flail",
+        "cost": "15 gp",
+        "weight": "15 lbs",
+        "size": "M",
+        "type": "B",
+        "speedFactor": 7,
+        "damage": {
+          "S-M": "1d6+1",
+          "L": "2d4"
+        }
+      },
+      {
+        "name": "Horseman’s Mace",
+        "cost": "6 gp",
+        "weight": "6 lbs",
+        "size": "M",
+        "type": "B",
+        "speedFactor": 6,
+        "damage": {
+          "S-M": "1d6",
+          "L": "1d4"
+        }
+      },
+      {
+        "name": "Horseman’s Flail",
+        "cost": "8 gp",
+        "weight": "5 lbs",
+        "size": "M",
+        "type": "B",
+        "speedFactor": 6,
+        "damage": {
+          "S-M": "1d4+1",
+          "L": "1d4+1"
+        }
+      }
+    ]
+  }
+}

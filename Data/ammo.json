@@ -1,0 +1,48 @@
+{
+  "Ammunition": [
+    {
+      "name": "Barbed Dart",
+      "cost": "1 sp",
+      "weight": "too light to measure",
+      "size": "S",
+      "type": "P",
+      "damage": {
+        "S-M": "1d3",
+        "L": "1d2"
+      }
+    },
+    {
+      "name": "Needle",
+      "cost": "2 cp",
+      "weight": "too light to measure",
+      "size": "S",
+      "type": "P",
+      "damage": {
+        "S-M": "1",
+        "L": "1"
+      }
+    },
+    {
+      "name": "Flight Arrow",
+      "cost": "3 sp / 12",
+      "weight": "too light to measure",
+      "size": "S",
+      "type": "P",
+      "damage": {
+        "S-M": "1d6",
+        "L": "1d6"
+      }
+    },
+    {
+      "name": "Sheaf Arrow",
+      "cost": "3 sp / 6",
+      "weight": "too light to measure",
+      "size": "S",
+      "type": "P",
+      "damage": {
+        "S-M": "1d8",
+        "L": "1d8"
+      }
+    }
+  ]
+}

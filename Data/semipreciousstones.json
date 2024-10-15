@@ -1,0 +1,135 @@
+{
+    "SemiPreciousStones": [
+      {
+        "name": "Bloodstone",
+        "description": "Dark gray with red flecks",
+        "tags": ["dark gray", "red flecks"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Carnelian",
+        "description": "Orange to red-brown",
+        "tags": ["orange", "red-brown"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Chalcedony",
+        "description": "White",
+        "tags": ["white"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Chrysoprase",
+        "description": "Translucent apple to emerald green",
+        "tags": ["translucent", "apple green", "emerald green"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Citrine",
+        "description": "Pale yellow brown",
+        "tags": ["pale yellow", "brown"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Jasper",
+        "description": "Blue, black to brown",
+        "tags": ["blue", "black", "brown"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Moonstone",
+        "description": "White with pale blue hue",
+        "tags": ["white", "pale blue"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Onyx",
+        "description": "Black, white, or bands of both",
+        "tags": ["black", "white", "bands"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Rock Crystal",
+        "description": "Clear, transparent",
+        "tags": ["clear", "transparent"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Sardonyx",
+        "description": "Bands of red and white",
+        "tags": ["bands", "red", "white"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Smoky Quartz",
+        "description": "Light gray, yellow, brown or blue",
+        "tags": ["light gray", "yellow", "brown", "blue"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Star Rose Quartz",
+        "description": "Smoky rose with white star center",
+        "tags": ["smoky rose", "white star center"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      },
+      {
+        "name": "Zircon",
+        "description": "Clear pale aqua",
+        "tags": ["clear", "pale aqua"],
+        "value": null,
+        "isMagical": false,
+        "magicalDescription": null,
+        "isUnidentified": false,
+        "rarity": "Semi-Precious"
+      }
+    ]
+  }
+  

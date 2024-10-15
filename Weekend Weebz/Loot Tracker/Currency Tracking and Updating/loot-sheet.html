@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Loot Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <!-- Load JS as modules -->
+    <script type="module" src="/Weekend Weebz\config\firebase.js" defer></script>  <!-- Firestore setup -->
+    <script type="module" src="/Weekend Weebz/Loot Tracker/Currency Tracking and Updating/javascripts/main.js" defer></script>  <!-- Update and Display-->
+    <script type="module" src="/Weekend Weebz/Loot Tracker/Currency Tracking and Updating/javascripts/ui.js" defer></script>       <!-- UI handling logic -->
+</head>
+<body>
+  <h2 id="total-funds">Total Party Funds in Gold: <span id="total-gold">0.00</span></h2>
+
+  <div id="currency">
+      <!-- Input for Platinum -->
+      <label for="Platinum-input">Platinum:</label>
+      <input id="Platinum-input" type="number" step="1" min="0" />
+      <button id="Platinum-button">Update Platinum</button>
+      <span id="Platinum-display">0 coins</span>
+      <span id="Platinum-weight">0 lbs</span>
+
+      <!-- Input for Gold -->
+      <label for="Gold-input">Gold:</label>
+      <input id="Gold-input" type="number" step="1" min="0" />
+      <button id="Gold-button">Update Gold</button>
+      <span id="Gold-display">0 coins</span>
+      <span id="Gold-weight">0 lbs</span>
+
+      <!-- Input for Electrum -->
+      <label for="Electrum-input">Electrum:</label>
+      <input id="Electrum-input" type="number" step="1" min="0" />
+      <button id="Electrum-button">Update Electrum</button>
+      <span id="Electrum-display">0 coins</span>
+      <span id="Electrum-weight">0 lbs</span>
+
+      <!-- Input for Silver -->
+      <label for="Silver-input">Silver:</label>
+      <input id="Silver-input" type="number" step="1" min="0" />
+      <button id="Silver-button">Update Silver</button>
+      <span id="Silver-display">0 coins</span>
+      <span id="Silver-weight">0 lbs</span>
+
+      <!-- Input for Copper -->
+      <label for="Copper-input">Copper:</label>
+      <input id="Copper-input" type="number" step="1" min="0" />
+      <button id="Copper-button">Update Copper</button>
+      <span id="Copper-display">0 coins</span>
+      <span id="Copper-weight">0 lbs</span>
+
+      <!-- Error message div -->
+      <div id="error-message" style="color: red;"></div>
+  </div>
+</body>
+</html>

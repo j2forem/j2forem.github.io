@@ -1,0 +1,222 @@
+{
+  "Weapons": {
+    "Polearms": [
+      {
+        "name": "Halberd",
+        "cost": "10 gp",
+        "weight": "15 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 9,
+        "damage": {
+          "S-M": "1d10",
+          "L": "2d6"
+        }
+      },
+      {
+        "name": "Awl Pike",
+        "cost": "5 gp",
+        "weight": "12 lbs",
+        "size": "L",
+        "type": "P",
+        "speedFactor": 13,
+        "damage": {
+          "S-M": "1d6",
+          "L": "1d12"
+        }
+      },
+      {
+        "name": "Bardiche",
+        "cost": "7 gp",
+        "weight": "12 lbs",
+        "size": "L",
+        "type": "S",
+        "speedFactor": 9,
+        "damage": {
+          "S-M": "2d4",
+          "L": "2d6"
+        }
+      },
+      {
+        "name": "Bec de Corbin",
+        "cost": "8 gp",
+        "weight": "10 lbs",
+        "size": "L",
+        "type": "P/B",
+        "speedFactor": 10,
+        "damage": {
+          "S-M": "2d4",
+          "L": "2d6"
+        }
+      },
+      {
+        "name": "Bill-Guisarme",
+        "cost": "8 gp",
+        "weight": "15 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 10,
+        "damage": {
+          "S-M": "2d4",
+          "L": "1d10"
+        }
+      },
+      {
+        "name": "Fauchard",
+        "cost": "5 gp",
+        "weight": "7 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 8,
+        "damage": {
+          "S-M": "1d6",
+          "L": "1d8"
+        }
+      },
+      {
+        "name": "Fauchard-Fork",
+        "cost": "8 gp",
+        "weight": "9 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 8,
+        "damage": {
+          "S-M": "1d8",
+          "L": "1d10"
+        }
+      },
+      {
+        "name": "Glaive",
+        "cost": "6 gp",
+        "weight": "8 lbs",
+        "size": "L",
+        "type": "S",
+        "speedFactor": 9,
+        "damage": {
+          "S-M": "1d6",
+          "L": "1d10"
+        }
+      },
+      {
+        "name": "Glaive-Guisarme",
+        "cost": "10 gp",
+        "weight": "10 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 9,
+        "damage": {
+          "S-M": "2d4",
+          "L": "2d6"
+        }
+      },
+      {
+        "name": "Guisarme",
+        "cost": "5 gp",
+        "weight": "8 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 8,
+        "damage": {
+          "S-M": "2d4",
+          "L": "2d4"
+        }
+      },
+      {
+        "name": "Guisarme-Voulge",
+        "cost": "8 gp",
+        "weight": "15 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 10,
+        "damage": {
+          "S-M": "2d4",
+          "L": "2d4"
+        }
+      },
+      {
+        "name": "Hook Fauchard",
+        "cost": "10 gp",
+        "weight": "8 lbs",
+        "size": "L",
+        "type": "P/S",
+        "speedFactor": 9,
+        "damage": {
+          "S-M": "1d4",
+          "L": "1d4"
+        }
+      },
+      {
+        "name": "Lucern Hammer",
+        "cost": "7 gp",
+        "weight": "15 lbs",
+        "size": "L",
+        "type": "P/B",
+        "speedFactor": 9,
+        "damage": {
+          "S-M": "2d4",
+          "L": "1d6"
+        }
+      },
+      {
+        "name": "Military Fork",
+        "cost": "5 gp",
+        "weight": "7 lbs",
+        "size": "L",
+        "type": "P",
+        "speedFactor": 7,
+        "damage": {
+          "S-M": "1d8",
+          "L": "2d4"
+        }
+      },
+      {
+        "name": "Partisan",
+        "cost": "10 gp",
+        "weight": "8 lbs",
+        "size": "L",
+        "type": "P",
+        "speedFactor": 9,
+        "damage": {
+          "S-M": "1d6",
+          "L": "1d6+1"
+        }
+      },
+      {
+        "name": "Ranseur",
+        "cost": "6 gp",
+        "weight": "7 lbs",
+        "size": "L",
+        "type": "P",
+        "speedFactor": 8,
+        "damage": {
+          "S-M": "2d4",
+          "L": "2d4"
+        }
+      },
+      {
+        "name": "Spetum",
+        "cost": "5 gp",
+        "weight": "7 lbs",
+        "size": "L",
+        "type": "P",
+        "speedFactor": 8,
+        "damage": {
+          "S-M": "1d6+1",
+          "L": "2d6"
+        }
+      },
+      {
+        "name": "Voulge",
+        "cost": "5 gp",
+        "weight": "12 lbs",
+        "size": "L",
+        "type": "S",
+        "speedFactor": 10,
+        "damage": {
+          "S-M": "2d4",
+          "L": "2d4"
+        }
+      }
+    ]
+  }
+}

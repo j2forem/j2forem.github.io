@@ -1,0 +1,34 @@
+{
+    "Clothing": [
+        {
+            "name": "Belt",
+            "price": "3 sp",
+            "weight": null
+        },
+        {
+            "name": "Boots",
+            "price": null,
+            "weight": null
+        },
+        {
+            "name": "Riding Boots",
+            "price": "3 gp",
+            "weight": null
+        },
+        {
+            "name": "Soft Boots",
+            "price": "1 gp",
+            "weight": null
+        },
+        {
+            "name": "Breeches",
+            "price": "2 gp",
+            "weight": null
+        },
+        {
+            "name": "Cap, hat",
+            "price": "1 sp",
+            "weight": null
+        }
+    ]
+}

@@ -1,0 +1,147 @@
+{
+  "OrnamentalStones": [
+    {
+      "name": "Black Opal",
+      "description": "Dark green with black mottling and golden flecks",
+      "tags": ["dark green", "black", "mottling", "golden flecks"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Ornamental"
+    },
+    {
+      "name": "Black Sapphire",
+      "description": "Rich black with highlights",
+      "tags": ["rich black", "highlights"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Ornamental"
+    },
+    {
+      "name": "Diamond",
+      "description": "Clear blue-white, rich blue, yellow",
+      "tags": ["clear", "blue-white", "rich blue", "yellow"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Emerald",
+      "description": "Brilliant green",
+      "tags": ["brilliant green"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Fire Opal",
+      "description": "Fiery red",
+      "tags": ["fiery red"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Jacinth",
+      "description": "Fiery orange",
+      "tags": ["fiery orange"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Opal",
+      "description": "Pale blue with green and gold mottling",
+      "tags": ["pale blue", "green", "gold mottling"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Oriental Amethyst",
+      "description": "Deep purple",
+      "tags": ["deep purple"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Fancy to Precious"
+    },
+    {
+      "name": "Oriental Emerald",
+      "description": "Bright green",
+      "tags": ["bright green"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Oriental Topaz",
+      "description": "Fiery yellow",
+      "tags": ["fiery yellow"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Ruby",
+      "description": "Clear to deep crimson red",
+      "tags": ["clear", "deep crimson red"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Sapphire",
+      "description": "Clear to medium blue",
+      "tags": ["clear", "medium blue"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Precious"
+    },
+    {
+      "name": "Star Ruby",
+      "description": "Translucent ruby with white star highlights",
+      "tags": ["translucent ruby", "white star highlights"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Fancy to Precious"
+    },
+    {
+      "name": "Star Sapphire",
+      "description": "Translucent blue with white star highlights",
+      "tags": ["translucent blue", "white star highlights"],
+      "value": null,
+      "isMagical": false,
+      "magicalDescription": null,
+      "isUnidentified": false,
+      "rarity": "Fancy to Precious"
+    }
+  ]
+}
+
+
+  

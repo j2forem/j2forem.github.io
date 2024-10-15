@@ -1,0 +1,24 @@
+{
+    "MiscellaneousEquipment": [
+        {
+            "name": "Backpack",
+            "price": "2 gp",
+            "weight": "2 lbs."
+        },
+        {
+            "name": "Barrel, small",
+            "price": "2 gp",
+            "weight": "30 lbs."
+        },
+        {
+            "name": "Basket (Large)",
+            "price": "3 sp",
+            "weight": "1 lb."
+        },
+        {
+            "name": "Bedroll",
+            "price": "5 sp",
+            "weight": "5 lbs."
+        }
+    ]
+}

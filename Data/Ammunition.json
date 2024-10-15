@@ -1,0 +1,78 @@
+{
+  "Weapons": {
+    "Ammunition": [
+      {
+        "name": "Flight Arrow",
+        "cost": "3 sp/12",
+        "weight": "*",
+        "size": "S",
+        "type": "P",
+        "speedFactor": "_",
+        "damage": {
+          "S-M": "1d6",
+          "L": "1d6"
+        }
+      },
+      {
+        "name": "Sheaf Arrow",
+        "cost": "3 sp/6",
+        "weight": "*",
+        "size": "S",
+        "type": "P",
+        "speedFactor": "_",
+        "damage": {
+          "S-M": "1d8",
+          "L": "1d8"
+        }
+      },
+      {
+        "name": "Light Quarrel",
+        "cost": "1 sp",
+        "weight": "*",
+        "size": "S",
+        "type": "P",
+        "speedFactor": "_",
+        "damage": {
+          "S-M": "1d4",
+          "L": "1d4"
+        }
+      },
+      {
+        "name": "Heavy Quarrel",
+        "cost": "2 sp",
+        "weight": "*",
+        "size": "S",
+        "type": "P",
+        "speedFactor": "_",
+        "damage": {
+          "S-M": "1d4+1",
+          "L": "1d4+1"
+        }
+      },
+      {
+        "name": "Sling Bullet",
+        "cost": "1 cp",
+        "weight": "*",
+        "size": "S",
+        "type": "B",
+        "speedFactor": "_",
+        "damage": {
+          "S-M": "1d4+1",
+          "L": "1d6+1"
+        }
+      },
+      {
+        "name": "Sling Stone",
+        "cost": "N/A",
+        "weight": "*",
+        "size": "S",
+        "type": "B",
+        "speedFactor": "_",
+        "damage": {
+          "S-M": "1d4",
+          "L": "1d4"
+        }
+      }
+    ]
+  }
+}

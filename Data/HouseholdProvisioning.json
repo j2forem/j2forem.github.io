@@ -1,0 +1,24 @@
+{
+    "HouseholdProvisioning": [
+        {
+            "name": "Candle",
+            "price": "1 cp",
+            "weight": "*"
+        },
+        {
+            "name": "Cookpot",
+            "price": "5 sp",
+            "weight": "10 lbs."
+        },
+        {
+            "name": "Pitcher",
+            "price": "3 cp",
+            "weight": "2 lbs."
+        },
+        {
+            "name": "Iron Pan",
+            "price": "8 cp",
+            "weight": "5 lbs."
+        }
+    ]
+}

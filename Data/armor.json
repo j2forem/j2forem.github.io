@@ -1,156 +1,167 @@
-[
+{
+  "Plate": [
     {
-      "Type": "Banded Mail",
-      "Value": "200 gp",
-      "Weight": "35 lbs",
+      "name": "Banded Mail",
+      "value": "200 gp",
+      "weight": "35 lbs",
       "AC": "4",
       "HumanoidSizeType": ""
     },
     {
-      "Type": "Brigandine",
-      "Value": "120 gp",
-      "Weight": "35 lbs",
-      "AC": "6",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Bronze plate mail",
-      "Value": "400 gp",
-      "Weight": "40 lbs",
+      "name": "Bronze Plate Mail",
+      "value": "400 gp",
+      "weight": "40 lbs",
       "AC": "4",
       "HumanoidSizeType": ""
     },
     {
-      "Type": "Chain mail",
-      "Value": "75 gp",
-      "Weight": "40 lbs",
-      "AC": "5",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Field plate",
-      "Value": "2000 gp",
-      "Weight": "60 lbs",
+      "name": "Field Plate",
+      "value": "2000 gp",
+      "weight": "60 lbs",
       "AC": "2",
       "HumanoidSizeType": ""
     },
     {
-      "Type": "Full plate",
-      "Value": "4000 - 10000 gp",
-      "Weight": "70 lbs",
+      "name": "Full Plate",
+      "value": "4000 - 10000 gp",
+      "weight": "70 lbs",
       "AC": "1",
       "HumanoidSizeType": ""
     },
     {
-      "Type": "Helmet",
-      "Value": "",
-      "Weight": "",
-      "AC": "",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Great helm",
-      "Value": "30 gp",
-      "Weight": "10 lbs",
-      "AC": "",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Basinet",
-      "Value": "8 gp",
-      "Weight": "5 lbs",
-      "AC": "",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Hide",
-      "Value": "15 gp",
-      "Weight": "30 lbs",
-      "AC": "6",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Leather",
-      "Value": "5 gp",
-      "Weight": "15 lbs",
-      "AC": "8",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Padded",
-      "Value": "4 gp",
-      "Weight": "10 lbs",
-      "AC": "8",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Plate mail",
-      "Value": "600 gp",
-      "Weight": "50 lbs",
+      "name": "Plate Mail",
+      "value": "600 gp",
+      "weight": "50 lbs",
       "AC": "3",
       "HumanoidSizeType": ""
+    }
+  ],
+  "Chain": [
+    {
+      "name": "Chain Mail",
+      "value": "75 gp",
+      "weight": "40 lbs",
+      "AC": "5",
+      "HumanoidSizeType": ""
+    }
+  ],
+  "Leather": [
+    {
+      "name": "Leather",
+      "value": "5 gp",
+      "weight": "15 lbs",
+      "AC": "8",
+      "HumanoidSizeType": ""
     },
     {
-      "Type": "Ring mail",
-      "Value": "100 gp",
-      "Weight": "30 lbs",
+      "name": "Studded Leather",
+      "value": "20 gp",
+      "weight": "25 lbs",
       "AC": "7",
       "HumanoidSizeType": ""
     },
     {
-      "Type": "Scale mail",
-      "Value": "120 gp",
-      "Weight": "40 lbs",
+      "name": "Padded",
+      "value": "4 gp",
+      "weight": "10 lbs",
+      "AC": "8",
+      "HumanoidSizeType": ""
+    }
+  ],
+  "Hide": [
+    {
+      "name": "Hide",
+      "value": "15 gp",
+      "weight": "30 lbs",
       "AC": "6",
       "HumanoidSizeType": ""
-    },
+    }
+  ],
+  "Scale": [
     {
-      "Type": "Shield",
-      "Value": "",
-      "Weight": "",
-      "AC": "9",
+      "name": "Scale Mail",
+      "value": "120 gp",
+      "weight": "40 lbs",
+      "AC": "6",
       "HumanoidSizeType": ""
-    },
+    }
+  ],
+  "Ring": [
     {
-      "Type": "Body Shield",
-      "Value": "10 gp",
-      "Weight": "15 lbs",
-      "AC": "9",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Buckler",
-      "Value": "1 gp",
-      "Weight": "3 lbs",
-      "AC": "9",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Medium Shield",
-      "Value": "7 gp",
-      "Weight": "10 lbs",
-      "AC": "9",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Small Shield",
-      "Value": "3 gp",
-      "Weight": "5 lbs",
-      "AC": "9",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Splint mail",
-      "Value": "80 gp",
-      "Weight": "40 lbs",
-      "AC": "4",
-      "HumanoidSizeType": ""
-    },
-    {
-      "Type": "Studded leather",
-      "Value": "20 gp",
-      "Weight": "25 lbs",
+      "name": "Ring Mail",
+      "value": "100 gp",
+      "weight": "30 lbs",
       "AC": "7",
       "HumanoidSizeType": ""
     }
+  ],
+  "Splint": [
+    {
+      "name": "Splint Mail",
+      "value": "80 gp",
+      "weight": "40 lbs",
+      "AC": "4",
+      "HumanoidSizeType": ""
+    }
+  ],
+  "Shields": [
+    {
+      "name": "Shield",
+      "value": "",
+      "weight": "",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "name": "Body Shield",
+      "value": "10 gp",
+      "weight": "15 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "name": "Buckler",
+      "value": "1 gp",
+      "weight": "3 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "name": "Medium Shield",
+      "value": "7 gp",
+      "weight": "10 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    },
+    {
+      "name": "Small Shield",
+      "value": "3 gp",
+      "weight": "5 lbs",
+      "AC": "9",
+      "HumanoidSizeType": ""
+    }
+  ],
+  "Helmets": [
+    {
+      "name": "Helmet",
+      "value": "",
+      "weight": "",
+      "AC": "",
+      "HumanoidSizeType": ""
+    },
+    {
+      "name": "Great Helm",
+      "value": "30 gp",
+      "weight": "10 lbs",
+      "AC": "",
+      "HumanoidSizeType": ""
+    },
+    {
+      "name": "Basinet",
+      "value": "8 gp",
+      "weight": "5 lbs",
+      "AC": "",
+      "HumanoidSizeType": ""
+    }
   ]
+}

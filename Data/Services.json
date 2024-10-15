@@ -1,0 +1,19 @@
+{
+    "Services": [
+        {
+            "name": "Messenger Service",
+            "price": "5 cp",
+            "weight": null
+        },
+        {
+            "name": "Guide (per day)",
+            "price": "1 gp",
+            "weight": null
+        },
+        {
+            "name": "Porter (per day)",
+            "price": "5 sp",
+            "weight": null
+        }
+    ]
+}
