@@ -1,4 +1,4 @@
-import { fetchPartyFunds, updatePartyFunds } from '../../../config/firebase.js';
+import { fetchPartyFunds, updatePartyFunds } from '../../../config/wallet.js'
 import { updateCoinDisplay, calculateTotalGold, displayErrorMessage, clearErrorMessage } from './ui.js';
 
 let initialCurrency = {
@@ -8,6 +8,8 @@ let initialCurrency = {
   silver: 0,
   copper: 0
 };
+
+
 // Expose spendFromTotalFunds for testing in the console
 window.spendFromTotalFunds = spendFromTotalFunds;
 // Display party funds and calculate total gold
@@ -64,12 +66,12 @@ async function spendFromTotalFunds(amountInGold) {
   // Fetch the latest party funds data
   const currencyData = await fetchPartyFunds();
   
-  // Make sure the coin values are converted to numbers
-  const platinum = parseFloat(currencyData.platinum) || 0;
-  const gold = parseFloat(currencyData.gold) || 0;
-  const electrum = parseFloat(currencyData.electrum) || 0;
-  const silver = parseFloat(currencyData.silver) || 0;
-  const copper = parseFloat(currencyData.copper) || 0;
+  // Match the exact case used in Firestore (capitalized names)
+  const platinum = parseFloat(currencyData.Platinum) || 0;
+  const gold = parseFloat(currencyData.Gold) || 0;
+  const electrum = parseFloat(currencyData.Electrum) || 0;
+  const silver = parseFloat(currencyData.Silver) || 0;
+  const copper = parseFloat(currencyData.Copper) || 0;
 
   // Calculate total funds in gold equivalent
   const totalGold = platinum * 5 + gold + electrum * 0.5 + silver * 0.1 + copper * 0.01;
@@ -103,11 +105,11 @@ async function spendFromTotalFunds(amountInGold) {
 
   // Create an object with the updated values
   const updates = {
-    platinum: platinum - platinumToDeduct,
-    gold: gold - goldToDeduct,
-    electrum: electrum - electrumToDeduct,
-    silver: silver - silverToDeduct,
-    copper: copper - copperToDeduct
+    Platinum: platinum - platinumToDeduct,  // Uppercase key
+    Gold: gold - goldToDeduct,              // Uppercase key
+    Electrum: electrum - electrumToDeduct,  // Uppercase key
+    Silver: silver - silverToDeduct,        // Uppercase key
+    Copper: copper - copperToDeduct         // Uppercase key
   };
 
   // Log the updates object to ensure it's correctly created

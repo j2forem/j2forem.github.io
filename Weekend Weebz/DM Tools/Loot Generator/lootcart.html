@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loot Search</title>
+    <script type="module" src="./lootmain.js"></script>  <!-- Main script -->
+    <script type="module" src="../../config/lootgen.js"></script>
+</head>
+<body>
+    <h1>Search Loot Collections</h1>
+
+    <!-- Dropdown for collection selection -->
+    <label for="collectionSelect">Select Collection:</label>
+    <select id="collectionSelect">
+        <option value="">--Select a Collection--</option>
+        <option value="Armors">Armors</option>
+        <option value="Weapons">Weapons</option>
+        <option value="Gems">Gems</option>
+        <option value="GeneralEquipment">General Equipment</option>
+    </select>
+
+    <!-- Dropdown for search field selection -->
+    <label for="searchFieldSelect">Search by:</label>
+    <select id="searchFieldSelect">
+        <option value="">--Select Field--</option>
+        <option value="name">Name</option>
+        <option value="AC">AC</option>
+        <option value="price">Price</option>
+    </select>
+
+    <!-- Input for search value -->
+    <label for="searchInput">Search Value:</label>
+    <input type="text" id="searchInput" placeholder="Enter search value..." />
+
+    <button id="testQueryBtn">Run Test Query</button>
+
+    <!-- Button to trigger the search -->
+    <button id="searchBtn">Search</button>
+
+    <!-- Results section -->
+    <h2>Search Results:</h2>
+    <div id="results"></div>  <!-- This is where search results will be displayed -->
+</body>
+</html>

@@ -5,6 +5,7 @@
   "scripts": {
     "bulk-upload": "node bulk-uploads/bulk-upload.js",
   "inventory": "node scripts/inventory-management.js"
+  
   },
 
 
@@ -13,5 +14,5 @@
   "license": "ISC",
   "description": ""
 
-  
+    
 }
