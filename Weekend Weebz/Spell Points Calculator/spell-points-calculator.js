@@ -12,12 +12,19 @@ document.getElementById('calculate-total-points').onclick = function () {
     // Bonus spell points by ability score and character level
     const bonusSpellPointsTable = {
         12: [0, 1, 1, 2, 2, 3, 3, 4, 4, 5],
+        13: [0, 1, 1, 2, 2, 3, 3, 4, 4, 5],
         14: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        15: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         16: [1, 3, 4, 6, 7, 9, 10, 12, 13, 15],
+        17: [1, 3, 4, 6, 7, 9, 10, 12, 13, 15],
         18: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+        19: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
         20: [2, 5, 7, 10, 12, 15, 17, 20, 22, 25],
+        21: [2, 5, 7, 10, 12, 15, 17, 20, 22, 25],
         22: [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
-        24: [3, 7, 10, 14, 17, 21, 24, 28, 31, 35]
+        23: [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+        24: [3, 7, 10, 14, 17, 21, 24, 28, 31, 35],
+        25: [3, 7, 10, 14, 17, 21, 24, 28, 31, 35]
     };
 
     // Ensure level and ability score are valid
@@ -66,22 +73,51 @@ document.getElementById('cast-spell').onclick = function () {
 document.getElementById('calculate-recovery').onclick = function () {
     const activity = document.getElementById('activity').value;
     const time = parseFloat(document.getElementById('time').value); // Time in hours
-
     let pointsRecovered = 0;
 
-    // Calculate points recovered based on activity
-    if (activity === 'walking') {
-        pointsRecovered = Math.max(2 * time, (totalSpellPoints * 0.02 * time));
-    } else if (activity === 'resting') {
-        pointsRecovered = Math.max(4 * time, (totalSpellPoints * 0.04 * time));
-    } else if (activity === 'sleeping') {
-        pointsRecovered = Math.max(8 * time, (totalSpellPoints * 0.1 * time));
-    } else {
-        pointsRecovered = 0;  // If "None" is selected
-    }
+    // Calculate 30-minute segments (time is in hours, so multiply by 2)
+    const halfHourSegments = time * 2;
 
-    // Ensure recovery doesn't exceed max spell points
-    pointsRecovered = Math.min(pointsRecovered, totalSpellPoints - remainingSpellPoints);
+    // Define base recovery rates per 30 minutes
+    const recoveryRates = {
+        walking: {
+            flat: 1, // 2 per hour => 1 per 30 minutes
+            percentage: 0.01 // 2% per hour => 1% per 30 minutes
+        },
+        resting: {
+            flat: 2, // 4 per hour => 2 per 30 minutes
+            percentage: 0.02 // 4% per hour => 2% per 30 minutes
+        },
+        sleeping: {
+            flat: 4, // 8 per hour => 4 per 30 minutes
+            percentage: 0.05 // 10% per hour => 5% per 30 minutes
+        },
+        none: {
+            flat: 0,
+            percentage: 0
+        }
+    };
+
+    // Get the flat and percentage recovery rates based on the selected activity
+    const { flat, percentage } = recoveryRates[activity] || recoveryRates.none;
+
+    // Calculate total recovery for the given time in 30-minute segments
+    for (let i = 0; i < halfHourSegments; i++) {
+        const flatRecovery = flat;
+        const percentageRecovery = Math.floor(totalSpellPoints * percentage);
+
+        // Use the greater of flat recovery or percentage recovery
+        const segmentRecovery = Math.max(flatRecovery, percentageRecovery);
+
+        // Add to the total points recovered
+        pointsRecovered += segmentRecovery;
+
+        // Ensure points recovered does not exceed total spell points
+        if (pointsRecovered > totalSpellPoints - remainingSpellPoints) {
+            pointsRecovered = totalSpellPoints - remainingSpellPoints;
+            break;
+        }
+    }
 
     // Update remaining spell points
     remainingSpellPoints += pointsRecovered;
@@ -90,3 +126,4 @@ document.getElementById('calculate-recovery').onclick = function () {
     document.getElementById('recovered-points').innerHTML = `Recovered Spell Points: ${Math.round(pointsRecovered)}`;
     document.getElementById('remaining-points').innerHTML = `Remaining Spell Points: ${Math.round(remainingSpellPoints)}`;
 };
+

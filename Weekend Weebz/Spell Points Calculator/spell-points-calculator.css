@@ -1,0 +1,134 @@
+/* General body styles to match fantasy look */
+
+
+body {
+    font-family: 'Cinzel', serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+    background-size: cover;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fdf8e4; /* Softer parchment-like background */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow for more depth */
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.section {
+    flex: 1;
+    padding: 20px;
+    background-color: #fdf8e4;
+    border-radius: 10px;
+    border: 2px solid #5d4037;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 2.2em;
+    color: #2b1a0e;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: #2b1a0e;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #5d4037;
+    border-radius: 10px;
+    background-color: #fdf8e4;
+    font-family: 'Cinzel', serif;
+    color: #2b1a0e;
+    font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    font-weight: bold;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    -moz-box-sizing: border-box; /* Ensuring consistent box model */
+}
+
+input[type="text"]::placeholder, input[type="number"]::placeholder {
+    color: #5d4037;
+    opacity: 0.8;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #d5a55d;
+    -moz-box-shadow: 0 0 8px rgba(213, 165, 93, 0.5);
+    box-shadow: 0 0 8px rgba(213, 165, 93, 0.5);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background-color: #5d4037;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Cinzel', serif;
+}
+
+button:hover {
+    background-color: #d5a55d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+p {
+    font-size: 18px;
+    color: #2b1a0e;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#total-points, #remaining-points, #recovered-points {
+    font-weight: bold;
+    color: #2b1a0e;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .section {
+        margin-bottom: 20px;
+    }
+}
