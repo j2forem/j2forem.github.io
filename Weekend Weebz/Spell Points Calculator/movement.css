@@ -1,0 +1,170 @@
+/* General body styles to match fantasy look */
+body {
+    font-family: 'Cinzel', serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+    background-size: cover;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-background-size: cover;
+}
+
+/* Main container for the content */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fdf8e4;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Layout for input and result sections */
+.layout {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    flex-direction: row;
+}
+
+/* Styling for each section */
+.section {
+    flex: 1;
+    padding: 20px;
+    background-color: #fdf8e4;
+    border-radius: 10px;
+    border: 2px solid #5d4037;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result p {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: #2b1a0e;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect for sections */
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -webkit-box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 2.2em;
+    color: #2b1a0e;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for input labels */
+label {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: #2b1a0e;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Input fields and select dropdowns styling */
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #5d4037;
+    border-radius: 10px;
+    background-color: #fdf8e4;
+    font-family: 'Cinzel', serif;
+    color: #2b1a0e;
+    font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-weight: bold;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    -webkit-transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    -moz-transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]::placeholder, input[type="number"]::placeholder {
+    color: #5d4037;
+    opacity: 0.8;
+}
+
+/* Focus styles for input and select */
+input:focus, select:focus {
+    outline: none;
+    border-color: #d5a55d;
+    box-shadow: 0 0 8px rgba(213, 165, 93, 0.5);
+    -webkit-box-shadow: 0 0 8px rgba(213, 165, 93, 0.5);
+    -moz-box-shadow: 0 0 8px rgba(213, 165, 93, 0.5);
+}
+
+/* Styling for buttons */
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background-color: #5d4037;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    -webkit-transition: background-color 0.3s ease, transform 0.3s ease;
+    -moz-transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Cinzel', serif;
+}
+
+button:hover {
+    background-color: #d5a55d;
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Paragraph styling */
+p {
+    font-size: 18px;
+    color: #2b1a0e;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .section {
+        margin-bottom: 20px;
+    }
+}
