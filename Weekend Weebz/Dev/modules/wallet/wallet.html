@@ -1,0 +1,88 @@
+<!-- Party and Wallet Container -->
+<div id="party-container">
+    <!-- Party Wallet Section -->
+    <div id="wallet-module">
+        <h2>Party Wallet</h2>
+        
+        <!-- Wallet Container for Coins -->
+        <div class="wallet-container">
+
+            <!-- Wallet Row for Copper -->
+            <div class="wallet-row">
+                <div class="coin-type">Copper Coins:</div>
+                <div class="coin-info">
+                    <span id="wallet-copper-count">0</span> 
+                    (<span id="wallet-copper-weight">0.00</span> lbs)
+                </div>
+                <div class="modify-funds">
+                    <input type="number" class="wallet-coin-input" id="modify-copper" value="0" min="0">
+                    <button class="add-coin-btn" data-coin-type="copper">Add</button>
+                    <button class="subtract-coin-btn" data-coin-type="copper">Subtract</button>
+                </div>
+            </div>
+
+            <!-- Wallet Row for Silver -->
+            <div class="wallet-row">
+                <div class="coin-type">Silver Coins:</div>
+                <div class="coin-info">
+                    <span id="wallet-silver-count">0</span> 
+                    (<span id="wallet-silver-weight">0.00</span> lbs)
+                </div>
+                <div class="modify-funds">
+                    <input type="number" class="wallet-coin-input" id="modify-silver" value="0" min="0">
+                    <button class="add-coin-btn" data-coin-type="silver">Add</button>
+                    <button class="subtract-coin-btn" data-coin-type="silver">Subtract</button>
+                </div>
+            </div>
+
+            <!-- Wallet Row for Electrum -->
+            <div class="wallet-row">
+                <div class="coin-type">Electrum Coins:</div>
+                <div class="coin-info">
+                    <span id="wallet-electrum-count">0</span> 
+                    (<span id="wallet-electrum-weight">0.00</span> lbs)
+                </div>
+                <div class="modify-funds">
+                    <input type="number" class="wallet-coin-input" id="modify-electrum" value="0" min="0">
+                    <button class="add-coin-btn" data-coin-type="electrum">Add</button>
+                    <button class="subtract-coin-btn" data-coin-type="electrum">Subtract</button>
+                </div>
+            </div>
+
+            <!-- Wallet Row for Gold -->
+            <div class="wallet-row">
+                <div class="coin-type">Gold Coins:</div>
+                <div class="coin-info">
+                    <span id="wallet-gold-count">0</span> 
+                    (<span id="wallet-gold-weight">0.00</span> lbs)
+                </div>
+                <div class="modify-funds">
+                    <input type="number" class="wallet-coin-input" id="modify-gold" value="0" min="0">
+                    <button class="add-coin-btn" data-coin-type="gold">Add</button>
+                    <button class="subtract-coin-btn" data-coin-type="gold">Subtract</button>
+                </div>
+            </div>
+
+            <!-- Wallet Row for Platinum -->
+            <div class="wallet-row">
+                <div class="coin-type">Platinum Coins:</div>
+                <div class="coin-info">
+                    <span id="wallet-platinum-count">0</span> 
+                    (<span id="wallet-platinum-weight">0.00</span> lbs)
+                </div>
+                <div class="modify-funds">
+                    <input type="number" class="wallet-coin-input" id="modify-platinum" value="0" min="0">
+                    <button class="add-coin-btn" data-coin-type="platinum">Add</button>
+                    <button class="subtract-coin-btn" data-coin-type="platinum">Subtract</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Summary Section for Total Value and Weight -->
+        <div class="wallet-summary">
+            <p>Total Value: <span id="total-copper-value">0 gold</span></p>
+            <p id="wallet-weight">Total Coin Weight: 0.00 lbs</p>
+        </div>
+    </div>
+</div>

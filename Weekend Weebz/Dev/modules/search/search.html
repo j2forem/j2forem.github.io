@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Items</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+
+    
+      <!-- Include main CSS file -->
+      <link rel="stylesheet" href="../styles/main.css">
+
+      <!-- search-navbar.html -->
+<nav class="navbar">
+    <div class="nav-left">
+        <!-- Home Button -->
+                 <!-- Toggle Mode Button -->
+        <button id="mode-toggle-button" onclick="toggleMode()">Switch to Merchant Mode</button>
+        <p id="current-mode">Current Mode: Loot</p>
+    </div>
+        <button onclick="window.location.href='../../index.html'">Home</button>
+    </div>
+</nav>
+
+
+
+<!-- Two-Column Container -->
+<div class="two-column-container">
+    <!-- Left Column: Search and Results -->
+    <div class="left-column">
+        <h2>Search Party Loot</h2>
+
+        <!-- Search Section with Filters -->
+        <div class="search-section">
+            <label for="collection-dropdown">Choose a Category:</label>
+            <select id="collection-dropdown">
+                <option value="">All Categories</option>
+                <option value="armors">Armors</option>
+                <option value="weapons">Weapons</option>
+                <option value="generalEquipment">General Equipment</option>
+                <option value="gems">Gems</option>
+                <option value="potions">Potions</option>
+            </select>
+
+            <input type="text" id="search-input" placeholder="Search items by name or tag" />
+            <button id="search-button">Search</button>
+        </div>
+
+        <!-- Results Section -->
+        <div id="search-results">
+            <!-- Items found by search.js will appear here -->
+        </div>
+    </div>
+
+    <!-- Right Column: Cart Summary and Items -->
+    <div class="right-column">
+        <div id="cart-payment-section" class="payment-section">
+            <!-- This section will be dynamically populated by updatePaymentSection() -->
+        </div>
+        <h2>Cart</h2>
+        <div id="cart-container">
+            <!-- Cart items added from search will display here -->
+        </div>
+        <div id="cart-summary"></div>
+        <!-- Payment section for completing purchases -->
+
+    </div>
+</div>
+
+<script type="module">
+    import { loadWalletModule } from '../wallet/wallet.js';
+    document.addEventListener("DOMContentLoaded", () => {
+        loadWalletModule();  // Initialize wallet module on each page
+    });
+</script>
+
+
+  <!-- JavaScript for Search Logic -->
+   
+  <script src="search.js" type="module"></script>
+  <script src="../cart/cart.js" type="module"></script>
+  <script src="../../main.js" type="module"></script>
+</body>
+</html>

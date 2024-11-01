@@ -1,0 +1,277 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #EAE0C8;
+  background-color: #1C1C1C;
+  line-height: 1.6;
+}
+
+/* Two-Column Layout (General Purpose) */
+.two-column-container, .search-cart-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.left-column, .right-column {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+}
+
+.left-column {
+  flex: 2;
+  background: #2E2E2E;
+}
+
+.right-column {
+  flex: 1;
+  background: #3D2B1F;
+}
+
+/* Section Headers */
+h2 {
+  font-family: 'Cinzel', serif;
+  color: #D4A373;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+/* Input & Button Styling */
+input[type="text"], input[type="number"], select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #3D2B1F;
+  color: #EAE0C8;
+  border: 1px solid #6A492B;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 8px 15px;
+  background-color: #6A492B;
+  color: #EAE0C8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #8A5B3B;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #3D2B1F;
+  color: #EAE0C8;
+  font-family: 'Cinzel', serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-left, .nav-center, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-center input[type="text"] {
+  padding: 8px;
+  width: 180px;
+  border: 1px solid #6A492B;
+  border-radius: 5px;
+  background-color: #2E2E2E;
+  color: #EAE0C8;
+  font-size: 1rem;
+}
+
+/* Party Loot & Wallet Sections */
+.party-loot-section, .wallet-section {
+  margin-bottom: 20px;
+}
+
+/* Result & Cart Item Styling */
+.item, .cart-item, #party-search-results, #search-results, #cart-container {
+  background: #2E2E2E;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.item h3, .cart-item h4 {
+  color: #D4A373;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.item p, .cart-item p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+/* Payment Section */
+.payment-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #3D2B1F;
+  color: #EAE0C8;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.payment-section h3 {
+  font-family: 'Cinzel', serif;
+  color: #D4A373;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.payment-section input[type="number"] {
+  width: 65px;
+  margin-right: 5px;
+  padding: 5px;
+  background-color: #2E2E2E;
+  color: #EAE0C8;
+  border: 1px solid #6A492B;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.payment-section button {
+  padding: 10px 20px;
+  background-color: #6A492B;
+  color: #EAE0C8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.payment-section button:hover {
+  background-color: #8A5B3B;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .two-column-container, .search-cart-container {
+      flex-direction: column;
+  }
+
+  .left-column, .right-column {
+      width: 100%;
+  }
+
+  .navbar {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .nav-left, .nav-right {
+      justify-content: center;
+  }
+
+  .nav-center input[type="text"] {
+      width: 100%;
+  }
+}
+
+/* Party Wallet Title */
+.wallet-section h2 {
+  font-family: 'Cinzel', serif;
+  color: #D4A373;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+/* Wallet Coin Count & Button Alignment */
+.wallet-row {
+  display: flex;
+  align-items: center; /* Vertically center-aligns content within each row */
+  gap: 10px; /* Adds spacing between elements in each row */
+  margin-bottom: 10px;
+}
+
+/* Coin Label Styling */
+.wallet-coin-label {
+  flex: 1;
+  font-size: 1.1rem;
+  color: #EAE0C8;
+}
+
+.wallet-coin-input {
+  width: 80px;
+  padding: 5px;
+  background-color: #3D2B1F;
+  color: #EAE0C8;
+  border: 1px solid #6A492B;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Add & Subtract Buttons */
+.wallet-coin-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.wallet-coin-buttons button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
+/* Total Value & Weight Styling */
+.wallet-summary {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #D4A373;
+  text-align: center;
+}
+
+/* Aligning Each Coin Row in the Wallet */
+.wallet-section .wallet-coin-row {
+  border-bottom: 1px solid #3D2B1F;
+  padding-bottom: 10px;
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 120px;
+  color: #EAE0C8;
+}
+
+.modify-funds {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.coin-type {
+  width: 140px; /* Adjust width to give more space */
+  color: #D4A373;
+  font-weight: bold;
+  text-align: right; /* Align text to the right for cleaner alignment */
+  padding-right: 10px; /* Adds space between label and input */
+}
